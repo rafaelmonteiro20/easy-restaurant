@@ -1,8 +1,13 @@
 package com.rm.easyrestaurant.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.rm.easyrestaurant.model.Produto;
 
@@ -16,11 +21,16 @@ public class ProdutosController {
 	}
 	
 	@RequestMapping(value = "/novo", method = RequestMethod.POST)
-	public String cadastrar(Produto produto) {
-		System.out.println("SKU: " + produto.getSku());
+	public String cadastrar(@Valid Produto produto, BindingResult result, 
+			Model model, RedirectAttributes attributes) {
 		
+		if(result.hasErrors()) {
+			model.addAttribute("mensagem", "Erro no formulário.");
+			return "produtos/CadastroProduto";
+		}
 		
-		return "produtos/CadastroProduto";
+		attributes.addFlashAttribute("mensagem", "Cadastro realizado com sucesso.");
+		return "redirect:/produtos/novo";
 	}
 	
 }

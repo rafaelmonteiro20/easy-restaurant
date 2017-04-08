@@ -2,10 +2,14 @@ package com.rm.easyrestaurant.model;
 
 import java.math.BigDecimal;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 public class Produto {
 
+	@NotBlank
 	private String sku;
 	
+	@NotBlank
 	private String nome;
 	
 	private String descricao;
