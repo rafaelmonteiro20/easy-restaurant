@@ -4,7 +4,7 @@ body {
 }
 
 .navbar-default {
-	background: #00acac !important;
+	background: #00acac;
 }
 
 .page-header {
@@ -19,7 +19,7 @@ body {
 	margin: 0;
 	height: 80px;
 	color: #263238;
-	font-size: 28px;
+	font-size: 26px;
 }
 
 .container-fluid {
