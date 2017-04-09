@@ -7,9 +7,25 @@ body {
 	background: #00acac !important;
 }
 
-/*#f0f3f5*/
+.page-header {
+	padding-bottom: 0px;
+  	background-color: #f0f3f5;
+}
 
+.page-header h1 {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	margin: 0;
+	height: 80px;
+	color: #263238;
+	font-size: 28px;
+}
 
+.container-fluid {
+	padding-right: 20px;
+    padding-left: 20px;
+}
 
 @media(min-width:768px) {
     body {

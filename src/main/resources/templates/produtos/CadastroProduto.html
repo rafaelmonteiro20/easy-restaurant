@@ -5,30 +5,74 @@
 	  layout:decorator="'layout/LayoutPadrao'">
 
 <section layout:fragment="conteudo">
-	<h1>Cadastro de Produto</h1>
-		
-	<form action="novo" method="POST" th:object=${produto}>
-		<div>
-			<ul>
-				<li th:each="erro : ${ #fields.detailedErrors() }" >
-					<span th:text="${erro.message}"></span>
-				</li>
-			</ul>
+	
+	<div class="page-header">
+		<div class="container-fluid">
+			<h1>
+				Cadastro de Produto
+			</h1>
 		</div>
+	</div>
+	
+	<div class="container-fluid">
+		<form action="novo" method="POST" th:object=${produto} class="form-vertical">
+			<div>
+				<ul>
+					<li th:each="erro : ${ #fields.detailedErrors() }" >
+						<span th:text="${erro.message}"></span>
+					</li>
+				</ul>
+			</div>
 			
-		<span th:text="${ mensagem }" ></span><br />
-		
-		<label>SKU</label>
-		<input type="text" th:field="*{sku}" >
+			<span th:text="${ mensagem }" ></span><br />
+
+			<div class="row">
+				<div class="col-sm-2  form-group">
+					<label for="sku">SKU</label>
+					<input id="sku" type="text" class="form-control" th:field="*{sku}" />
+				</div>
+				
+				<div class="col-sm-10  form-group">
+					<label for="nome">Nome</label>
+					<input id="nome" type="text" class="form-control" th:field="*{nome}" />
+				</div>
+			</div>
 			
-		<br/>
+			<div class="form-group">
+				<label for="descricao">Descrição</label>
+				<textarea id="descricao" rows="3" class="form-control"></textarea>
+			</div>
 			
-		<label>Nome</label>
-		<input type="text" th:field="*{nome}" >
-		
-		<br/>
+			<div class="row">
+				<div class="col-sm-3  form-group">
+					<label for="estilo">Categoria</label>
+					<select id="estilo" class="form-control">
+						<option value="">Selecione</option>
+						<option value="1">Bebida</option>
+						<option value="1">Massa</option>
+					</select>
+				</div>
+				
+				<div class="col-sm-3  form-group">
+					<label for="preco">Preço unitário</label>
+					<div class="input-group">
+						<div class="input-group-addon">R$</div>
+						<input id="preco" type="text" class="form-control js-decimal" />
+					</div>
+				</div>
+				
+				<div class="col-sm-3  form-group">
+					<label for="estoque">Estoque</label>
+					<input id="estoque" type="text" class="form-control js-plain" />
+				</div>
+			</div>
 			
-		<input type="submit" value="Salvar">
-	</form>
+			<br/>
+				
+			<div class="form-group">
+				<button class="btn  btn-primary" type="submit">Salvar</button>
+			</div>
+		</form>
+	</div>
 </section>
 </html>
