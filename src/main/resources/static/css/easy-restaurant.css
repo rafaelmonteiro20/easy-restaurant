@@ -1,0 +1,9 @@
+.easy-field-action {
+	display: flex;
+}
+
+.easy-field-action_icon {
+	font-size: 20px;
+	margin-top: 5px;
+	margin-left: 5px;
+}
