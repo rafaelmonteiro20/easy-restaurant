@@ -9,16 +9,24 @@
 <body>
 	<h1>Cadastro de Produto</h1>
 	
-	<span th:text="${ mensagem }"></span><br/>
+	<form action="novo" method="POST" th:object=${produto}>
+		<div>
+			<ul>
+				<li th:each="erro : ${ #fields.detailedErrors() }" >
+					<span th:text="${erro.message}"></span>
+				</li>
+			</ul>
+		</div>
+		
+		<span th:text="${ mensagem }" ></span><br />
 	
-	<form action="novo" method="POST">
 		<label>SKU</label>
-		<input type="text" name="sku" >
+		<input type="text" th:field="*{sku}" >
 		
 		<br/>
 		
 		<label>Nome</label>
-		<input type="text" name="nome" >
+		<input type="text" th:field="*{nome}" >
 	
 		<br/>
 		

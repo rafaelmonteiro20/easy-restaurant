@@ -16,7 +16,7 @@ import com.rm.easyrestaurant.model.Produto;
 public class ProdutosController {
 
 	@RequestMapping("/novo")
-	public String novo() {
+	public String novo(Produto produto) {
 		return "produtos/CadastroProduto";
 	}
 	
@@ -24,10 +24,8 @@ public class ProdutosController {
 	public String cadastrar(@Valid Produto produto, BindingResult result, 
 			Model model, RedirectAttributes attributes) {
 		
-		if(result.hasErrors()) {
-			model.addAttribute("mensagem", "Erro no formulário.");
-			return "produtos/CadastroProduto";
-		}
+		if(result.hasErrors())
+			return novo(produto);
 		
 		attributes.addFlashAttribute("mensagem", "Cadastro realizado com sucesso.");
 		return "redirect:/produtos/novo";
