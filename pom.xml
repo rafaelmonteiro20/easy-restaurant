@@ -30,6 +30,9 @@
 		
 		<!-- Bean Validation / Hibernate Validator -->
 		<hibernate-validator.version>5.4.1.Final</hibernate-validator.version>
+		
+		<!-- JPA / Hibernate -->
+		<hibernate.version>5.2.9.Final</hibernate.version>
 	</properties>
 	
 	<build>
@@ -99,5 +102,21 @@
             <version>${hibernate-validator.version}</version>
             <scope>compile</scope>
         </dependency>
+        
+        <!-- JPA / Hibernate -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate.version}</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- Hibernate - Java 8 support -->
+        <dependency>
+    		<groupId>org.hibernate</groupId>
+    		<artifactId>hibernate-java8</artifactId>
+    		<version>${hibernate.version}</version>
+    		<scope>compile</scope>
+		</dependency>
 	</dependencies>
 </project>
