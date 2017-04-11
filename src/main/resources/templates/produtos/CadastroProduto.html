@@ -23,15 +23,8 @@
 	
 	<div class="container-fluid">
 		<form method="POST" th:object=${produto} class="form-vertical">
-			<div>
-				<ul>
-					<li th:each="erro : ${ #fields.detailedErrors() }" >
-						<span th:text="${erro.message}"></span>
-					</li>
-				</ul>
-			</div>
-			
-			<span th:text="${ mensagem }" ></span><br />
+			<th:block th:include="layout/fragments/MensagemSucesso"></th:block>
+			<th:block th:include="layout/fragments/MensagensErro"></th:block>
 
 			<div class="row">
 				<div class="col-sm-2  form-group">
