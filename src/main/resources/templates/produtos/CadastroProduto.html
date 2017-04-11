@@ -22,7 +22,7 @@
 	</div>
 	
 	<div class="container-fluid">
-		<form action="novo" method="POST" th:object=${produto} class="form-vertical">
+		<form method="POST" th:object=${produto} class="form-vertical">
 			<div>
 				<ul>
 					<li th:each="erro : ${ #fields.detailedErrors() }" >
@@ -47,14 +47,14 @@
 			
 			<div class="form-group">
 				<label for="descricao">Descrição</label>
-				<textarea id="descricao" rows="3" class="form-control"></textarea>
+				<textarea id="descricao" rows="3" class="form-control" th:field="*{descricao}"></textarea>
 			</div>
 			
 			<div class="row">
 				<div class="col-sm-3  form-group">
 					<label for="categoria">Categoria</label>
 					<div class="easy-field-action">
-						<select id="categoria" class="form-control">
+						<select id="categoria" class="form-control" th:field="*{categoria}">
 							<option value="">Selecione</option>
 							<option th:each="categoria : ${ categorias }" 
 								th:value="${categoria.codigo}" th:text="${categoria.nome}"></option>
@@ -69,24 +69,23 @@
 				</div>
 				
 				<div class="col-sm-3  form-group">
-					<label for="preco">Preço unitário</label>
+					<label for="valor">Valor unitário</label>
 					<div class="input-group">
 						<div class="input-group-addon">R$</div>
-						<input id="preco" type="text" class="form-control js-decimal" />
+						<input id="valor" type="text" class="form-control js-decimal" th:field="*{valorUnitario}" />
 					</div>
 				</div>
 				
 				<div class="col-sm-3  form-group">
 					<label for="estoque">Estoque</label>
-					<input id="estoque" type="text" class="form-control js-plain" />
+					<input id="estoque" type="text" class="form-control js-plain" th:field="*{quantidadeEstoque}" />
 				</div>
 				
 				<div class="col-sm-3 form-group">
 					<label class="control-label">Status</label>
 					<div>
-						<input type="checkbox" class="js-status" data-size="normal"
-							data-on="Ativo" data-off="Inativo" data-onstyle="success" data-offstyle="danger"
-						/>
+						<input type="checkbox" class="js-status" data-size="normal" th:field="*{ativo}"
+							data-on="Ativo" data-off="Inativo" data-onstyle="success" data-offstyle="danger" />
 					</div>
 				</div>
 			</div>

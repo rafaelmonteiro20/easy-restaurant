@@ -33,8 +33,17 @@ public class ProdutosController {
 	public ModelAndView cadastrar(@Valid Produto produto, BindingResult result, 
 			Model model, RedirectAttributes attributes) {
 		
-		if(result.hasErrors())
-			return novo(produto);
+//		if(result.hasErrors())
+//			return novo(produto);
+		
+		System.out.println(produto.getSku());
+		System.out.println(produto.getNome());
+		System.out.println(produto.getDescricao());
+		System.out.println(produto.getCategoria());
+		System.out.println(produto.getValorUnitario());
+		System.out.println(produto.getQuantidadeEstoque());
+		System.out.println(produto.isAtivo());
+		
 		
 		attributes.addFlashAttribute("mensagem", "Cadastro realizado com sucesso.");
 		return new ModelAndView("redirect:/produtos/novo");

@@ -22,6 +22,14 @@ public class Categoria {
 	@NotBlank
 	@Column(length = 60, nullable = false, unique = true)
 	private String nome;
+	
+	public Categoria() {
+
+	}
+
+	public Categoria(Long codigo) {
+		this.codigo = codigo;
+	}
 
 	public Long getCodigo() {
 		return codigo;

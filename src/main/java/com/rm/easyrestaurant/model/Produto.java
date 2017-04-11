@@ -45,7 +45,7 @@ public class Produto {
 	@JoinColumn(name = "codigo_categoria", nullable = false)
 	private Categoria categoria;
 	
-	private boolean ativo;
+	private boolean ativo = true;
 
 	public Long getCodigo() {
 		return codigo;
