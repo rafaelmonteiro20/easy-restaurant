@@ -14,6 +14,8 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.rm.easyrestaurant.validation.SKU;
+
 @Entity
 @Table(name = "produto")
 public class Produto {
@@ -22,6 +24,7 @@ public class Produto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 
+	@SKU
 	@NotBlank(message = "SKU é obrigatório")
 	@Column(length = 8, nullable = false, unique = true)
 	private String sku;
