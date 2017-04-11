@@ -56,8 +56,8 @@
 					<div class="easy-field-action">
 						<select id="categoria" class="form-control">
 							<option value="">Selecione</option>
-							<option value="1">Bebida</option>
-							<option value="1">Bolo</option>
+							<option th:each="categoria : ${ categorias }" 
+								th:value="${categoria.codigo}" th:text="${categoria.nome}"></option>
 						</select>
 						
 						<div class="easy-field-action_icon">
