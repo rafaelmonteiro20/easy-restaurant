@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.rm.easyrestaurant.model.Produto;
 import com.rm.easyrestaurant.repository.Categorias;
+import com.rm.easyrestaurant.service.CadastroProdutoService;
 
 @Controller
 @RequestMapping("/produtos")
@@ -20,6 +21,9 @@ public class ProdutosController {
 	
 	@Autowired
 	private Categorias categorias;
+	
+	@Autowired
+	private CadastroProdutoService service;
 
 	@RequestMapping("/novo")
 	public ModelAndView novo(Produto produto) {
@@ -33,17 +37,10 @@ public class ProdutosController {
 	public ModelAndView cadastrar(@Valid Produto produto, BindingResult result, 
 			Model model, RedirectAttributes attributes) {
 		
-//		if(result.hasErrors())
-//			return novo(produto);
+		if(result.hasErrors())
+			return novo(produto);
 		
-		System.out.println(produto.getSku());
-		System.out.println(produto.getNome());
-		System.out.println(produto.getDescricao());
-		System.out.println(produto.getCategoria());
-		System.out.println(produto.getValorUnitario());
-		System.out.println(produto.getQuantidadeEstoque());
-		System.out.println(produto.isAtivo());
-		
+		service.save(produto);
 		
 		attributes.addFlashAttribute("mensagem", "Cadastro realizado com sucesso.");
 		return new ModelAndView("redirect:/produtos/novo");
