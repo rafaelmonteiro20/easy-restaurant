@@ -10,8 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.rm.easyrestaurant.validation.SKU;
@@ -29,16 +33,20 @@ public class Produto {
 	@Column(length = 8, nullable = false, unique = true)
 	private String sku;
 
+	@Length(max = 100, message = "O tamanho do nome deve ser no máximo 100 caracteres")
 	@NotBlank(message = "Nome é obrigatório")
 	@Column(length = 100, nullable = false)
 	private String nome;
 
 	private String descricao;
 
+	@DecimalMin(value = "0.50", message = "O valor do produto deve ser no mínimo R$ 0,50")
+	@DecimalMax(value = "999.99", message = "O valor do produto deve ser no máximo R$ 999,99")
 	@NotNull(message = "Valor unitário é obrigatório")
 	@Column(name = "valor_unitario", nullable = false, precision = 10, scale = 2)
 	private BigDecimal valorUnitario;
 
+	@Max(value = 1000, message = "Quantidade em estoque deve ser no máximo 1000")
 	@NotNull(message = "Quantidade estoque é obrigatório")
 	@Column(name = "quantidade_estoque", nullable = false)
 	private Integer quantidadeEstoque;
