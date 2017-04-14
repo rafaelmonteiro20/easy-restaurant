@@ -1,9 +1,23 @@
+var Easy = Easy || {};
+
+
+Easy.MaskMoney = (function() {
+	
+	function MaskMoney() {
+		this.decimal = $('.js-decimal');
+		this.plain = $('.js-plain');
+	}
+	
+	MaskMoney.prototype.enable = function() {
+		this.decimal.maskMoney({ decimal: ',', thousands: '.' });
+		this.plain.maskMoney({ precision: 0, thousands: '.' });
+	}
+	
+	return MaskMoney;
+	
+})();
+
 $(function() {
-	
-	var decimal = $('.js-decimal');
-	decimal.maskMoney({ decimal: ',', thousands: '.' });
-	
-	var plain = $('.js-plain');
-	plain.maskMoney({ precision: 0, thousands: '.' });
-	
-});
+	var maskMoney = new Easy.MaskMoney();
+	maskMoney.enable();
+})
