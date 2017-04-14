@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rm.easyrestaurant.model.Categoria;
-import com.rm.easyrestaurant.repository.Categorias;
+import com.rm.easyrestaurant.service.CadastroCategoriaService;
 
 @Controller
 @RequestMapping("/categorias")
 public class CategoriasController {
 
 	@Autowired
-	private Categorias categorias;
+	private CadastroCategoriaService service;
 	
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<?> save(@RequestBody @Valid Categoria categoria, BindingResult result) {
@@ -28,7 +28,7 @@ public class CategoriasController {
 			return ResponseEntity.badRequest().body(result.getFieldError("nome").getDefaultMessage());
 		}
 		
-		System.out.println("Categoria::" + categoria.getNome());
+		service.save(categoria);
 		
 		return ResponseEntity.ok(categoria);
 	}

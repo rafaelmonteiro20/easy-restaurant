@@ -24,7 +24,7 @@ public class ProdutosController {
 	
 	@Autowired
 	private CadastroProdutoService service;
-
+	
 	@RequestMapping("/novo")
 	public ModelAndView novo(Produto produto) {
 		ModelAndView mv = new ModelAndView("produtos/CadastroProduto");
