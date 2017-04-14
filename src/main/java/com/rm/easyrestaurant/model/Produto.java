@@ -58,6 +58,12 @@ public class Produto {
 	@JoinColumn(name = "codigo_categoria", nullable = false)
 	private Categoria categoria;
 	
+	@Column(length = 150)
+	private String foto;
+	
+	@Column(name = "content_type", length = 60)
+	private String contentType;
+	
 	private boolean ativo = true;
 
 	public Long getCodigo() {
@@ -116,6 +122,22 @@ public class Produto {
 		this.categoria = categoria;
 	}
 	
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
+	public String getContentType() {
+		return contentType;
+	}
+
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
+	}
+
 	public boolean isAtivo() {
 		return ativo;
 	}
