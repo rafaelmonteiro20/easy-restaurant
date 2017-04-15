@@ -8,18 +8,20 @@ import com.rm.easyrestaurant.dto.FotoDTO;
 public class FotoStorageRunnable implements Runnable {
 
 	private MultipartFile[] files;
+	
 	private DeferredResult<FotoDTO> result;
+	
+	private FotoStorage storage;
 
-	public FotoStorageRunnable(MultipartFile[] files, DeferredResult<FotoDTO> result) {
+	public FotoStorageRunnable(MultipartFile[] files, DeferredResult<FotoDTO> result, FotoStorage storage) {
 		this.files = files;
 		this.result = result;
+		this.storage = storage;
 	}
 
 	@Override
 	public void run() {
-		System.out.println("Salvando a foto " + files[0].getSize());
-		
-		String nome = files[0].getOriginalFilename();
+		String nome = storage.salvarTemporariamente(files);
 		String contentType = files[0].getContentType();
 		
 		result.setResult(new FotoDTO(nome, contentType));
