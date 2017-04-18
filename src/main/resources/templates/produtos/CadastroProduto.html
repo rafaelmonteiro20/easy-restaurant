@@ -85,18 +85,20 @@
 			</div>
 			
 			<div class="row">
-				<div class="form-group  col-sm-12">
+				<div class="form-group col-sm-12">
 					<input type="hidden" th:field="*{foto}">
 					<input type="hidden" th:field="*{contentType}">
 				
 					<label class="control-label">Foto</label>
 					
-					<div id="upload-drop" class="easy-upload">
-						<i class="glyphicon  glyphicon-cloud-upload"></i>
-						<span>Arraste a foto aqui ou </span>
-						<a class="easy-upload-form-file">selecione 
-							<input id="upload-select" type="file" accept=".jpg,.jpeg,.png" />
-						</a>
+					<div class="js-container-foto-produto">
+						<div id="upload-drop" class="easy-upload">
+							<i class="glyphicon  glyphicon-cloud-upload"></i>
+							<span>Arraste a foto aqui ou </span>
+							<a class="easy-upload-form-file">selecione 
+								<input id="upload-select" type="file" accept=".jpg,.jpeg,.png"/>
+							</a>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -110,12 +112,14 @@
 	</div>
 	
 	<div th:replace="categoria/CadastroRapidoCategoria :: modal"></div>
+	<th:block th:replace="hbs/FotoProduto"></th:block>
 </section>
 
 <th:block layout:fragment="javascript-extra">
 	<script th:src="@{/js/vendors/bootstrap-toggle.min.js}"></script>
 	<script th:src="@{/js/cadastro-rapido-categoria.js}"></script>
 	<script th:src="@{/js/vendors/uikit.min.js}"></script>
+	<script th:src="@{/js/vendors/handlebars.min.js}"></script>
 	
 	<script>
 		$('.js-status').bootstrapToggle();
@@ -131,10 +135,29 @@
 				complete : function(resposta) {
 					var fotoDTO = resposta.responseJSON;
 					
-					$('input[name=foto]').val(fotoDTO.nome);
-					$('input[name=contentType]').val(fotoDTO.contentType);
+					var inputNomeFoto = $('input[name=foto]');
+					var inputContentType = $('input[name=contentType]');
 					
-					console.log(fotoDTO);
+					var htmlFotoProdutoTemplate = $('#foto-produto').html();
+					var template = Handlebars.compile(htmlFotoProdutoTemplate);
+					var htmlFotoProduto = template({nomeFoto: fotoDTO.nome});
+					
+					var containerFotoProduto = $('.js-container-foto-produto');
+					
+					var uploadDrop = $('#upload-drop');
+					
+					inputNomeFoto.val(fotoDTO.nome);
+					inputContentType.val(fotoDTO.contentType);
+					
+					uploadDrop.addClass('hidden');
+					containerFotoProduto.append(htmlFotoProduto);
+					
+					$('.js-remove-foto').on('click', function() {
+						$('.js-foto-produto').remove();
+						uploadDrop.removeClass('hidden');
+						inputNomeFoto.val('');
+						inputContentType.val('');
+					});
 				}
 			};
 			
