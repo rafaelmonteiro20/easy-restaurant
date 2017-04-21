@@ -28,21 +28,21 @@
 	</div>
 	
 	<div class="container-fluid">
-		<form>
+		<form method="get" th:object="${produtoFilter}">
 			<div class="row">
 				<div class="form-group  col-sm-2">
 					<label class="control-label" for="sku">SKU</label>
-					<input type="text" class="form-control" id="sku" autofocus="autofocus"/>
+					<input type="text" class="form-control" id="sku" autofocus="autofocus" th:field="*{sku}" />
 				</div>
 				
 				<div class="form-group  col-sm-5" >
 					<label class="control-label" for="nome">Nome</label>
-					<input type="text" class="form-control" id="nome"/>
+					<input type="text" class="form-control" id="nome" th:field="*{nome}" />
 				</div>
 			
 				<div class="form-group  col-sm-3">
 					<label class="control-label" for="estilo">Categoria</label>
-					<select id="estilo" class="form-control">
+					<select id="estilo" class="form-control" th:field="*{categoria}" >
 	                    <option value="">Todas as categorias</option>
 	                    <option th:each="categoria : ${categorias}" th:text="${categoria.nome}" th:value="${categoria.codigo}"></option>
 	                </select>

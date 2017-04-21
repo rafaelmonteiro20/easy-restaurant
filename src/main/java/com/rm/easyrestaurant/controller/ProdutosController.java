@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.rm.easyrestaurant.model.Produto;
 import com.rm.easyrestaurant.repository.Categorias;
 import com.rm.easyrestaurant.repository.Produtos;
+import com.rm.easyrestaurant.repository.filter.ProdutoFilter;
 import com.rm.easyrestaurant.service.CadastroProdutoService;
 
 @Controller
@@ -51,10 +52,10 @@ public class ProdutosController {
 	}
 	
 	@GetMapping
-	public ModelAndView pesquisar() {
+	public ModelAndView pesquisar(ProdutoFilter produtoFilter, BindingResult result) {
 		ModelAndView mv = new ModelAndView("produtos/PesquisaProdutos");
 		mv.addObject("categorias", categorias.findAll());
-		mv.addObject("produtos", produtos.findAll());
+		mv.addObject("produtos", produtos.filtrar(produtoFilter));
 		return mv;
 	}
 	
