@@ -3,6 +3,8 @@ package com.rm.easyrestaurant.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -52,10 +54,12 @@ public class ProdutosController {
 	}
 	
 	@GetMapping
-	public ModelAndView pesquisar(ProdutoFilter produtoFilter, BindingResult result) {
+	public ModelAndView pesquisar(ProdutoFilter produtoFilter, BindingResult result, 
+			@PageableDefault(size = 2) Pageable pageable) {
+		
 		ModelAndView mv = new ModelAndView("produtos/PesquisaProdutos");
 		mv.addObject("categorias", categorias.findAll());
-		mv.addObject("produtos", produtos.filtrar(produtoFilter));
+		mv.addObject("produtos", produtos.filtrar(produtoFilter, pageable));
 		return mv;
 	}
 	
