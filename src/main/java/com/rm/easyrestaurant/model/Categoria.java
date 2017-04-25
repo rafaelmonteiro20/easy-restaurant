@@ -18,8 +18,8 @@ public class Categoria {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 
-	@Size(max = 60)
 	@NotBlank
+	@Size(max = 60)
 	@Column(length = 60, nullable = false, unique = true)
 	private String nome;
 	
