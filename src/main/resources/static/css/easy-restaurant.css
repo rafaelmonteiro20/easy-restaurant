@@ -45,15 +45,15 @@
 }
 
 /* Table */
-.table-produtos {
+.easy-table {
 	margin-top: 15px;
 }
 
-.table-produtos table tr th {
+.easy-table table tr th {
 	border-bottom-width: 1px;
 }
 
-.table-produtos table tr td {
+.easy-table table tr td {
     border-top: none;
     border-bottom: 1px solid #e7eaec;
     padding: 10px;
@@ -91,4 +91,30 @@
 
 .table-produtos-col-acoes {
 	width: 80px;
+	text-align: center;
+}
+
+/* Colunas - Pesquisa de clientes */
+.table-clientes-col-nome {
+	
+}
+
+.table-clientes-col-tipo {
+	width: 100px;
+	text-align: center;	
+}
+
+.table-clientes-col-documento {
+	width: 240px;
+	text-align: center;	
+}
+
+.table-clientes-col-telefone {
+	width: 230px;
+	text-align: center;	
+}
+
+.table-clientes-col-acoes {
+	width: 120px;
+	text-align: center;
 }

@@ -11,6 +11,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.rm.easyrestaurant.model.Cliente;
 import com.rm.easyrestaurant.model.Estado;
 import com.rm.easyrestaurant.model.TipoPessoa;
+import com.rm.easyrestaurant.repository.Clientes;
 import com.rm.easyrestaurant.service.CadastroClienteService;
 
 @Controller
@@ -18,11 +19,14 @@ import com.rm.easyrestaurant.service.CadastroClienteService;
 public class ClientesController {
 
 	@Autowired
+	private Clientes clientes;
+	
+	@Autowired
 	private CadastroClienteService service;
 	
 	@GetMapping("/novo")
 	public ModelAndView novo(Cliente cliente) {
-		ModelAndView mv = new ModelAndView("cliente/CadastroCliente");
+		ModelAndView mv = new ModelAndView("clientes/CadastroCliente");
 		mv.addObject("tiposPessoa", TipoPessoa.values());
 		mv.addObject("estados", Estado.values());
 		return mv;
@@ -36,5 +40,11 @@ public class ClientesController {
 		return new ModelAndView("redirect:/clientes/novo");
 	}
 	
+	@GetMapping
+	public ModelAndView pesquisar() {
+		ModelAndView mv = new ModelAndView("clientes/PesquisaClientes");
+		mv.addObject("clientes", clientes.findAll());
+		return mv;
+	}
 	
 }
