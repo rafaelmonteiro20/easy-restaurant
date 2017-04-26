@@ -6,10 +6,7 @@
 
 <head>
 	<title>Cadastro de Cliente</title>
-	
-	<link th:href="@{/css/vendors/bootstrap-toggle.min.css}" rel="stylesheet">
 </head>
-
 
 <section layout:fragment="conteudo">
 	<div class="page-header">
@@ -21,74 +18,76 @@
 	</div>
 	
 	<div class="container-fluid">
-		<form>
+		<form method="POST" th:object=${cliente} class="form-vertical">
+			<th:block th:include="layout/fragments/MensagemSucesso"></th:block>
+			<th:block th:include="layout/fragments/MensagensErro"></th:block>
+		
 			<div class="row">
-				<div class="form-group  col-sm-12">
+				<div class="form-group col-sm-12 easy-required">
 					<label for="nome">Nome</label>
-					<input type="text" class="form-control" id="nome" autofocus="autofocus" />
+					<input type="text" class="form-control" id="nome" th:field="*{nome}" autofocus="autofocus"  />
 				</div>
 			</div>
 			
 			<div class="row">
-				<div class="form-group  col-sm-4">
+				<div class="form-group col-sm-4 easy-required">
 					<label>Tipo pessoa</label> 
 					<div>
-						<div class="radio  radio-inline">
-							<input type="radio" name="tipoPessoa"> 
-							<label>Física</label>
-						</div>
-						<div class="radio  radio-inline">
-							<input type="radio" name="tipoPessoa"> 
-							<label>Juridica</label>
-						</div>
+						<th:block th:each="tipo : ${tiposPessoa}">
+							<div class="radio  radio-inline">
+								<input th:id="|id_${tipo}|" type="radio" th:value="${tipo}" th:field="*{tipo}"> 
+								<label th:for="|id_${tipo}|" th:text="${tipo.descricao}"></label>
+							</div>
+						</th:block>
 					</div>
 				</div>
 				
-				<div class="form-group  col-sm-8" >
+				<div class="form-group col-sm-8 easy-required" >
 					<label for="cpfOuCnpj">CPF/CNPJ</label>
-					<input type="text" class="form-control" id="cpfOuCnpj"/>
+					<input type="text" class="form-control" id="cpfOuCnpj" th:field="*{documento}"/>
 				</div>
 			</div>
 			
 			<div class="row">
-				<div class="form-group  col-sm-4">
+				<div class="form-group  col-sm-4 easy-required">
 					<label for="telefone">Telefone</label>
-					<input type="text" class="form-control" id="telefone"/>
+					<input type="text" class="form-control" id="telefone" th:field="*{telefone}" />
 				</div>
 				
 				<div class="form-group  col-sm-8">
 					<label for="email">E-mail</label>
-					<input type="text" class="form-control" id="email"/>
+					<input type="text" class="form-control" id="email" th:field="*{email}" />
 				</div>
 			</div>
 			
 			<div class="row">
 				<div class="form-group  col-sm-4">
 					<label for="logradouro">Logradouro</label>
-					<input type="text" class="form-control" id="logradouro"/>
+					<input type="text" class="form-control" id="logradouro" th:field="*{endereco.logradouro}"/>
 				</div>
 				
 				<div class="form-group  col-sm-2">
 					<label for="numero">Número</label>
-					<input type="text" class="form-control" id="numero"/>
+					<input type="text" class="form-control" id="numero" th:field="*{endereco.numero}"/>
 				</div>
 				
 				<div class="form-group  col-sm-6">
 					<label for="complemento">Complemento</label>
-					<input type="text" class="form-control" id="complemento"/>
+					<input type="text" class="form-control" id="complemento" th:field="*{endereco.complemento}"/>
 				</div>
 			</div>
 			
 			<div class="row">
 				<div class="form-group  col-sm-4">
 					<label for="bairro">Bairro</label>
-					<input type="text" class="form-control" id="bairro" />
+					<input type="text" class="form-control" id="bairro" th:field="*{endereco.bairro}"/>
 				</div>
 			
 				<div class="form-group  col-sm-4">
 					<label for="estado">Estado</label>
-					<select id="estado" class="form-control">
+					<select id="estado" class="form-control" th:field="*{endereco.estado}">
 	                    <option value="">Selecione o estado</option>
+	                    <option th:each="estado : ${estados}" th:value="${estado}" th:text="${estado.descricao}">Ceará</option>
 	                </select>
 				</div>
 				
