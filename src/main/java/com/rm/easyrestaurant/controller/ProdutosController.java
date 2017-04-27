@@ -59,7 +59,7 @@ public class ProdutosController {
 		
 		ModelAndView mv = new ModelAndView("produtos/PesquisaProdutos");
 		mv.addObject("categorias", categorias.findAll());
-		mv.addObject("produtos", produtos.filtrar(produtoFilter, pageable));
+		mv.addObject("pagina", produtos.filtrar(produtoFilter, pageable));
 		return mv;
 	}
 	

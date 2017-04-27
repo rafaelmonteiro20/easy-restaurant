@@ -19,7 +19,7 @@
 				<div class="col-sm-2">
 					<div class="page-header-controls">
 						<a class="btn  btn-default" th:href="@{/produtos/novo}">
-							<i class="glyphicon  glyphicon-plus-sign"></i> <span class="hidden-xs  hidden-sm">Nova produto</span>
+							<i class="glyphicon  glyphicon-plus-sign"></i> <span class="hidden-xs  hidden-sm">Novo produto</span>
 						</a>
 					</div>
 				</div>
@@ -54,7 +54,7 @@
 			</div>
 		</form>
 		
-		<div class="table-responsive table-produtos">
+		<div class="table-responsive easy-table">
 			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -69,7 +69,7 @@
 				</thead>
 				
 				<tbody>
-					<tr th:each="produto : ${produtos}">
+					<tr th:each="produto : ${pagina.content}">
 						<td class="text-center">
 							<img th:src="@{/fotos/temp/{foto}(foto=${produto.foto})}" class="img-responsive"/>
 						</td>
@@ -88,26 +88,28 @@
 							</a>
 						</td>
 					</tr>
+					
+					<tr th:if="${#lists.isEmpty(pagina.content)}">
+						<td colspan="7">Nenhum produto encontrado</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>
 		
-		<div class="col-sm-12  text-center">
+		<div class="col-sm-12 text-center" th:if="${not #lists.isEmpty(pagina.content)}">
 			<nav>
 				<ul class="pagination  pagination-sm">
 					<li class="disabled">
 						<a href="#"><span>&laquo;</span></a>
 					</li>
-					<li class="active">
-						<a href="?page=0">1</a>
-					</li>
-					<li>
-						<a href="?page=1">2</a>
-					</li>
-					<li>
-						<a href="?page=2">3</a>
-					</li>
-					<li>
+					
+					<th:block th:each="p : ${#numbers.sequence(1, pagina.totalPages)}" th:with="numeroPagina=${p - 1}">
+						<li th:class="${pagina.number == numeroPagina} ? active">
+							<a th:href="|?page=${numeroPagina}|">[[${p}]]</a>
+						</li>
+					</th:block>
+					
+					<li class="disabled">
 						<a href="#"><span>&raquo;</span></a>
 					</li>
 				</ul>
