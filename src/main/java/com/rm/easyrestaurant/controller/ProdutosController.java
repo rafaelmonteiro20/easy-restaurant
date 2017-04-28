@@ -1,5 +1,6 @@
 package com.rm.easyrestaurant.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.rm.easyrestaurant.controller.page.PageWrapper;
 import com.rm.easyrestaurant.model.Produto;
 import com.rm.easyrestaurant.repository.Categorias;
 import com.rm.easyrestaurant.repository.Produtos;
@@ -55,11 +57,15 @@ public class ProdutosController {
 	
 	@GetMapping
 	public ModelAndView pesquisar(ProdutoFilter produtoFilter, BindingResult result, 
-			@PageableDefault(size = 2) Pageable pageable) {
+			@PageableDefault(size = 2) Pageable pageable, HttpServletRequest request) {
 		
 		ModelAndView mv = new ModelAndView("produtos/PesquisaProdutos");
 		mv.addObject("categorias", categorias.findAll());
-		mv.addObject("pagina", produtos.filtrar(produtoFilter, pageable));
+		
+		PageWrapper<Produto> pageWrapper = 
+				new PageWrapper<>(produtos.filtrar(produtoFilter, pageable), request);
+		
+		mv.addObject("pagina", pageWrapper);
 		return mv;
 	}
 	
