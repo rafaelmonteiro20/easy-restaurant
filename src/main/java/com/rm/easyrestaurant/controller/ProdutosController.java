@@ -57,7 +57,7 @@ public class ProdutosController {
 	
 	@GetMapping
 	public ModelAndView pesquisar(ProdutoFilter produtoFilter, BindingResult result, 
-			@PageableDefault(size = 2) Pageable pageable, HttpServletRequest request) {
+			@PageableDefault(size = 5) Pageable pageable, HttpServletRequest request) {
 		
 		ModelAndView mv = new ModelAndView("produtos/PesquisaProdutos");
 		mv.addObject("categorias", categorias.findAll());

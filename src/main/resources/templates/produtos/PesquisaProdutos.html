@@ -100,24 +100,7 @@
 			</table>
 		</div>
 		
-		<div class="col-sm-12  text-center" th:if="${not pagina.empty}">
-			<nav>
-				<ul class="pagination  pagination-sm" th:with="paginaAtual=${pagina.current}">
-					<li th:class="${pagina.first} ? disabled">
-						<a th:href="${pagina.uriToPage(paginaAtual - 1)}" th:remove="${pagina.first} ? tag"><span>&laquo;</span></a>
-					</li>
-					<th:block th:each="p : ${#numbers.sequence(1, pagina.total)}" th:with="numeroPagina=${p - 1}">
-						<li th:class="${paginaAtual == numeroPagina} ? active">
-							<a th:href="${pagina.uriToPage(numeroPagina)}">[[${p}]]</a>
-						</li>
-					</th:block>
-					
-					<li th:class="${pagina.last} ? disabled">
-						<a th:href="${pagina.uriToPage(paginaAtual + 1)}" th:remove="${pagina.last} ? tag"><span>&raquo;</span></a>
-					</li>
-				</ul>
-			</nav>
-		</div>
+		<easy:pagination page="${pagina}" />
 	</div>
 </section>
 </html>

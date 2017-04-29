@@ -1,4 +1,5 @@
 package com.rm.easyrestaurant.controller.page;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -6,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
 public class PageWrapper<T> {
@@ -16,7 +16,7 @@ public class PageWrapper<T> {
 	private UriComponentsBuilder uriBuilder;
 
 	public PageWrapper(Page<T> page, HttpServletRequest request) {
-		this.uriBuilder = ServletUriComponentsBuilder.fromRequest(request);
+		this.uriBuilder = UriComponentsBuilder.fromHttpUrl(getURL(request));
 		this.page = page;
 	}
 	
@@ -81,6 +81,18 @@ public class PageWrapper<T> {
 			return false;
 		
 		return sort.getOrderFor(property) != null ? true : false;
+	}
+	
+	private String getURL(HttpServletRequest request) {
+		String queryString = request.getQueryString();
+		
+		String result = "";
+		
+		if(queryString != null)
+			result = "?" + queryString;
+		
+		return request.getRequestURL().append(result).toString()
+									  .replaceAll("\\+", "%20");
 	}
 	
 }
