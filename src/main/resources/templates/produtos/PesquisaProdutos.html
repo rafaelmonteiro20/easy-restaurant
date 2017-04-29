@@ -59,8 +59,12 @@
 				<thead>
 					<tr>
 						<th class="table-produtos-col-foto"></th>
-						<th class="table-produtos-col-sku">SKU</th>
-						<th class="table-produtos-col-nome">Nome</th>
+						<th class="table-produtos-col-sku">
+							<easy:order page="${pagina}" field="sku" text="SKU" />
+						</th>
+						<th class="table-produtos-col-nome">
+							<easy:order page="${pagina}" field="nome" text="Nome" />
+						</th>
 						<th class="table-produtos-col-categoria">Categoria</th>
 						<th class="table-produtos-col-estoque">Estoque</th>
 						<th class="table-produtos-col-valor">Valor</th>

@@ -25,6 +25,7 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import com.rm.easyrestaurant.controller.HomeController;
 import com.rm.easyrestaurant.converter.CategoriaConverter;
+import com.rm.easyrestaurant.thymeleaf.EasyDialect;
 
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 
@@ -56,6 +57,7 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter implements Appl
 		engine.setTemplateResolver(templateResolver());
 		
 		engine.addDialect(new LayoutDialect());
+		engine.addDialect(new EasyDialect());
 		
 		return engine;
 	}

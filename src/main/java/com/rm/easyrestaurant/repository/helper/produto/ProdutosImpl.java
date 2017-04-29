@@ -6,11 +6,13 @@ import javax.persistence.PersistenceContext;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
@@ -21,23 +23,30 @@ public class ProdutosImpl implements ProdutosQueries {
 
 	@PersistenceContext
 	private EntityManager manager;
-	
+
 	@SuppressWarnings({ "deprecation", "unchecked" })
 	@Override @Transactional(readOnly = true)
 	public Page<Produto> filtrar(ProdutoFilter filtro, Pageable pageable) {
 		Criteria criteria = manager.unwrap(Session.class).createCriteria(Produto.class);
-		
+
 		int pageSize = pageable.getPageSize();
 		int firstResult = pageable.getPageNumber() * pageSize;
-		
+
 		criteria.setFirstResult(firstResult);
 		criteria.setMaxResults(pageSize);
+
+		Sort sort = pageable.getSort();
+		if (sort != null) {
+			Sort.Order order = sort.iterator().next();
+			String property = order.getProperty();
+			criteria.addOrder(order.isAscending() ? Order.asc(property) : Order.desc(property));
+		}
 		
 		adicionarFiltro(filtro, criteria);
 
-		return new PageImpl<>(criteria.list(), pageable, count(filtro)) ;
+		return new PageImpl<>(criteria.list(), pageable, count(filtro));
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	private Long count(ProdutoFilter filtro) {
 		Criteria criteria = manager.unwrap(Session.class).createCriteria(Produto.class);
@@ -45,18 +54,18 @@ public class ProdutosImpl implements ProdutosQueries {
 		criteria.setProjection(Projections.rowCount());
 		return (Long) criteria.uniqueResult();
 	}
-	
+
 	private void adicionarFiltro(ProdutoFilter filtro, Criteria criteria) {
-		if(filtro != null) {
-			if(!StringUtils.isEmpty(filtro.getSku())) {
+		if (filtro != null) {
+			if (!StringUtils.isEmpty(filtro.getSku())) {
 				criteria.add(Restrictions.eq("sku", filtro.getSku()));
 			}
-			
-			if(!StringUtils.isEmpty(filtro.getNome())) {
+
+			if (!StringUtils.isEmpty(filtro.getNome())) {
 				criteria.add(Restrictions.ilike("nome", filtro.getNome(), MatchMode.ANYWHERE));
 			}
-			
-			if(filtro.getCategoria() != null) {
+
+			if (filtro.getCategoria() != null) {
 				criteria.add(Restrictions.eq("categoria", filtro.getCategoria()));
 			}
 		}
