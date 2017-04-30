@@ -23,6 +23,7 @@ import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
+import com.github.mxab.thymeleaf.extras.dataattribute.dialect.DataAttributeDialect;
 import com.rm.easyrestaurant.controller.HomeController;
 import com.rm.easyrestaurant.converter.CategoriaConverter;
 import com.rm.easyrestaurant.thymeleaf.EasyDialect;
@@ -58,6 +59,7 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter implements Appl
 		
 		engine.addDialect(new LayoutDialect());
 		engine.addDialect(new EasyDialect());
+		engine.addDialect(new DataAttributeDialect());
 		
 		return engine;
 	}

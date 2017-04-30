@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
 	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:data="http://www.thymeleaf.org/extras/data"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorator="'layout/LayoutPadrao'">
+	  layout:decorate="layout/LayoutPadrao">
 
 <head>
 	<title>Cadastro de Cliente</title>
@@ -41,28 +42,29 @@
 			</div>
 			
 			<div class="row">
-				<div class="form-group col-sm-4 easy-required">
+				<div class="form-group  col-sm-4">
 					<label>Tipo pessoa</label> 
 					<div>
-						<th:block th:each="tipo : ${tiposPessoa}">
+						<th:block th:each="tipoPessoa : ${tiposPessoa}">
 							<div class="radio  radio-inline">
-								<input th:id="|id_${tipo}|" type="radio" th:value="${tipo}" th:field="*{tipo}"> 
-								<label th:for="|id_${tipo}|" th:text="${tipo.descricao}"></label>
+								<input type="radio" th:id="|id_${tipoPessoa}|" class="js-radio-tipo-pessoa" 
+									name="tipoPessoa" data:documento="${tipoPessoa.documento}" data:mascara="${tipoPessoa.mascara}"> 
+								<label class="control-label" th:for="|id_${tipoPessoa}|" th:text="${tipoPessoa.descricao}">Física</label>
 							</div>
 						</th:block>
 					</div>
 				</div>
 				
-				<div class="form-group col-sm-8 easy-required" >
-					<label for="cpfOuCnpj">CPF/CNPJ</label>
-					<input type="text" class="form-control" id="cpfOuCnpj" th:field="*{documento}"/>
+				<div class="form-group  col-sm-8" >
+					<label for="documento">CPF/CNPJ</label>
+					<input type="text" class="form-control" id="documento" disabled/>
 				</div>
 			</div>
 			
 			<div class="row">
 				<div class="form-group  col-sm-4 easy-required">
 					<label for="telefone">Telefone</label>
-					<input type="text" class="form-control" id="telefone" th:field="*{telefone}" />
+					<input type="text" class="form-control js-phone" id="telefone" th:field="*{telefone}" />
 				</div>
 				
 				<div class="form-group  col-sm-8">
@@ -114,4 +116,8 @@
 		</form>
 	</div>
 </section>
+
+<th:block layout:fragment="javascript-extra">
+	<script th:src="@{/js/mascara-documento.js}"></script>
+</th:block>
 </html>
