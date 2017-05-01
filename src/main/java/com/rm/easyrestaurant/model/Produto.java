@@ -19,6 +19,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.util.StringUtils;
 
 import com.rm.easyrestaurant.validation.SKU;
 
@@ -144,6 +145,10 @@ public class Produto {
 	
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
+	}
+	
+	public String getFotoOuMock() {
+		return !StringUtils.isEmpty(foto) ? foto : "produto-mock.png";
 	}
 	
 	@PrePersist @PreUpdate

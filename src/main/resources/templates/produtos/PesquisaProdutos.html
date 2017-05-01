@@ -75,7 +75,7 @@
 				<tbody>
 					<tr th:each="produto : ${pagina.content}">
 						<td class="text-center">
-							<img th:src="@{/fotos/temp/{foto}(foto=${produto.foto})}" class="img-responsive"/>
+							<img th:src="@{/fotos/thumbnail.{foto}(foto=${produto.fotoOuMock})}" class="img-responsive"/>
 						</td>
 						
 						<td class="text-center" th:text="${produto.sku}"></td>

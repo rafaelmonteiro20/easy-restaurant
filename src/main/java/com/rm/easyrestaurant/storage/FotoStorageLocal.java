@@ -12,6 +12,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.name.Rename;
+
 public class FotoStorageLocal implements FotoStorage {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(FotoStorageLocal.class);
@@ -51,11 +54,31 @@ public class FotoStorageLocal implements FotoStorage {
 	}
 	
 	@Override
-	public byte[] recuperarFotoTemporaria(String nome) {
+	public void salvar(String foto) {
 		try {
-			return Files.readAllBytes(this.localTemporario.resolve(nome));
+			Files.move(this.localTemporario.resolve(foto), this.local.resolve(foto));
 		} catch (IOException e) {
-			throw new RuntimeException("Erro ao ler a foto temporária", e);
+			throw new RuntimeException("Erro movendo a foto para destino final", e);
+		}
+		
+		resize(foto);
+	}
+	
+	@Override
+	public byte[] recuperarFoto(String nome) {
+		return recuperar(this.local.resolve(nome));
+	}
+	
+	@Override
+	public byte[] recuperarFotoTemporaria(String nome) {
+		return recuperar(this.localTemporario.resolve(nome));
+	}
+	
+	private byte[] recuperar(Path name) {
+		try {
+			return Files.readAllBytes(name);
+		} catch (IOException e) {
+			throw new RuntimeException("Erro ao ler a foto", e);
 		}
 	}
 
@@ -90,6 +113,14 @@ public class FotoStorageLocal implements FotoStorage {
 			LOGGER.debug(String.format("Nome original: %s, novo nome: %s", nomeOriginal, nome));
 		
 		return nome;
+	}
+	
+	private void resize(String foto) {
+		try {
+			Thumbnails.of(this.local.resolve(foto).toString()).size(50, 85).toFiles(Rename.PREFIX_DOT_THUMBNAIL);
+		} catch (IOException e) {
+			throw new RuntimeException("Erro gerando thumbnail", e);
+		}
 	}
 	
 }
