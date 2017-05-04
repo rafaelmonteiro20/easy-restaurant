@@ -105,10 +105,15 @@
 				</div>
 				
 				<div class="form-group  col-sm-4">
-					<label  for="cidade">Cidade</label>
-					<select id="cidade" class="form-control">
-						<option value="">Selecione a cidade</option>
-					</select>
+					<label for="cidade">Cidade</label>
+					<div class="easy-field-action">
+						<select id="cidade" class="form-control" data:url="@{/cidades}">
+						</select>
+						
+						<div class="easy-field-action_icon js-img-loading" style="display: none">
+							<img th:src="@{/images/mini-loading.gif}"/>
+						</div>
+					</div>
 				</div>
 			</div>
 			
@@ -119,5 +124,6 @@
 
 <th:block layout:fragment="javascript-extra">
 	<script th:src="@{/js/mascara-documento.js}"></script>
+	<script th:src="@{/js/combo-cidade.js}"></script>
 </th:block>
 </html>
