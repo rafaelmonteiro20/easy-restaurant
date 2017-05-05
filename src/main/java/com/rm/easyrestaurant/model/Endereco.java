@@ -2,8 +2,8 @@ package com.rm.easyrestaurant.model;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Embeddable
 public class Endereco {
@@ -20,12 +20,9 @@ public class Endereco {
 	@Column(length = 80)
 	private String bairro;
 
-	@Enumerated(EnumType.STRING)
-	@Column(length = 2)
-	private Estado estado;
-
-	@Column(length = 60)
-	private String cidade;
+	@ManyToOne
+	@JoinColumn(name = "cidade_codigo")
+	private Cidade cidade;
 
 	public String getLogradouro() {
 		return logradouro;
@@ -59,19 +56,11 @@ public class Endereco {
 		this.bairro = bairro;
 	}
 
-	public Estado getEstado() {
-		return estado;
-	}
-
-	public void setEstado(Estado estado) {
-		this.estado = estado;
-	}
-
-	public String getCidade() {
+	public Cidade getCidade() {
 		return cidade;
 	}
-
-	public void setCidade(String cidade) {
+	
+	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
 	}
 
