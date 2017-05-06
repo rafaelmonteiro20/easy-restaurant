@@ -3,6 +3,7 @@
 	  xmlns:th="http://www.thymeleaf.org"
 	  xmlns:data="http://www.thymeleaf.org/extras/data"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:easy="http://easy-restaurant.com"
 	  layout:decorate="layout/LayoutPadrao">
 
 <head>
@@ -30,45 +31,45 @@
 	</div>
 	
 	<div class="container-fluid">
-		<form method="POST" th:object=${cliente} class="form-vertical">
-			<th:block th:include="layout/fragments/MensagemSucesso"></th:block>
-			<th:block th:include="layout/fragments/MensagensErro"></th:block>
+		<form method="POST" th:object=${cliente} th:action="@{/clientes/novo}">
+			<easy:message />
 		
 			<div class="row">
-				<div class="form-group col-sm-12 easy-required">
-					<label for="nome">Nome</label>
-					<input type="text" class="form-control" id="nome" th:field="*{nome}" autofocus="autofocus"  />
+				<div class="form-group col-sm-12 easy-required" easy:classforerror="nome">
+					<label for="nome" class="control-label">Nome</label>
+					<input type="text" class="form-control" id="nome" th:field="*{nome}" autofocus />
 				</div>
 			</div>
 			
 			<div class="row">
-				<div class="form-group  col-sm-4">
-					<label>Tipo pessoa</label> 
+				<div class="form-group col-sm-4 easy-required" easy:classforerror="tipo">
+					<label class="control-label">Tipo pessoa</label> 
 					<div>
 						<th:block th:each="tipoPessoa : ${tiposPessoa}">
 							<div class="radio  radio-inline">
 								<input type="radio" th:id="|id_${tipoPessoa}|" class="js-radio-tipo-pessoa" 
-									name="tipoPessoa" data:documento="${tipoPessoa.documento}" data:mascara="${tipoPessoa.mascara}"> 
+									th:field="*{tipo}" th:value="${tipoPessoa}"
+									data:documento="${tipoPessoa.documento}" data:mascara="${tipoPessoa.mascara}"> 
 								<label class="control-label" th:for="|id_${tipoPessoa}|" th:text="${tipoPessoa.descricao}">Física</label>
 							</div>
 						</th:block>
 					</div>
 				</div>
 				
-				<div class="form-group  col-sm-8" >
-					<label for="documento">CPF/CNPJ</label>
-					<input type="text" class="form-control" id="documento" disabled/>
+				<div class="form-group  col-sm-8 easy-required" easy:classforerror="documento">
+					<label for="documento" class="control-label">CPF/CNPJ</label>
+					<input type="text" class="form-control" id="documento" th:field="*{documento}" disabled />
 				</div>
 			</div>
 			
 			<div class="row">
-				<div class="form-group  col-sm-4 easy-required">
-					<label for="telefone">Telefone</label>
+				<div class="form-group  col-sm-4">
+					<label for="telefone" class="control-label">Telefone</label>
 					<input type="text" class="form-control js-phone" id="telefone" th:field="*{telefone}" />
 				</div>
 				
-				<div class="form-group  col-sm-8">
-					<label for="email">E-mail</label>
+				<div class="form-group  col-sm-8" easy:classforerror="email">
+					<label for="email" class="control-label">E-mail</label>
 					<input type="text" class="form-control" id="email" th:field="*{email}" />
 				</div>
 			</div>
@@ -107,7 +108,7 @@
 				<div class="form-group  col-sm-4">
 					<label for="cidade">Cidade</label>
 					<div class="easy-field-action">
-						<select id="cidade" class="form-control" data:url="@{/cidades}">
+						<select id="cidade" class="form-control" data:url="@{/cidades}" th:field="*{endereco.cidade}">
 						</select>
 						
 						<div class="easy-field-action_icon js-img-loading" style="display: none">

@@ -1,7 +1,10 @@
 package com.rm.easyrestaurant.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,9 +36,14 @@ public class ClientesController {
 	}
 	
 	@PostMapping("/novo")
-	public ModelAndView cadastrar(Cliente cliente, RedirectAttributes attributes) {
-		service.save(cliente);
+	public ModelAndView cadastrar(@Valid Cliente cliente, BindingResult result,
+			RedirectAttributes attributes) {
 		
+		if(result.hasErrors()) {
+			return novo(cliente);
+		}
+		
+		service.save(cliente);
 		attributes.addFlashAttribute("mensagem", "Cadastro realizado com sucesso.");
 		return new ModelAndView("redirect:/clientes/novo");
 	}

@@ -9,6 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "cliente")
@@ -18,12 +22,15 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 
+	@NotBlank(message = "Nome é obrigatório")
 	@Column(nullable = false, length = 100)
 	private String nome;
 
+	@NotBlank(message = "Documento é obrigatório")
 	@Column(nullable = false, length = 25, unique = true)
 	private String documento;
 
+	@NotNull(message = "Tipo pessoa é obrigatório")
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, length = 8)
 	private TipoPessoa tipo;
@@ -31,6 +38,7 @@ public class Cliente {
 	@Column(length = 20)
 	private String telefone;
 
+	@Email(message = "E-mail inválido")
 	@Column(length = 80)
 	private String email;
 

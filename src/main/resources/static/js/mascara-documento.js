@@ -10,14 +10,21 @@ Easy.MascaraDocumento = (function() {
 	
 	MascaraDocumento.prototype.iniciar = function() {
 		this.radioTipoPessoa.on('change', onTipoPessoaAlterado.bind(this));
+		var tipoPessoaSelecionada = this.radioTipoPessoa.filter(':checked')[0];
+		if(tipoPessoaSelecionada) {
+			aplicarMascara.call(this, $(tipoPessoaSelecionada));
+		}
 	}
 	
 	function onTipoPessoaAlterado(evento) {
 		var tipoPessoaSelecionada = $(evento.currentTarget);
-		
+		aplicarMascara.call(this, tipoPessoaSelecionada);
+		this.inputDocumento.val('');
+	}
+	
+	function aplicarMascara(tipoPessoaSelecionada) {
 		this.labelDocumento.text(tipoPessoaSelecionada.data('documento'));
 		this.inputDocumento.mask(tipoPessoaSelecionada.data('mascara'));
-		this.inputDocumento.val('');
 		this.inputDocumento.removeAttr('disabled');
 	}
 	

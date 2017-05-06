@@ -24,6 +24,14 @@ public class Cidade {
 	@Column(nullable = false, length = 2)
 	private Estado estado;
 
+	public Cidade(Long codigo) {
+		this.codigo = codigo;
+	}
+	
+	public Cidade() {
+
+	}
+	
 	public Long getCodigo() {
 		return codigo;
 	}

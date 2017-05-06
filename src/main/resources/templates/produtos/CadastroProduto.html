@@ -3,7 +3,7 @@
 	  xmlns:th="http://www.thymeleaf.org"
 	  xmlns:easy="http://easy-restaurant.com"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorator="'layout/LayoutPadrao'">
+	  layout:decorate="~{layout/LayoutPadrao}">
 
 <head>
 	<title>Cadastro de Produto</title>
@@ -33,7 +33,7 @@
 	</div>
 	
 	<div class="container-fluid">
-		<form method="POST" th:object=${produto} class="form-vertical">
+		<form method="POST" th:object=${produto} th:action="@{/produtos/novo}">
 			<easy:message />
 
 			<div class="row">
