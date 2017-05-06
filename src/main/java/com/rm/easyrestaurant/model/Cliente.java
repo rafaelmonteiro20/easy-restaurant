@@ -13,9 +13,17 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.br.CNPJ;
+import org.hibernate.validator.constraints.br.CPF;
+import org.hibernate.validator.group.GroupSequenceProvider;
+
+import com.rm.easyrestaurant.model.validation.ClienteGroupSequenceProvider;
+import com.rm.easyrestaurant.model.validation.group.CNPJGroup;
+import com.rm.easyrestaurant.model.validation.group.CPFGroup;
 
 @Entity
 @Table(name = "cliente")
+@GroupSequenceProvider(ClienteGroupSequenceProvider.class)
 public class Cliente {
 
 	@Id
@@ -27,6 +35,8 @@ public class Cliente {
 	private String nome;
 
 	@NotBlank(message = "Documento é obrigatório")
+	@CPF(message = "CPF inválido", groups = CPFGroup.class)
+	@CNPJ(message = "CNPJ inválido", groups = CNPJGroup.class)
 	@Column(nullable = false, length = 25, unique = true)
 	private String documento;
 
