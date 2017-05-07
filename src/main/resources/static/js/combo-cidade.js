@@ -26,14 +26,23 @@ Easy.ComboCidade = (function() {
 		this.comboEstado = comboEstado;
 		this.combo = $('#cidade');
 		this.imgLoading = $('.js-img-loading');
+		this.inputHiddenCidadeSelecionada = $('#inputHiddenCidadeSelecionada');
 	}
 	
 	ComboCidade.prototype.iniciar = function() {
 		reset.call(this);
 		this.comboEstado.on('alterado', onEstadoAlterado.bind(this));
+		
+		var siglaEstado = this.comboEstado.combo.val();
+		inicializarCidades.call(this, siglaEstado);
 	}
 	
 	function onEstadoAlterado(evento, estado) {
+		this.inputHiddenCidadeSelecionada.val('');
+		inicializarCidades.call(this, estado);
+	}
+	
+	function inicializarCidades(estado) {
 		if (estado) {
 			var resposta = $.ajax({
 				url: this.combo.data('url'),
@@ -52,11 +61,16 @@ Easy.ComboCidade = (function() {
 	function onBuscarCidadesFinalizado(cidades) {
 		var options = [];
 		cidades.forEach(function(cidade) {
-			options.push('<option value"' + cidade.codigo + '">' + cidade.nome + '</option>');
+			options.push('<option value="' + cidade.codigo + '">' + cidade.nome + '</option>');
 		});
 		
 		this.combo.html(options.join(''));
 		this.combo.removeAttr('disabled');
+		
+		var codigoCidadeSelecionada = this.inputHiddenCidadeSelecionada.val();
+		if (codigoCidadeSelecionada) {
+			this.combo.val(codigoCidadeSelecionada);
+		}
 	}
 	
 	function reset() {
