@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.rm.easyrestaurant.exception.DocumentoExistenteException;
 import com.rm.easyrestaurant.model.Cliente;
 import com.rm.easyrestaurant.model.Estado;
 import com.rm.easyrestaurant.model.TipoPessoa;
@@ -43,7 +44,13 @@ public class ClientesController {
 			return novo(cliente);
 		}
 		
-		service.save(cliente);
+		try {
+			service.save(cliente);
+		} catch (DocumentoExistenteException e) {
+			result.rejectValue("documento", e.getMessage(), e.getMessage());
+			return novo(cliente);
+		}
+			
 		attributes.addFlashAttribute("mensagem", "Cadastro realizado com sucesso.");
 		return new ModelAndView("redirect:/clientes/novo");
 	}
