@@ -1,8 +1,11 @@
 package com.rm.easyrestaurant.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.rm.easyrestaurant.controller.page.PageWrapper;
 import com.rm.easyrestaurant.exception.DocumentoExistenteException;
 import com.rm.easyrestaurant.model.Cliente;
 import com.rm.easyrestaurant.model.Estado;
 import com.rm.easyrestaurant.model.TipoPessoa;
 import com.rm.easyrestaurant.repository.Clientes;
+import com.rm.easyrestaurant.repository.filter.ClienteFilter;
 import com.rm.easyrestaurant.service.CadastroClienteService;
 
 @Controller
@@ -56,9 +61,15 @@ public class ClientesController {
 	}
 	
 	@GetMapping
-	public ModelAndView pesquisar() {
+	public ModelAndView pesquisar(ClienteFilter clienteFilter, BindingResult result, 
+			@PageableDefault(size = 10) Pageable pageable, HttpServletRequest request) {
+		
 		ModelAndView mv = new ModelAndView("clientes/PesquisaClientes");
-		mv.addObject("clientes", clientes.findAll());
+		
+		PageWrapper<Cliente> pageWrapper = 
+				new PageWrapper<>(clientes.filtrar(clienteFilter, pageable), request);
+		
+		mv.addObject("pagina", pageWrapper);
 		return mv;
 	}
 	

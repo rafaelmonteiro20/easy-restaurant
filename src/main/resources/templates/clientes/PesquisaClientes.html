@@ -28,6 +28,24 @@
 	</div>
 	
 	<div class="container-fluid">
+		<form th:object="${clienteFilter}">
+			<div class="row">
+				<div class="form-group  col-sm-4">
+					<label class="control-label" for="nome">Nome</label>
+					<input type="text" class="form-control" id="nome" autofocus="autofocus" th:field="*{nome}" />
+				</div>
+				
+				<div class="form-group  col-sm-4" >
+					<label class="control-label" for="documento">Documento</label>
+					<input type="text" class="form-control" id="documento" th:field="*{documento}" />
+				</div>
+			
+				<div class="form-group  col-sm-2">
+					<button type="submit" class="btn  btn-primary" style="margin-top: 25px">Pesquisar</button>
+				</div>
+			</div>
+		</form>
+		
 		<div class="table-responsive easy-table">
 			<table class="table table-hover">
 				<thead>
@@ -41,7 +59,7 @@
 				</thead>
 				
 				<tbody>
-					<tr th:each="cliente : ${clientes}">
+					<tr th:each="cliente : ${pagina.content}">
 						<td th:text="${cliente.nome}"></td>
 						<td class="text-center" th:text="${cliente.tipo.descricao}"></td>
 						<td class="text-center" th:text="${cliente.documento}"></td>
@@ -55,31 +73,15 @@
 							</a>
 						</td>
 					</tr>
+					
+					<tr th:if="${pagina.empty}">
+						<td colspan="7">Nenhum cliente encontrado.</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>
 		
-		<div class="col-sm-12  text-center">
-			<nav>
-				<ul class="pagination  pagination-sm">
-					<li class="disabled">
-						<a href="#"><span>&laquo;</span></a>
-					</li>
-					<li class="active">
-						<a href="?page=0">1</a>
-					</li>
-					<li>
-						<a href="?page=1">2</a>
-					</li>
-					<li>
-						<a href="?page=2">3</a>
-					</li>
-					<li>
-						<a href="#"><span>&raquo;</span></a>
-					</li>
-				</ul>
-			</nav>
-		</div>
+		<easy:pagination page="${pagina}" />
 	</div>
 </section>
 </html>
