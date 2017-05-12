@@ -8,6 +8,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PostLoad;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -109,6 +112,16 @@ public class Cliente {
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+	
+	@PrePersist @PreUpdate
+	public void preSave() {
+		this.documento = TipoPessoa.removerSinais(this.documento);
+	}
+	
+	@PostLoad
+	public void postLoad() {
+		this.documento = this.tipo.formatar(this.documento);
 	}
 
 	@Override

@@ -5,8 +5,19 @@ import com.rm.easyrestaurant.model.validation.group.CPFGroup;
 
 public enum TipoPessoa {
 
-	FISICA("Física", "CPF", "000.000.000-00", CPFGroup.class), 
-	JURIDICA("Jurídica", "CNPJ", "00.000.000/0000-00", CNPJGroup.class);
+	FISICA("Física", "CPF", "000.000.000-00", CPFGroup.class) {
+		@Override
+		public String formatar(String documento) {
+			return documento.replaceAll("(\\d{3})(\\d{3})(\\d{3})", "$1.$2.$3-");
+		}
+	}, 
+	
+	JURIDICA("Jurídica", "CNPJ", "00.000.000/0000-00", CNPJGroup.class) {
+		@Override
+		public String formatar(String documento) {
+			return documento.replaceAll("(\\d{2})(\\d{3})(\\d{3})(\\d{4})", "$1.$2.$3/$4-");
+		}
+	};
 
 	private String descricao;
 	private String documento;
@@ -35,5 +46,11 @@ public enum TipoPessoa {
 	public Class<?> getGrupo() {
 		return grupo;
 	}
+
+	public static String removerSinais(String documento) {
+		return documento.replaceAll("\\.|/|-", "");
+	}
+
+	public abstract String formatar(String documento);
 	
 }
