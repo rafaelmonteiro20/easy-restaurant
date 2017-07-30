@@ -11,7 +11,7 @@ import com.rm.easyrestaurant.model.Categoria;
 import com.rm.easyrestaurant.repository.Categorias;
 
 @Service
-public class CadastroCategoriaService {
+public class CategoriaService {
 
 	@Autowired
 	private Categorias categorias;

@@ -7,25 +7,51 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.rm.easyrestaurant.exception.CategoriaExistenteException;
 import com.rm.easyrestaurant.model.Categoria;
-import com.rm.easyrestaurant.service.CadastroCategoriaService;
+import com.rm.easyrestaurant.service.CategoriaService;
 
 @Controller
 @RequestMapping("/categorias")
 public class CategoriasController {
 
 	@Autowired
-	private CadastroCategoriaService service;
+	private CategoriaService service;
 	
-	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping("/form")
+	public ModelAndView form(Categoria categoria) {
+		return new ModelAndView("/categoria/CadastraCategoria");
+	}
+	
+	@PostMapping("/form")
+	public ModelAndView salvar(@Valid Categoria categoria, BindingResult result, RedirectAttributes attributes) {
+		if(result.hasErrors())
+			return form(categoria);
+		
+		try {
+			service.save(categoria);
+			attributes.addFlashAttribute("mensagem", "Categoria salva com sucesso.");
+			return new ModelAndView("redirect:/categorias/form");
+
+		} catch (CategoriaExistenteException e) {
+			result.rejectValue("nome", e.getMessage(), e.getMessage());
+			return form(categoria);
+		}
+	}
+	
+	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<?> save(@RequestBody @Valid Categoria categoria, BindingResult result) {
 		if(result.hasErrors()) {
-			return ResponseEntity.badRequest().body(result.getFieldError("nome").getDefaultMessage());
+			String message = result.getFieldError("nome").getDefaultMessage();
+			return ResponseEntity.badRequest().body(message);
 		}
 		
 		service.save(categoria);
