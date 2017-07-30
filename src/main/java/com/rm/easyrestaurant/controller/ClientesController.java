@@ -15,13 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.rm.easyrestaurant.controller.page.PageWrapper;
-import com.rm.easyrestaurant.exception.DocumentoExistenteException;
 import com.rm.easyrestaurant.model.Cliente;
-import com.rm.easyrestaurant.model.Estado;
 import com.rm.easyrestaurant.model.TipoPessoa;
 import com.rm.easyrestaurant.repository.Clientes;
 import com.rm.easyrestaurant.repository.filter.ClienteFilter;
-import com.rm.easyrestaurant.service.CadastroClienteService;
+import com.rm.easyrestaurant.service.ClienteService;
+import com.rm.easyrestaurant.service.exception.DocumentoExistenteException;
 
 @Controller
 @RequestMapping("/clientes")
@@ -31,38 +30,35 @@ public class ClientesController {
 	private Clientes clientes;
 	
 	@Autowired
-	private CadastroClienteService service;
+	private ClienteService clienteService;
 	
-	@GetMapping("/novo")
+	
+	@GetMapping("/form")
 	public ModelAndView novo(Cliente cliente) {
-		ModelAndView mv = new ModelAndView("clientes/CadastroCliente");
+		ModelAndView mv = new ModelAndView("clientes/CadastraCliente");
 		mv.addObject("tiposPessoa", TipoPessoa.values());
-		mv.addObject("estados", Estado.values());
 		return mv;
 	}
 	
-	@PostMapping("/novo")
-	public ModelAndView cadastrar(@Valid Cliente cliente, BindingResult result,
-			RedirectAttributes attributes) {
-		
-		if(result.hasErrors()) {
+	@PostMapping("/form")
+	public ModelAndView cadastrar(@Valid Cliente cliente, BindingResult result, RedirectAttributes attributes) {
+		if(result.hasErrors())
 			return novo(cliente);
-		}
 		
 		try {
-			service.save(cliente);
+			clienteService.save(cliente);
+			attributes.addFlashAttribute("mensagem", "Cliente cadastrado com sucesso.");
+		
+			return new ModelAndView("redirect:/clientes/form");
 		} catch (DocumentoExistenteException e) {
 			result.rejectValue("documento", e.getMessage(), e.getMessage());
 			return novo(cliente);
 		}
-			
-		attributes.addFlashAttribute("mensagem", "Cadastro realizado com sucesso.");
-		return new ModelAndView("redirect:/clientes/novo");
 	}
 	
 	@GetMapping
 	public ModelAndView pesquisar(ClienteFilter clienteFilter, BindingResult result, 
-			@PageableDefault(size = 10) Pageable pageable, HttpServletRequest request) {
+				@PageableDefault(size = 10) Pageable pageable, HttpServletRequest request) {
 		
 		ModelAndView mv = new ModelAndView("clientes/PesquisaClientes");
 		
