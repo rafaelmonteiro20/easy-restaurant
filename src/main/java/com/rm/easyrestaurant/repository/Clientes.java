@@ -10,5 +10,5 @@ import com.rm.easyrestaurant.repository.helper.cliente.ClientesQueries;
 public interface Clientes extends JpaRepository<Cliente, Long>, ClientesQueries {
 
 	Optional<Cliente> findByDocumento(String documento);
-	
+
 }

@@ -1,7 +1,5 @@
 package com.rm.easyrestaurant.model;
 
-import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -11,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.PostLoad;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
@@ -25,7 +22,6 @@ import com.rm.easyrestaurant.model.validation.group.CNPJGroup;
 import com.rm.easyrestaurant.model.validation.group.CPFGroup;
 
 @Entity
-@Table(name = "cliente")
 @GroupSequenceProvider(ClienteGroupSequenceProvider.class)
 public class Cliente {
 
@@ -33,30 +29,23 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 
-	@NotBlank(message = "Nome é obrigatório")
-	@Column(nullable = false, length = 100)
+	@NotBlank
 	private String nome;
 
-	@NotBlank(message = "Documento é obrigatório")
-	@CPF(message = "CPF inválido", groups = CPFGroup.class)
-	@CNPJ(message = "CNPJ inválido", groups = CNPJGroup.class)
-	@Column(nullable = false, length = 25, unique = true)
+	@NotBlank
+	@CPF(groups = CPFGroup.class)
+	@CNPJ(groups = CNPJGroup.class)
 	private String documento;
 
-	@NotNull(message = "Tipo pessoa é obrigatório")
+	@NotNull
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false, length = 8)
 	private TipoPessoa tipo;
 
-	@Column(length = 20)
 	private String telefone;
 
-	@Email(message = "E-mail inválido")
-	@Column(length = 80)
+	@Email
 	private String email;
 
-	@Embedded
-	private Endereco endereco;
 
 	public Long getCodigo() {
 		return codigo;
@@ -106,14 +95,6 @@ public class Cliente {
 		this.email = email;
 	}
 
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
-	
 	@PrePersist @PreUpdate
 	public void preSave() {
 		this.documento = TipoPessoa.removerSinais(this.documento);
@@ -122,6 +103,11 @@ public class Cliente {
 	@PostLoad
 	public void postLoad() {
 		this.documento = this.tipo.formatar(this.documento);
+	}
+	
+	@Override
+	public String toString() {
+		return "[" + nome + ", " + tipo + ", " + documento + "]";
 	}
 
 	@Override
@@ -136,9 +122,7 @@ public class Cliente {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if (!(obj instanceof Cliente))
 			return false;
 		Cliente other = (Cliente) obj;
 		if (codigo == null) {
