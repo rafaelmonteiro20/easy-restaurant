@@ -52,19 +52,6 @@
 		<thumbnailator.version>0.4.8</thumbnailator.version>
 	</properties>
 	
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${maven-compiler-pluging.version}</version>
-				<configuration>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-	
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -206,4 +193,26 @@
 			<scope>compile</scope>
 		</dependency>
 	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-pluging.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>4.0.2</version>
+				<configuration>
+					<driver>com.mysql.jdbc.Driver</driver>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

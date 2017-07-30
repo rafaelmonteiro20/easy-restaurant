@@ -1,26 +1,19 @@
 package com.rm.easyrestaurant.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-@Table(name = "categoria")
 public class Categoria {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue
 	private Long codigo;
 
 	@NotBlank
-	@Size(max = 60)
-	@Column(length = 60, nullable = false, unique = true)
 	private String nome;
 	
 	public Categoria() {
@@ -45,6 +38,11 @@ public class Categoria {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	@Override
+	public String toString() {
+		return nome;
 	}
 
 	@Override
