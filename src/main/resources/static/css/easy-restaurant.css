@@ -94,35 +94,16 @@
 	text-align: center;
 }
 
-/* Colunas - Pesquisa de clientes */
-.table-clientes-col-nome {
-	
-}
-
 .table-clientes-col-tipo {
 	width: 100px;
 	text-align: center;	
 }
 
-.table-clientes-col-documento {
-	width: 240px;
-	text-align: center;	
-}
-
-.table-clientes-col-telefone {
-	width: 230px;
-	text-align: center;	
-}
-
-.table-clientes-col-acoes {
-	width: 120px;
-	text-align: center;
-}
-
-.wid100 {
-	width: 100px
-}
-
-.wid150 {
-	width: 150px;
-}
+.wid80  { width: 80px  }
+.wid100 { width: 100px }
+.wid120 { width: 120px }
+.wid150 { width: 150px }
+.wid160 { width: 160px }
+.wid200 { width: 200px }
+.wid220 { width: 220px }
+.wid250 { width: 250px }
