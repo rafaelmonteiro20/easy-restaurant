@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.rm.easyrestaurant.exception.CategoriaExistenteException;
 import com.rm.easyrestaurant.model.Categoria;
+import com.rm.easyrestaurant.repository.Categorias;
 import com.rm.easyrestaurant.service.CategoriaService;
 
 @Controller
@@ -25,6 +26,9 @@ public class CategoriasController {
 
 	@Autowired
 	private CategoriaService service;
+	
+	@Autowired
+	private Categorias categorias;
 	
 	@GetMapping("/form")
 	public ModelAndView form(Categoria categoria) {
@@ -57,6 +61,13 @@ public class CategoriasController {
 		service.save(categoria);
 		
 		return ResponseEntity.ok(categoria);
+	}
+	
+	@GetMapping
+	public ModelAndView pesquisar() {
+		ModelAndView mv = new ModelAndView("/categoria/PesquisaCategorias");
+		mv.addObject("categorias", categorias.findAll());
+		return mv;
 	}
 	
 }
