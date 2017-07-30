@@ -4,7 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.rm.easyrestaurant.exception.CategoriaExistenteException;
+import com.rm.easyrestaurant.service.exception.CategoriaExistenteException;
 
 @ControllerAdvice
 public class ControllerAdviceExceptionHandler {

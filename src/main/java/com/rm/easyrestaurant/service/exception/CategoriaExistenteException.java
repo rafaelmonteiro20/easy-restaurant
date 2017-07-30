@@ -1,4 +1,4 @@
-package com.rm.easyrestaurant.exception;
+package com.rm.easyrestaurant.service.exception;
 
 public class CategoriaExistenteException extends RuntimeException {
 

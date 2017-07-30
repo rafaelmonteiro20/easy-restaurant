@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.rm.easyrestaurant.exception.CategoriaExistenteException;
 import com.rm.easyrestaurant.model.Categoria;
 import com.rm.easyrestaurant.repository.Categorias;
 import com.rm.easyrestaurant.service.CategoriaService;
+import com.rm.easyrestaurant.service.exception.CategoriaExistenteException;
 
 @Controller
 @RequestMapping("/categorias")

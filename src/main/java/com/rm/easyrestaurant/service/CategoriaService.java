@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.rm.easyrestaurant.exception.CategoriaExistenteException;
 import com.rm.easyrestaurant.model.Categoria;
 import com.rm.easyrestaurant.repository.Categorias;
+import com.rm.easyrestaurant.service.exception.CategoriaExistenteException;
 
 @Service
 public class CategoriaService {
