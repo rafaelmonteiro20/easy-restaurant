@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
-import javax.persistence.Table;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Max;
@@ -24,7 +23,6 @@ import org.springframework.util.StringUtils;
 import com.rm.easyrestaurant.validation.SKU;
 
 @Entity
-@Table(name = "produto")
 public class Produto {
 
 	@Id
@@ -32,41 +30,37 @@ public class Produto {
 	private Long codigo;
 
 	@SKU
-	@NotBlank(message = "SKU é obrigatório")
-	@Column(length = 8, nullable = false, unique = true)
+	@NotBlank
 	private String sku;
 
-	@Length(max = 100, message = "O tamanho do nome deve ser no máximo 100 caracteres")
-	@NotBlank(message = "Nome é obrigatório")
-	@Column(length = 100, nullable = false)
+	@NotBlank
+	@Length(max = 100)
 	private String nome;
 
 	private String descricao;
 
-	@DecimalMin(value = "0.50", message = "O valor do produto deve ser no mínimo R$ 0,50")
-	@DecimalMax(value = "999.99", message = "O valor do produto deve ser no máximo R$ 999,99")
-	@NotNull(message = "Valor unitário é obrigatório")
-	@Column(name = "valor_unitario", nullable = false, precision = 10, scale = 2)
+	@NotNull
+	@DecimalMin(value = "0.50")
+	@DecimalMax(value = "999.99")
+	@Column(name = "valor_unitario")
 	private BigDecimal valorUnitario;
 
-	@Max(value = 1000, message = "Quantidade em estoque deve ser no máximo 1000")
-	@NotNull(message = "Quantidade estoque é obrigatório")
-	@Column(name = "quantidade_estoque", nullable = false)
+	@NotNull
+	@Max(value = 1000)
+	@Column(name = "qtd_estoque")
 	private Integer quantidadeEstoque;
 
-	@NotNull(message = "Categoria é obrigatório")
+	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "codigo_categoria", nullable = false)
+	@JoinColumn(name = "codigo_categoria")
 	private Categoria categoria;
 	
 	@Column(length = 150)
 	private String foto;
 	
-	@Column(name = "content_type", length = 60)
-	private String contentType;
-	
 	private boolean ativo = true;
 
+	
 	public Long getCodigo() {
 		return codigo;
 	}
@@ -131,14 +125,6 @@ public class Produto {
 		this.foto = foto;
 	}
 
-	public String getContentType() {
-		return contentType;
-	}
-
-	public void setContentType(String contentType) {
-		this.contentType = contentType;
-	}
-
 	public boolean isAtivo() {
 		return ativo;
 	}
@@ -148,12 +134,17 @@ public class Produto {
 	}
 	
 	public String getFotoOuMock() {
-		return !StringUtils.isEmpty(foto) ? foto : "produto-mock.png";
+		return StringUtils.isEmpty(foto) ? "produto-mock.png" : "foto";
 	}
 	
 	@PrePersist @PreUpdate
 	private void prePersistUpdate() {
 		this.sku = sku.toUpperCase();
+	}
+	
+	@Override
+	public String toString() {
+		return "[" + sku + ", " + nome + "]";
 	}
 
 	@Override

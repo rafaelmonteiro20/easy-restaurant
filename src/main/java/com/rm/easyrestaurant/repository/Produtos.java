@@ -9,5 +9,4 @@ import com.rm.easyrestaurant.repository.helper.produto.ProdutosQueries;
 @Repository
 public interface Produtos extends JpaRepository<Produto, Long>, ProdutosQueries {
 
-	
 }
