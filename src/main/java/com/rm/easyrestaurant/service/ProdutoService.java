@@ -10,7 +10,7 @@ import com.rm.easyrestaurant.repository.Produtos;
 import com.rm.easyrestaurant.service.event.ProdutoSalvoEvent;
 
 @Service
-public class CadastroProdutoService {
+public class ProdutoService {
 
 	@Autowired
 	private Produtos produtos;
@@ -21,7 +21,6 @@ public class CadastroProdutoService {
 	@Transactional
 	public void save(Produto produto) {
 		produtos.save(produto);
-		
 		publisher.publishEvent(new ProdutoSalvoEvent(produto));
 	}
 	

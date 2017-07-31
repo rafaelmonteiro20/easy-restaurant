@@ -5,6 +5,9 @@ CREATE TABLE produto (
     descricao TEXT,
     valor_unitario DECIMAL(10, 2) NOT NULL,
     qtd_estoque INTEGER NOT NULL,
+    ativo BOOLEAN NOT NULL,
+    foto VARCHAR(150),
+    content_type VARCHAR(30),
     codigo_categoria BIGINT(20) NOT NULL,
     FOREIGN KEY (codigo_categoria) REFERENCES categoria(codigo)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

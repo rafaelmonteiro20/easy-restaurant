@@ -5,12 +5,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-import com.rm.easyrestaurant.service.CadastroProdutoService;
+import com.rm.easyrestaurant.service.ProdutoService;
 import com.rm.easyrestaurant.storage.FotoStorage;
 import com.rm.easyrestaurant.storage.FotoStorageLocal;
 
 @Configuration
-@ComponentScan(basePackageClasses = CadastroProdutoService.class)
+@ComponentScan(basePackageClasses = ProdutoService.class)
 public class ServiceConfig {
 
 	@Bean
