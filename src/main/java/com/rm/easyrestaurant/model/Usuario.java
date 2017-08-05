@@ -36,7 +36,10 @@ public class Usuario implements Serializable {
 
 	private String senha;
 
-	private Boolean ativo;
+	@Column(name = "data_nascimento")
+	private LocalDate dataNascimento;
+
+	private Boolean ativo = true;
 
 	@NotNull
 	@ManyToMany
@@ -44,9 +47,6 @@ public class Usuario implements Serializable {
 				inverseJoinColumns = @JoinColumn(name = "codigo_grupo"))	
 	private List<Grupo> grupos;
 
-	@NotNull
-	@Column(name = "data_nascimento")
-	private LocalDate dataNascimento;
 
 	public Long getCodigo() {
 		return codigo;
