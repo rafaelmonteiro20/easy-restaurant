@@ -12,12 +12,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.rm.easyrestaurant.validation.ConfirmacaoSenha;
 
+@ConfirmacaoSenha(atributo = "senha", atributoConfirmacao = "confirmacaoSenha")
 @Entity
 public class Usuario implements Serializable {
 
@@ -34,10 +37,13 @@ public class Usuario implements Serializable {
 	@Email
 	private String email;
 
-	private String senha;
-
 	@Column(name = "data_nascimento")
 	private LocalDate dataNascimento;
+
+	private String senha;
+
+	@Transient
+	private String confirmacaoSenha;
 
 	private Boolean ativo = true;
 
@@ -78,6 +84,14 @@ public class Usuario implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	
+	public String getConfirmacaoSenha() {
+		return confirmacaoSenha;
+	}
+	
+	public void setConfirmacaoSenha(String confirmacaoSenha) {
+		this.confirmacaoSenha = confirmacaoSenha;
 	}
 
 	public Boolean getAtivo() {
