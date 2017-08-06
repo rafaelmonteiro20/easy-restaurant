@@ -1,15 +1,19 @@
 package com.rm.easyrestaurant.config;
 
 import java.math.BigDecimal;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
+import org.springframework.format.datetime.standard.DateTimeFormatterRegistrar;
 import org.springframework.format.number.NumberStyleFormatter;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.format.support.FormattingConversionService;
@@ -92,12 +96,24 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter implements Appl
 		NumberStyleFormatter integerFormatter = new NumberStyleFormatter("#,##0");
 		conversionService.addFormatterForFieldType(Integer.class, integerFormatter);
 		
+		DateTimeFormatterRegistrar dateTimeFormatter = new DateTimeFormatterRegistrar();
+		dateTimeFormatter.setDateFormatter(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		dateTimeFormatter.registerFormatters(conversionService);
+		
 		return conversionService;
 	}
 	
 	@Bean
 	public LocaleResolver localeResolver() {
 		return new FixedLocaleResolver(new Locale("pt", "BR"));
+	}
+	
+	@Bean
+	public MessageSource messageSource() {
+		ReloadableResourceBundleMessageSource bundle = new ReloadableResourceBundleMessageSource();
+		bundle.setBasename("classpath:/messages");
+		bundle.setDefaultEncoding("UTF-8");
+		return bundle;
 	}
 	
 }
