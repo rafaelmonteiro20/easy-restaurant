@@ -26,4 +26,8 @@ public class UsuarioFilter {
 		this.grupos = grupos;
 	}
 	
+	public boolean hasGrupoSelecionado() {
+		return grupos != null && !grupos.isEmpty();
+	}
+	
 }
