@@ -32,6 +32,14 @@ public class Grupo implements Serializable {
 	private List<Permissao> permissoes;
 
 	
+	public Grupo() {
+
+	}
+	
+	public Grupo(Long codigo) {
+		this.codigo = codigo;
+	}
+
 	public Long getCodigo() {
 		return codigo;
 	}

@@ -33,6 +33,7 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 import com.github.mxab.thymeleaf.extras.dataattribute.dialect.DataAttributeDialect;
 import com.rm.easyrestaurant.controller.HomeController;
 import com.rm.easyrestaurant.converter.CategoriaConverter;
+import com.rm.easyrestaurant.converter.GrupoConverter;
 import com.rm.easyrestaurant.thymeleaf.EasyDialect;
 
 import nz.net.ultraq.thymeleaf.LayoutDialect;
@@ -89,6 +90,7 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter implements Appl
 	public FormattingConversionService mvcConversionService() {
 		DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService();
 		conversionService.addConverter(new CategoriaConverter());
+		conversionService.addConverter(new GrupoConverter());
 		
 		NumberStyleFormatter bigDecimalFormatter = new NumberStyleFormatter("#,##0.00");
 		conversionService.addFormatterForFieldType(BigDecimal.class, bigDecimalFormatter);

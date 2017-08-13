@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.rm.easyrestaurant.model.Usuario;
+import com.rm.easyrestaurant.repository.Grupos;
 import com.rm.easyrestaurant.service.UsuarioService;
 import com.rm.easyrestaurant.service.exception.EmailUsuarioJaCadastradoException;
 
@@ -22,9 +23,14 @@ public class UsuariosController {
 	@Autowired
 	private UsuarioService usuarioService;
 	
+	@Autowired
+	private Grupos grupos;
+	
 	@GetMapping("/form")
 	public ModelAndView form(Usuario usuario) {
-		return new ModelAndView("usuario/CadastroUsuario");
+		ModelAndView mv = new ModelAndView("usuario/CadastroUsuario");
+		mv.addObject("grupos", grupos.findAll());
+		return mv;
 	}
 	
 	@PostMapping("/form")
