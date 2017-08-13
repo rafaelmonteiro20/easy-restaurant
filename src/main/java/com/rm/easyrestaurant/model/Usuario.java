@@ -47,7 +47,7 @@ public class Usuario implements Serializable {
 
 	private Boolean ativo = true;
 
-//	@NotNull
+	@NotNull
 	@ManyToMany
 	@JoinTable(name = "usuario_grupo", joinColumns = @JoinColumn(name = "codigo_usuario"),
 				inverseJoinColumns = @JoinColumn(name = "codigo_grupo"))	
@@ -116,6 +116,10 @@ public class Usuario implements Serializable {
 
 	public void setGrupos(List<Grupo> grupos) {
 		this.grupos = grupos;
+	}
+	
+	public boolean isNovo() {
+		return codigo == null;
 	}
 
 	@Override

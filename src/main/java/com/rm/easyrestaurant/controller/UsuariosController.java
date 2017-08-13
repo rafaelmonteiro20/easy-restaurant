@@ -15,6 +15,7 @@ import com.rm.easyrestaurant.model.Usuario;
 import com.rm.easyrestaurant.repository.Grupos;
 import com.rm.easyrestaurant.service.UsuarioService;
 import com.rm.easyrestaurant.service.exception.EmailUsuarioJaCadastradoException;
+import com.rm.easyrestaurant.service.exception.SenhaObrigatoriaUsuarioException;
 
 @Controller
 @RequestMapping("/usuarios")
@@ -45,7 +46,11 @@ public class UsuariosController {
 			return new ModelAndView("redirect:/usuarios/form");
 		} catch (EmailUsuarioJaCadastradoException e) {
 			result.rejectValue("email", e.getMessage(), e.getMessage());
-			return form(usuario);
+		} catch (SenhaObrigatoriaUsuarioException e) {
+			result.rejectValue("senha", e.getMessage(), e.getMessage());
 		}
+		
+		return form(usuario);
 	}
+	
 }
