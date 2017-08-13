@@ -3,6 +3,7 @@ package com.rm.easyrestaurant.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -116,6 +117,13 @@ public class Usuario implements Serializable {
 
 	public void setGrupos(List<Grupo> grupos) {
 		this.grupos = grupos;
+	}
+	
+	public String getNomesGrupos() {
+		if(grupos == null)
+			return "";
+		
+		return grupos.stream().map(Grupo::getNome).collect(Collectors.joining(", "));
 	}
 	
 	public boolean isNovo() {

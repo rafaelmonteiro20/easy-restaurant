@@ -13,6 +13,7 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.Subqueries;
+import org.hibernate.sql.JoinType;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
@@ -31,8 +32,9 @@ public class UsuariosImpl implements UsuariosQueries {
 	@Transactional(readOnly = true)
 	public List<Usuario> pesquisar(UsuarioFilter filtro) {
 		Criteria criteria = manager.unwrap(Session.class).createCriteria(Usuario.class);
-		
+		criteria.createAlias("grupos", "g", JoinType.LEFT_OUTER_JOIN);
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		
 		adicionarFiltro(filtro, criteria);
 		
 		return criteria.list();
