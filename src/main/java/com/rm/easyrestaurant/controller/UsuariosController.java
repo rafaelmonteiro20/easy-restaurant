@@ -13,6 +13,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.rm.easyrestaurant.model.Usuario;
 import com.rm.easyrestaurant.repository.Grupos;
+import com.rm.easyrestaurant.repository.Usuarios;
+import com.rm.easyrestaurant.repository.filter.UsuarioFilter;
 import com.rm.easyrestaurant.service.UsuarioService;
 import com.rm.easyrestaurant.service.exception.EmailUsuarioJaCadastradoException;
 import com.rm.easyrestaurant.service.exception.SenhaObrigatoriaUsuarioException;
@@ -25,8 +27,12 @@ public class UsuariosController {
 	private UsuarioService usuarioService;
 	
 	@Autowired
+	private Usuarios usuarios;
+	
+	@Autowired
 	private Grupos grupos;
 	
+
 	@GetMapping("/form")
 	public ModelAndView form(Usuario usuario) {
 		ModelAndView mv = new ModelAndView("usuario/CadastroUsuario");
@@ -51,6 +57,14 @@ public class UsuariosController {
 		}
 		
 		return form(usuario);
+	}
+	
+	@GetMapping
+	public ModelAndView pesquisar(UsuarioFilter usuarioFilter) {
+		ModelAndView mv = new ModelAndView("/usuario/PesquisaUsuarios");
+		mv.addObject("grupos", grupos.findAll());
+		mv.addObject("usuarios", usuarios.findAll());
+		return mv;
 	}
 	
 }
