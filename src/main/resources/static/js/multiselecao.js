@@ -27,6 +27,9 @@ Easy.MultiSelecao = (function() {
 				data: {
 					codigos: codigos,
 					status: status
+				}, 
+				success: function() {
+					window.location.reload();
 				}
 			});
 		}

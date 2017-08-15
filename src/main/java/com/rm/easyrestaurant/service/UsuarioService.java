@@ -40,4 +40,9 @@ public class UsuarioService {
 		usuarios.save(usuario);
 	}
 	
+	@Transactional
+	public void alterarStatus(Long[] codigos, StatusUsuario status) {
+		status.alterar(codigos, usuarios);
+	}
+	
 }

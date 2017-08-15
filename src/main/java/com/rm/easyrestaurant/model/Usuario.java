@@ -13,9 +13,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.PreUpdate;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -23,6 +25,7 @@ import com.rm.easyrestaurant.validation.ConfirmacaoSenha;
 
 @ConfirmacaoSenha(atributo = "senha", atributoConfirmacao = "confirmacaoSenha")
 @Entity
+@DynamicUpdate
 public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -54,6 +57,10 @@ public class Usuario implements Serializable {
 				inverseJoinColumns = @JoinColumn(name = "codigo_grupo"))	
 	private List<Grupo> grupos;
 
+	@PreUpdate
+	private void preUpdate() {
+		this.confirmacaoSenha = senha;
+	}
 
 	public Long getCodigo() {
 		return codigo;
@@ -98,7 +105,15 @@ public class Usuario implements Serializable {
 	public Boolean getAtivo() {
 		return ativo;
 	}
-
+	
+	public void ativar() {
+		this.ativo = true;
+	}
+	
+	public void desativar() {
+		this.ativo = false;
+	}
+	
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}

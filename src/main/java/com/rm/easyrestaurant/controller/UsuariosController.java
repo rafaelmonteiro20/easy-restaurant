@@ -1,7 +1,5 @@
 package com.rm.easyrestaurant.controller;
 
-import java.util.Arrays;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +19,7 @@ import com.rm.easyrestaurant.model.Usuario;
 import com.rm.easyrestaurant.repository.Grupos;
 import com.rm.easyrestaurant.repository.Usuarios;
 import com.rm.easyrestaurant.repository.filter.UsuarioFilter;
+import com.rm.easyrestaurant.service.StatusUsuario;
 import com.rm.easyrestaurant.service.UsuarioService;
 import com.rm.easyrestaurant.service.exception.EmailUsuarioJaCadastradoException;
 import com.rm.easyrestaurant.service.exception.SenhaObrigatoriaUsuarioException;
@@ -75,9 +74,10 @@ public class UsuariosController {
 	
 	@PutMapping("/status")
 	@ResponseStatus(HttpStatus.OK)
-	public void atualizarStatus(@RequestParam("codigos[]") Long[] codigos, @RequestParam("status") String status) {
-		Arrays.asList(codigos).forEach(System.out::println);
-		System.out.println("ação: " + status);
+	public void atualizarStatus(@RequestParam("codigos[]") Long[] codigos, 
+			@RequestParam("status") StatusUsuario statusUsuario) {
+		
+		usuarioService.alterarStatus(codigos, statusUsuario);
 	}
 	
 }
