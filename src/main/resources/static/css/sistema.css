@@ -249,3 +249,12 @@ ul.alert-dropdown {
 .panel-yellow > a:hover {
     color: #df8a13;
 }
+
+.checkbox-no-margin {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+}
+
+.checkbox-no-margin .checkbox input[type=checkbox] {
+  margin-left: 0px !important;
+}

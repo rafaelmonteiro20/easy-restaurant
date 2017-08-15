@@ -55,10 +55,28 @@
 				<button type="submit" class="btn  btn-primary">Pesquisar</button>
 			</form>
 			
+			<div class="aw-datatable-toolbar">
+				<button class="btn btn-default  btn-xs  js-status-btn" data:status="ATIVAR">
+					<span>Ativar</span>
+				</button>
+				
+				<button class="btn btn-default  btn-xs  js-status-btn" data:status="DESATIVAR">
+					<span>Desativar</span>
+				</button>
+			</div>
+			
+			<br />
+			
 			<div class="table-responsive easy-table">
 				<table class="table table-hover">
 					<thead>
 						<tr>
+							<th class="wid30">
+		            			<div class="checkbox  checkbox-no-margin">
+		            				<input type="checkbox"/>
+		            				<label></label>
+		            			</div>
+		            		</th>
 							<th>Nome</th>
 							<th>E-mail</th>
 							<th>Grupos</th>
@@ -69,6 +87,12 @@
 					
 					<tbody>
 						<tr th:each="usuario : ${usuarios}">
+							<td>
+								<div class="checkbox  checkbox-no-margin">
+		            				<input type="checkbox" class="js-selecao" data:codigo="${usuario.codigo}">
+		            				<label></label>
+		            			</div>
+		            		</td>
 							<td th:text="${usuario.nome}"></td>
 							<td th:text="${usuario.email}"></td>
 							<td th:text="${usuario.nomesGrupos}"></td>
@@ -93,4 +117,8 @@
 <!-- 			<easy:pagination page="${pagina}" /> -->
 		</div>
 	</section>
+	
+	<th:block layout:fragment="javascript-extra">
+		<script th:src="@{/js/multiselecao.js}"></script>	
+	</th:block>
 </html>
