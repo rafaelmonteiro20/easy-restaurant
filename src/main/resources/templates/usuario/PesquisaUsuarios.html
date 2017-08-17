@@ -86,7 +86,7 @@
 					</thead>
 					
 					<tbody>
-						<tr th:each="usuario : ${usuarios}">
+						<tr th:each="usuario : ${pagina.content}">
 							<td>
 								<div class="checkbox  checkbox-no-margin">
 		            				<input type="checkbox" class="js-selecao" data:codigo="${usuario.codigo}">
@@ -107,14 +107,14 @@
 							</td>
 						</tr>
 						
-<!-- 						<tr th:if="${pagina.empty}"> -->
-<!-- 							<td colspan="7">Nenhum usuário encontrado.</td> -->
-<!-- 						</tr> -->
+						<tr th:if="${pagina.empty}">
+							<td colspan="6">Nenhum usuário encontrado.</td>
+						</tr>
 					</tbody>
 				</table>
 			</div>
 			
-<!-- 			<easy:pagination page="${pagina}" /> -->
+			<easy:pagination page="${pagina}" />
 		</div>
 	</section>
 	

@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.DetachedCriteria;
@@ -13,7 +14,10 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.Subqueries;
-import org.hibernate.sql.JoinType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
@@ -21,23 +25,28 @@ import com.rm.easyrestaurant.model.Grupo;
 import com.rm.easyrestaurant.model.Usuario;
 import com.rm.easyrestaurant.model.UsuarioGrupo;
 import com.rm.easyrestaurant.repository.filter.UsuarioFilter;
+import com.rm.easyrestaurant.repository.pagination.PaginacaoUtil;
 
 public class UsuariosImpl implements UsuariosQueries {
 
 	@PersistenceContext
 	private EntityManager manager;
 	
+	@Autowired
+	private PaginacaoUtil paginacaoUtil;
 
 	@SuppressWarnings({"unchecked", "deprecation"})
 	@Transactional(readOnly = true)
-	public List<Usuario> pesquisar(UsuarioFilter filtro) {
+	public Page<Usuario> pesquisar(UsuarioFilter filtro, Pageable pageable) {
 		Criteria criteria = manager.unwrap(Session.class).createCriteria(Usuario.class);
-		criteria.createAlias("grupos", "g", JoinType.LEFT_OUTER_JOIN);
-		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		
+		paginacaoUtil.configurar(criteria, pageable);
 		adicionarFiltro(filtro, criteria);
 		
-		return criteria.list();
+		List<Usuario> filtrados = criteria.list();
+		filtrados.forEach(u -> Hibernate.initialize(u.getGrupos()));
+		
+		return new PageImpl<>(filtrados, pageable, total(filtro));
 	}
 
 	private void adicionarFiltro(UsuarioFilter filtro, Criteria criteria) {
@@ -61,6 +70,15 @@ public class UsuariosImpl implements UsuariosQueries {
 				criteria.add(Restrictions.and(subqueries.toArray(criterions)));
 			}
 		}
+	}
+	
+	@SuppressWarnings("deprecation")
+	private Long total(UsuarioFilter filtro) {
+		Criteria criteria = manager.unwrap(Session.class).createCriteria(Usuario.class);
+		adicionarFiltro(filtro, criteria);
+		criteria.setProjection(Projections.rowCount());
+		
+		return (Long) criteria.uniqueResult();
 	}
 	
 	private long[] getCodigosGrupos(UsuarioFilter filtro) {
