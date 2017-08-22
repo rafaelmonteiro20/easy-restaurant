@@ -109,3 +109,20 @@
 .wid200 { width: 200px }
 .wid220 { width: 220px }
 .wid250 { width: 250px }
+
+
+/* Tabela produtos página de pedido */
+.tabela_produto {
+	margin-bottom: 15px;
+}
+
+.tabela_produto_vazio {
+	padding: 15px 15px;
+	
+	border: 1px dashed #ddd;
+	
+	text-align: center;
+	font-size: 1.2em;
+	font-weight: 300;
+	color: #555;
+}
