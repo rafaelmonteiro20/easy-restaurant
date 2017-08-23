@@ -7,10 +7,7 @@
 
 	<head>
 		<title>Cadastro de pedido</title>
-		
-		
 	</head>
-
 
 	<section layout:fragment="conteudo">
 		<div class="page-header">
@@ -81,8 +78,6 @@
 					      </span>
 					    </div>
 					</div>
-					
-					<th:block th:replace="clientes/PesquisaRapidaClientes :: pesquisaRapidaClientes"></th:block>
 				</div>
 				
 				<div class="row">
@@ -117,10 +112,12 @@
 					</div>
 				</div>
 			</form>
+			
+			<th:block th:replace="clientes/PesquisaRapidaClientes :: pesquisaRapidaClientes"></th:block>
 		</div>
 	</section>
 	
 	<th:block layout:fragment="javascript-extra">
-		
+		<script th:src="@{/js/cliente.pesquisa-rapida.js}"></script>
 	</th:block>
 </html>
