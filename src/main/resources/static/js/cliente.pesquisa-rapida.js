@@ -7,6 +7,9 @@ Easy.PesquisaRapidaCliente = (function() {
 		this.nomeInput = $('#nomeClienteModal');
 		this.pesquisaRapidaBtn = $('.js-pesquisa-rapida-clientes-btn');
 		this.mensagemErro = $('.js-mensagem-erro');
+		this.containerTabelaPesquisa = $('#containerTabelaPesquisaRapidaCliente');
+		this.htmlTabelaPesquisa = $('#tabela-pesquisa-rapida-cliente').html();
+		this.template = Handlebars.compile(this.htmlTabelaPesquisa);
 	}
 	
 	PesquisaRapidaCliente.prototype.iniciar = function() {
@@ -29,7 +32,9 @@ Easy.PesquisaRapidaCliente = (function() {
 	}
 	
 	function onPesquisaConcluida(resultado) {
-		console.log('Resultado', resultado)
+		var html = this.template(resultado);
+		this.containerTabelaPesquisa.html(html);
+		this.mensagemErro.addClass('hidden');
 	}
 	
 	function onErroPesquisa() {
