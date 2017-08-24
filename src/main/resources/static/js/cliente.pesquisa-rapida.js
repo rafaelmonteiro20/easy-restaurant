@@ -5,7 +5,8 @@ Easy.PesquisaRapidaCliente = (function() {
 	function PesquisaRapidaCliente() {
 		this.pesquisaRapidaClientesModal = $('#pesquisaRapidaClientes');
 		this.nomeInput = $('#nomeClienteModal');
-		this.pesquisaRapidaBtn = $('.js-pesquisa-rapida-clientes-btn'); 
+		this.pesquisaRapidaBtn = $('.js-pesquisa-rapida-clientes-btn');
+		this.mensagemErro = $('.js-mensagem-erro');
 	}
 	
 	PesquisaRapidaCliente.prototype.iniciar = function() {
@@ -22,13 +23,18 @@ Easy.PesquisaRapidaCliente = (function() {
 			data: {
 				nome: this.nomeInput.val()
 			}, 
-			success: onPesquisaConcluida.bind(this)
+			success: onPesquisaConcluida.bind(this),
+			error: onErroPesquisa.bind(this)
 		});
 	}
 	
 	function onPesquisaConcluida(resultado) {
 		console.log('Resultado', resultado)
-	} 
+	}
+	
+	function onErroPesquisa() {
+		this.mensagemErro.removeClass('hidden');
+	}
 	
 	return PesquisaRapidaCliente;
 	

@@ -9,8 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -75,7 +78,18 @@ public class ClientesController {
 	
 	@RequestMapping(consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public @ResponseBody List<Cliente> pesquisar(String nome) {
+		validarNome(nome);
 		return clientes.findByNomeStartingWithIgnoreCase(nome);
+	}
+	
+	private void validarNome(String nome) {
+		if (StringUtils.isEmpty(nome) || nome.length() < 3)
+			throw new IllegalArgumentException();
+	}
+	
+	@ExceptionHandler(IllegalArgumentException.class)
+	public ResponseEntity<Void> tratarIllegalArgumentException(IllegalArgumentException e) {
+		return ResponseEntity.badRequest().build();
 	}
 	
 }
