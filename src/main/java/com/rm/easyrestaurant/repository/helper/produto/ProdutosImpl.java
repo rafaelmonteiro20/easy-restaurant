@@ -1,5 +1,7 @@
 package com.rm.easyrestaurant.repository.helper.produto;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -15,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import com.rm.easyrestaurant.dto.ProdutoDTO;
 import com.rm.easyrestaurant.model.Produto;
 import com.rm.easyrestaurant.repository.filter.ProdutoFilter;
 import com.rm.easyrestaurant.repository.pagination.PaginacaoUtil;
@@ -61,4 +64,16 @@ public class ProdutosImpl implements ProdutosQueries {
 			}
 		}
 	}
+
+	@Override
+	public List<ProdutoDTO> porSkuOuNome(String skuOuNome) {
+		String jpql = "select new com.rm.easyrestaurant.dto.ProdutoDTO(codigo, sku, nome, categoria.nome, "
+				+ "valorUnitario, foto) from Produto "
+				+ "where lower(sku) like lower(:skuOuNome) or lower(nome) like lower(:skuOuNome)";
+		
+		return manager.createQuery(jpql, ProdutoDTO.class)
+					  .setParameter("skuOuNome", skuOuNome + "%")
+					  .getResultList();
+	}
+	
 }

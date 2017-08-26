@@ -1,5 +1,7 @@
 package com.rm.easyrestaurant.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -12,10 +14,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.rm.easyrestaurant.controller.page.PageWrapper;
+import com.rm.easyrestaurant.dto.ProdutoDTO;
 import com.rm.easyrestaurant.model.Produto;
 import com.rm.easyrestaurant.repository.Categorias;
 import com.rm.easyrestaurant.repository.Produtos;
@@ -68,6 +72,11 @@ public class ProdutosController {
 		
 		mv.addObject("pagina", pageWrapper);
 		return mv;
+	}
+	
+	@GetMapping("/filtro")
+	public @ResponseBody List<ProdutoDTO> pesquisar(String skuOuNome) {
+		return produtos.porSkuOuNome(skuOuNome);
 	}
 	
 }
