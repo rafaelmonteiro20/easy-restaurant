@@ -60,6 +60,11 @@ Easy.MaskDate = (function() {
 	
 }());
 
+Easy.formatarMoeda = function(valor) {
+	numeral.language('pt-br');
+	return numeral(valor).format('0,0.00');
+}
+
 $(function() {
 	var maskMoney = new Easy.MaskMoney();
 	maskMoney.enable();

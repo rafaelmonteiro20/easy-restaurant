@@ -2,6 +2,8 @@ package com.rm.easyrestaurant.dto;
 
 import java.math.BigDecimal;
 
+import org.springframework.util.StringUtils;
+
 public class ProdutoDTO {
 
 	private Long codigo;
@@ -17,13 +19,12 @@ public class ProdutoDTO {
 	private String foto;
 
 	public ProdutoDTO(Long codigo, String sku, String nome, String categoria, BigDecimal valorUnitario, String foto) {
-		
 		this.codigo = codigo;
 		this.sku = sku;
 		this.nome = nome;
 		this.valorUnitario = valorUnitario;
 		this.categoria = categoria;
-		this.foto = foto;
+		this.foto = StringUtils.isEmpty(foto) ? "produto-mock.png" : foto;
 	}
 
 	public Long getCodigo() {
