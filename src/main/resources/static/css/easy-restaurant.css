@@ -126,3 +126,91 @@
 	font-weight: 300;
 	color: #555;
 }
+
+/* Tabela Item */
+.tabela-item {
+	position: relative;
+	padding: 15px 0;
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+}
+
+.tabela-item:after {
+	clear: both;
+	display: block;
+    content: "";
+}
+
+.tabela-item ~ .abela-item {
+	border-top: 1px solid #ddd;
+}
+
+.tabela-item__coluna {
+	padding: 0 10px;
+}
+
+.tabela-item__coluna--foto {
+	float: left;
+	width: 60px;
+	
+	text-align: center;
+}
+
+.tabela-item__coluna--valores {
+	padding-right: 0px;
+}
+
+.tabela-item__coluna--detalhes, .tabela-item__coluna--valores {
+	margin-left: 60px;
+}
+
+.tabela-produto-nome {
+	font-weight: 500;
+	font-size: 1.1em;
+	display: block;
+}
+
+.tabela-produto-categoria {
+	color: #aaa;
+	display: block;
+	font-weight: 200;
+}
+
+.tabela-produto-campo-quantidade {
+	width: 30px;
+	text-align: right;
+}
+
+.tabela-produto-valor-pequeno {
+	font-weight: 300;
+	font-size: 1em;
+}
+
+.tabela-produto-valor-medio {
+	font-weight: 300;
+	font-size: 1.3em;
+}
+
+.tabela-produto-valor-grande {
+	font-weight: 300;
+	font-size: 1.6em;
+}
+
+@media (min-width: 768px) { /* screen-sm-min */
+	.tabela-item__coluna {
+		float: left;
+		margin-left: 0px;
+	}
+	
+	.tabela-item__coluna--detalhes {
+		width: calc(70% - 30px);
+	}
+	
+	.tabela-item__coluna--valores {
+		width: calc(30% - 30px);
+
+		text-align: right;
+	}
+}

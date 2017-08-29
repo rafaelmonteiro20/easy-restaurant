@@ -93,10 +93,30 @@
 				</div>
 					
 				<div class="tabela_produto">
-					<div class="tabela_produto_vazio">
-						<i class="glyphicon  glyphicon-shopping-cart"></i> 
-						<span>Você ainda não adicionou nenhum produto.</span>
+					<div class="tabela-item">
+						<div class="tabela-item__coluna  tabela-item__coluna--foto">
+							<img th:src="@{/fotos/thumbnail.produto-mock.png}" class="img-responsive" />
+						</div>
+							
+						<div class="tabela-item__coluna tabela-item__coluna--detalhes">
+							<span class="tabela-produto-nome">Coca-cola 2L</span>
+							<span class="label  label-default">AA1112</span>
+							<span class="bw-tabela-produto-categoria">Refrigerante</span>
+						</div>
+							
+						<div class="tabela-item__coluna  tabela-item__coluna--valores">
+							<div class="tabela-produto-valor-pequeno">
+								<input type="text" maxlength="3" class="tabela-produto-campo-quantidade" value="1"/>
+								<span>x R$8,90</span>
+							</div>
+							<div class="tabela-produto-valor-grande">R$8,90</div>
+						</div>						
 					</div>
+				
+<!-- 					<div class="tabela_produto_vazio"> -->
+<!-- 						<i class="glyphicon  glyphicon-shopping-cart"></i>  -->
+<!-- 						<span>Você ainda não adicionou nenhum produto.</span> -->
+<!-- 					</div> -->
 				</div>
 				
 				<div class="row" style="clear: both">
