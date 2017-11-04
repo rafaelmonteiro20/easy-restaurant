@@ -33,6 +33,7 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 import com.easyrestaurant.controller.HomeController;
 import com.easyrestaurant.converter.CategoriaConverter;
 import com.easyrestaurant.converter.GrupoConverter;
+import com.easyrestaurant.session.TabelaItensPedido;
 import com.easyrestaurant.thymeleaf.EasyDialect;
 import com.github.mxab.thymeleaf.extras.dataattribute.dialect.DataAttributeDialect;
 
@@ -40,7 +41,7 @@ import nz.net.ultraq.thymeleaf.LayoutDialect;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackageClasses = { HomeController.class })
+@ComponentScan(basePackageClasses = { HomeController.class, TabelaItensPedido.class })
 @EnableSpringDataWebSupport
 public class AppWebConfiguration extends WebMvcConfigurerAdapter implements ApplicationContextAware {
 

@@ -4,9 +4,14 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.SessionScope;
+
 import com.easyrestaurant.model.ItemPedido;
 import com.easyrestaurant.model.Produto;
 
+@Component
+@SessionScope
 public class TabelaItensPedido {
 
 	private List<ItemPedido> itens = new ArrayList<>();
@@ -24,6 +29,10 @@ public class TabelaItensPedido {
 		return itens.stream()
 				.map(ItemPedido::getValorTotal)
 				.reduce(BigDecimal.ZERO, BigDecimal::add);
+	}
+	
+	public int quantidadeDeItens() {
+		return itens.size();
 	}
 
 }
