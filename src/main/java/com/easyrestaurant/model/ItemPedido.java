@@ -2,7 +2,7 @@ package com.easyrestaurant.model;
 
 import java.math.BigDecimal;
 
-public class ItemVenda {
+public class ItemPedido {
 
 	private Long codigo;
 	private Integer quantidade;
@@ -61,7 +61,7 @@ public class ItemVenda {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ItemVenda other = (ItemVenda) obj;
+		ItemPedido other = (ItemPedido) obj;
 		if (codigo == null) {
 			if (other.codigo != null)
 				return false;

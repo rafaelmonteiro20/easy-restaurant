@@ -8,14 +8,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.easyrestaurant.model.Produto;
+import com.easyrestaurant.session.TabelaItensPedido;
 
-public class TabelaItensVendaTest {
+public class TabelaItensPedidoTest {
 
-	private TabelaItensVenda tabelaItensVenda;
+	private TabelaItensPedido tabelaItensVenda;
 	
 	@Before
 	public void setUp() {
-		this.tabelaItensVenda = new TabelaItensVenda();
+		this.tabelaItensVenda = new TabelaItensPedido();
 	}
 	
 	@Test

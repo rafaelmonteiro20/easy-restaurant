@@ -67,7 +67,7 @@ public class ProdutosImpl implements ProdutosQueries {
 
 	@Override
 	public List<ProdutoDTO> porSkuOuNome(String skuOuNome) {
-		String jpql = "select new com.rm.easyrestaurant.dto.ProdutoDTO(codigo, sku, nome, categoria.nome, "
+		String jpql = "select new com.easyrestaurant.dto.ProdutoDTO(codigo, sku, nome, categoria.nome, "
 				+ "valorUnitario, foto) from Produto "
 				+ "where lower(sku) like lower(:skuOuNome) or lower(nome) like lower(:skuOuNome)";
 		

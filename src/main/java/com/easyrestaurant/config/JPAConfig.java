@@ -46,7 +46,7 @@ public class JPAConfig {
 		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
 		factory.setDataSource(dataSource);
 		factory.setJpaVendorAdapter(jpaVendorAdapter);
-		factory.setPackagesToScan("com.rm.easyrestaurant.model");
+		factory.setPackagesToScan("com.easyrestaurant.model");
 		factory.afterPropertiesSet();
 		return factory.getObject();
 	}

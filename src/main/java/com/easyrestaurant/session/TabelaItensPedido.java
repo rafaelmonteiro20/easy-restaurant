@@ -1,18 +1,18 @@
-package com.easyrestaurant.venda;
+package com.easyrestaurant.session;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.easyrestaurant.model.ItemVenda;
+import com.easyrestaurant.model.ItemPedido;
 import com.easyrestaurant.model.Produto;
 
-public class TabelaItensVenda {
+public class TabelaItensPedido {
 
-	private List<ItemVenda> itens = new ArrayList<>();
+	private List<ItemPedido> itens = new ArrayList<>();
 	
 	public void adicionarItem(Produto produto, Integer quantidade) {
-		ItemVenda item = new ItemVenda();
+		ItemPedido item = new ItemPedido();
 		item.setProduto(produto);
 		item.setQuantidade(quantidade);
 		item.setValorUnitario(produto.getValorUnitario());
@@ -22,7 +22,7 @@ public class TabelaItensVenda {
 	
 	public BigDecimal getValorTotal() {
 		return itens.stream()
-				.map(ItemVenda::getValorTotal)
+				.map(ItemPedido::getValorTotal)
 				.reduce(BigDecimal.ZERO, BigDecimal::add);
 	}
 
