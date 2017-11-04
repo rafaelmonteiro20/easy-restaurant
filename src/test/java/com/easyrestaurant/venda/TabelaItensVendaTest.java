@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.rm.easyrestaurant.venda.TabelaItensVenda;
+import com.easyrestaurant.venda.TabelaItensVenda;
 
 public class TabelaItensVendaTest {
 
