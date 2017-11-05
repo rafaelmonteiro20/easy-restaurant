@@ -3,9 +3,11 @@ Easy = Easy || {};
 Easy.Autocomplete = (function() {
 	
 	function Autocomplete() {
-		this.skuOuNomeInput = $('.js-sku-nome-cerveja-input');
+		this.skuOuNomeInput = $('.js-sku-nome-produto-input');
 		var htmlTemplateAutocomplete = $('#template-autocomplete-produto').html();
 		this.template = Handlebars.compile(htmlTemplateAutocomplete);
+		this.emitter = $({});
+		this.on = this.emitter.on.bind(this.emitter);
 	}
 	
 	Autocomplete.prototype.iniciar = function() {
@@ -21,21 +23,25 @@ Easy.Autocomplete = (function() {
 			},
 			template: {
 				type: 'custom',
-				method: function(nome, produto) {
-					produto.valorFormatado = Easy.formatarMoeda(produto.valorUnitario);
-					return this.template(produto);
-				}.bind(this)
+				method: template.bind(this)
+			},
+			list: {
+				onChooseEvent: onItemSelecionado.bind(this)
 			}
 		};
 		
 		this.skuOuNomeInput.easyAutocomplete(options);
 	}
+		
+	function onItemSelecionado() {
+		this.emitter.trigger('item-selecionado', this.skuOuNomeInput.getSelectedItemData());
+	}
+		
+	function template(nome, produto) {
+		produto.valorFormatado = Easy.formatarMoeda(produto.valorUnitario);
+		return this.template(produto);
+	}
 	
 	return Autocomplete
 	
 }());
-
-$(function() {
-	var autocomplete = new Easy.Autocomplete();
-	autocomplete.iniciar();
-})
