@@ -144,7 +144,7 @@ public class Produto {
 	}
 	
 	public String getFotoOuMock() {
-		return StringUtils.isEmpty(foto) ? "produto-mock.png" : "foto";
+		return StringUtils.isEmpty(foto) ? "produto-mock.png" : foto;
 	}
 	
 	@PrePersist @PreUpdate

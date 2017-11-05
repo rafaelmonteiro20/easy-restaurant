@@ -2,6 +2,7 @@ Easy.TabelaItens = (function() {
 	
 	function TabelaItens(autocomplete) {
 		this.autocomplete = autocomplete;
+		this.tabelaProdutosContainer = $('.js-tabela-produtos-container');
 	}
 	
 	TabelaItens.prototype.iniciar = function() {
@@ -17,9 +18,11 @@ Easy.TabelaItens = (function() {
 			}
 		});
 		
-		resposta.done(function(data) {
-			console.log('retorno', data);
-		});
+		resposta.done(onItemAdicionado.bind(this));
+		
+		function onItemAdicionado(html) {
+			this.tabelaProdutosContainer.html(html);
+		}
 	}
 	
 	return TabelaItens;

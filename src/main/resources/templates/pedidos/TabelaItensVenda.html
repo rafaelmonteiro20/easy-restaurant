@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+	<div class="tabela-item" th:each="item : ${itens}">
+		<div class="tabela-item__coluna  tabela-item__coluna--foto">
+			<img th:src="@{/fotos/thumbnail.{foto}(foto=${item.produto.fotoOuMock})}" class="img-responsive"/>
+		</div>
+	
+		<div class="tabela-item__coluna tabela-item__coluna--detalhes">
+			<span class="tabela-produto-nome" th:text="${item.produto.nome}">Coca-cola 2L</span> 
+			<span class="label  label-default" th:text="${item.produto.sku}">AA1112</span> 
+			<span class="bw-tabela-produto-categoria" th:text="${item.produto.categoria.nome}">Refrigerante</span>
+		</div>
+	
+		<div class="tabela-item__coluna  tabela-item__coluna--valores">
+			<div class="tabela-produto-valor-pequeno">
+				<input type="text" maxlength="3" class="tabela-produto-campo-quantidade" value="1" /> 
+				<span>x R$[[${{item.valorUnitario}}]]</span>
+			</div>
+			<div class="tabela-produto-valor-grande">R$[[${{item.valorTotal}}]]</div>
+		</div>
+	</div>
+</html>

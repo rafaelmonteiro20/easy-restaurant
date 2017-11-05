@@ -2,6 +2,7 @@ package com.easyrestaurant.session;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -33,6 +34,10 @@ public class TabelaItensPedido {
 	
 	public int quantidadeDeItens() {
 		return itens.size();
+	}
+
+	public List<ItemPedido> getItens() {
+		return Collections.unmodifiableList(itens);
 	}
 
 }

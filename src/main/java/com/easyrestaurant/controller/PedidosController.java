@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.easyrestaurant.model.Produto;
@@ -28,13 +27,13 @@ public class PedidosController {
 	}
 	
 	@PostMapping("/item")
-	public @ResponseBody String adicionarItem(Long codigoProduto) {
+	public ModelAndView adicionarItem(Long codigoProduto) {
 		Produto produto = produtos.findOne(codigoProduto);
 		tabelaItens.adicionarItem(produto, 1);
 		
-		System.out.println(tabelaItens.quantidadeDeItens());
-		
-		return "Item adicionado";
+		ModelAndView mv = new ModelAndView("pedidos/TabelaItensVenda");
+		mv.addObject("itens", tabelaItens.getItens());
+		return mv;
 	}
 	
 }
