@@ -44,6 +44,10 @@ public class ItemPedido {
 	public BigDecimal getValorTotal() {
 		return valorUnitario.multiply(new BigDecimal(quantidade));
 	}
+	
+	public void addQuantidade(int quantidade) {
+		this.quantidade += quantidade;
+	}
 
 	@Override
 	public int hashCode() {

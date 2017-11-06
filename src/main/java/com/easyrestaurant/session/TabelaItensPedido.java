@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
@@ -18,12 +19,24 @@ public class TabelaItensPedido {
 	private List<ItemPedido> itens = new ArrayList<>();
 	
 	public void adicionarItem(Produto produto, Integer quantidade) {
-		ItemPedido item = new ItemPedido();
-		item.setProduto(produto);
-		item.setQuantidade(quantidade);
-		item.setValorUnitario(produto.getValorUnitario());
+		Optional<ItemPedido> itemVendaOptional = buscarItemExistente(produto);
 		
-		itens.add(item);
+		ItemPedido itemVenda = null;
+		
+		if (itemVendaOptional.isPresent()) {
+			itemVenda = itemVendaOptional.get();
+			itemVenda.addQuantidade(quantidade);
+		} else {
+			itemVenda = new ItemPedido();
+			itemVenda.setProduto(produto);
+			itemVenda.setQuantidade(quantidade);
+			itemVenda.setValorUnitario(produto.getValorUnitario());
+			itens.add(0, itemVenda);
+		}
+	}
+
+	private Optional<ItemPedido> buscarItemExistente(Produto produto) {
+		return itens.stream().filter(i -> i.getProduto().equals(produto)).findAny();
 	}
 	
 	public BigDecimal getValorTotal() {
