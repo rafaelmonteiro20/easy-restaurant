@@ -1,6 +1,6 @@
 package com.easyrestaurant.venda;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
 
@@ -63,6 +63,19 @@ public class TabelaItensPedidoTest {
 		
 		assertEquals(1, tabelaItensVenda.quantidadeDeItens());
 		assertEquals(new BigDecimal("9.00"), tabelaItensVenda.getValorTotal());
+	}
+	
+	@Test
+	public void deveAlterarQuatidadeItens() {
+		Produto p1 = new ProdutoBuilder()
+				.comCodigo(1L)
+				.comValorUnitarioDe("4.50").build();
+		
+		tabelaItensVenda.adicionarItem(p1, 1);
+		tabelaItensVenda.alterarQuantidade(p1, 4);
+		
+		assertEquals(1, tabelaItensVenda.quantidadeDeItens());
+		assertEquals(new BigDecimal("18.00"), tabelaItensVenda.getValorTotal());
 	}
 	
 }

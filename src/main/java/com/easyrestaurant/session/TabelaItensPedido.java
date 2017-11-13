@@ -19,7 +19,7 @@ public class TabelaItensPedido {
 	private List<ItemPedido> itens = new ArrayList<>();
 	
 	public void adicionarItem(Produto produto, Integer quantidade) {
-		Optional<ItemPedido> itemVendaOptional = buscarItemExistente(produto);
+		Optional<ItemPedido> itemVendaOptional = buscarItemPor(produto);
 		
 		ItemPedido itemVenda = null;
 		
@@ -35,8 +35,9 @@ public class TabelaItensPedido {
 		}
 	}
 
-	private Optional<ItemPedido> buscarItemExistente(Produto produto) {
-		return itens.stream().filter(i -> i.getProduto().equals(produto)).findAny();
+	public void alterarQuantidade(Produto produto, Integer quantidade) {
+		ItemPedido item = buscarItemPor(produto).get();
+		item.setQuantidade(quantidade);
 	}
 	
 	public BigDecimal getValorTotal() {
@@ -51,6 +52,10 @@ public class TabelaItensPedido {
 
 	public List<ItemPedido> getItens() {
 		return Collections.unmodifiableList(itens);
+	}
+	
+	private Optional<ItemPedido> buscarItemPor(Produto produto) {
+		return itens.stream().filter(i -> i.getProduto().equals(produto)).findAny();
 	}
 
 }
