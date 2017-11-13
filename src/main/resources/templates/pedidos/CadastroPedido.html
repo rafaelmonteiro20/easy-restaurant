@@ -2,6 +2,7 @@
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
 	  xmlns:th="http://www.thymeleaf.org"
 	  xmlns:easy="http://easy-restaurant.com"
+	  xmlns:data="http://www.thymeleaf.org/extras/data"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  layout:decorate="~{layout/LayoutPadrao}">
 
@@ -88,7 +89,8 @@
 					<div class="form-group  col-lg-12">
 						<label for="produto" class="control-label">Produto</label>
 						<input type="text" class="form-control js-sku-nome-produto-input" id="produto" 
-							placeholder="Pesquise e adicione o produto pelo SKU ou nome" autofocus="autofocus" />
+							placeholder="Pesquise e adicione o produto pelo SKU ou nome" autofocus="autofocus"
+							data:url="@{/produtos}" />
 					</div>
 				</div>
 					
