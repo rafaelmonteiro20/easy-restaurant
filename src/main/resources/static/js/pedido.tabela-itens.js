@@ -18,10 +18,27 @@ Easy.TabelaItens = (function() {
 			}
 		});
 		
-		resposta.done(onItemAdicionado.bind(this));
+		resposta.done(onItemAtualizado.bind(this));
 		
-		function onItemAdicionado(html) {
+		function onItemAtualizado(html) {
 			this.tabelaProdutosContainer.html(html);
+			$('.js-tabela-produto-quantidade-item').on('change', onQuantidadeItemAlterado.bind(this));
+		}
+		
+		function onQuantidadeItemAlterado(evento) {
+			var input = $(evento.target);
+			var quantidade = input.val();
+			var codigoProduto = input.data('codigo-produto');
+			
+			var resposta = $.ajax({
+				url: 'item/' + codigoProduto,
+				method: 'PUT',
+				data: {
+					quantidade: quantidade
+				}
+			});
+			
+			resposta.done(onItemAtualizado.bind(this));
 		}
 	}
 	
