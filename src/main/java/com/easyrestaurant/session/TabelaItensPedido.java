@@ -40,6 +40,10 @@ public class TabelaItensPedido {
 		item.setQuantidade(quantidade);
 	}
 	
+	public void removerItem(Produto produto) {
+		itens.removeIf(item -> item.getProduto().equals(produto));
+	}
+	
 	public BigDecimal getValorTotal() {
 		return itens.stream()
 				.map(ItemPedido::getValorTotal)
