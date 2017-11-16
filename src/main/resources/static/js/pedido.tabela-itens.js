@@ -23,6 +23,7 @@ Easy.TabelaItens = (function() {
 		function onItemAtualizado(html) {
 			this.tabelaProdutosContainer.html(html);
 			$('.js-tabela-produto-quantidade-item').on('change', onQuantidadeItemAlterado.bind(this));
+			$('.js-tabela-item').on('dblclick', onDoubleClick);
 		}
 		
 		function onQuantidadeItemAlterado(evento) {
@@ -39,6 +40,10 @@ Easy.TabelaItens = (function() {
 			});
 			
 			resposta.done(onItemAtualizado.bind(this));
+		}
+		
+		function onDoubleClick(evento) {
+			$(this).toggleClass('solicitando-exclusao');
 		}
 	}
 	

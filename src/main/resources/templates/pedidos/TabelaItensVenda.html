@@ -3,7 +3,7 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:data="http://www.thymeleaf.org/extras/data">
 
-	<div class="tabela-item" th:each="item : ${itens}">
+	<div class="tabela-item js-tabela-item" th:each="item : ${itens}">
 		<div class="tabela-item__coluna  tabela-item__coluna--foto">
 			<img th:src="@{/fotos/thumbnail.{foto}(foto=${item.produto.fotoOuMock})}" class="img-responsive"/>
 		</div>
@@ -22,6 +22,11 @@
 				<span>x R$[[${{item.valorUnitario}}]]</span>
 			</div>
 			<div class="tabela-produto-valor-grande">R$[[${{item.valorTotal}}]]</div>
+		</div>
+		
+		<div class="tabela-item__painel-exclusao">
+			<span class="tabela-item__titulo-exclusao">Excluir este item da venda?</span>
+			<button type="button" class="btn  btn-danger">Sim, excluir!</button>
 		</div>
 	</div>
 </html>
