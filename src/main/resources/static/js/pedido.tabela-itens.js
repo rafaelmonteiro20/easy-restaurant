@@ -19,32 +19,44 @@ Easy.TabelaItens = (function() {
 		});
 		
 		resposta.done(onItemAtualizado.bind(this));
+	}
+
+	function onItemAtualizado(html) {
+		this.tabelaProdutosContainer.html(html);
+		$('.js-tabela-produto-quantidade-item').on('change', onQuantidadeItemAlterado.bind(this));
+		$('.js-tabela-item').on('dblclick', onDoubleClick);
+		$('.js-exclusao-item-btn').on('click', onExclusaoItemClick.bind(this));
+	}
+	
+	function onQuantidadeItemAlterado(evento) {
+		var input = $(evento.target);
+		var quantidade = input.val();
+		var codigoProduto = input.data('codigo-produto');
 		
-		function onItemAtualizado(html) {
-			this.tabelaProdutosContainer.html(html);
-			$('.js-tabela-produto-quantidade-item').on('change', onQuantidadeItemAlterado.bind(this));
-			$('.js-tabela-item').on('dblclick', onDoubleClick);
-		}
+		var resposta = $.ajax({
+			url: 'item/' + codigoProduto,
+			method: 'PUT',
+			data: {
+				quantidade: quantidade
+			}
+		});
 		
-		function onQuantidadeItemAlterado(evento) {
-			var input = $(evento.target);
-			var quantidade = input.val();
-			var codigoProduto = input.data('codigo-produto');
-			
-			var resposta = $.ajax({
-				url: 'item/' + codigoProduto,
-				method: 'PUT',
-				data: {
-					quantidade: quantidade
-				}
-			});
-			
-			resposta.done(onItemAtualizado.bind(this));
-		}
+		resposta.done(onItemAtualizado.bind(this));
+	}
+
+	function onDoubleClick(evento) {
+		$(this).toggleClass('solicitando-exclusao');
+	}
+
+	function onExclusaoItemClick(evento) {
+		var input = $(evento.target);
+		var codigoProduto = input.data('codigo-produto');
+		var resposta = $.ajax({
+			url: 'item/' + codigoProduto,
+			method: 'DELETE'
+		});
 		
-		function onDoubleClick(evento) {
-			$(this).toggleClass('solicitando-exclusao');
-		}
+		resposta.done(onItemAtualizado.bind(this));
 	}
 	
 	return TabelaItens;

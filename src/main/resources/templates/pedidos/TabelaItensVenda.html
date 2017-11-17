@@ -26,7 +26,13 @@
 		
 		<div class="tabela-item__painel-exclusao">
 			<span class="tabela-item__titulo-exclusao">Excluir este item da venda?</span>
-			<button type="button" class="btn  btn-danger">Sim, excluir!</button>
+			<button type="button" class="btn  btn-danger js-exclusao-item-btn"
+				data:codigo-produto="${item.produto.codigo}">Sim, excluir!</button>
 		</div>
+	</div>
+	
+	<div class="tabela_produto_vazio" th:if=${itens.empty}>
+		<i class="glyphicon  glyphicon-shopping-cart"></i> 
+		<span>Você ainda não adicionou nenhum produto.</span>
 	</div>
 </html>

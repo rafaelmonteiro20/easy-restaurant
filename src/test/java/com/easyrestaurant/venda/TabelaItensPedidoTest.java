@@ -93,7 +93,7 @@ public class TabelaItensPedidoTest {
 		tabelaItensVenda.adicionarItem(p2, 2);
 		tabelaItensVenda.adicionarItem(p3, 1);
 		
-		tabelaItensVenda.removerItem(p1);
+		tabelaItensVenda.removerItem(p2);
 		
 		assertEquals(2, tabelaItensVenda.quantidadeDeItens());
 		assertEquals(new BigDecimal("8.90"), tabelaItensVenda.getValorTotal());
