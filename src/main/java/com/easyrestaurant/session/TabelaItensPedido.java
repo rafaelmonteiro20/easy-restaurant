@@ -6,17 +6,19 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.stereotype.Component;
-import org.springframework.web.context.annotation.SessionScope;
-
 import com.easyrestaurant.model.ItemPedido;
 import com.easyrestaurant.model.Produto;
 
-@Component
-@SessionScope
-public class TabelaItensPedido {
 
+class TabelaItensPedido {
+
+	private String uuid;
+	
 	private List<ItemPedido> itens = new ArrayList<>();
+	
+	TabelaItensPedido(String uuid) {
+		this.uuid = uuid;
+	}
 	
 	public void adicionarItem(Produto produto, Integer quantidade) {
 		Optional<ItemPedido> itemVendaOptional = buscarItemPor(produto);
@@ -50,6 +52,10 @@ public class TabelaItensPedido {
 				.reduce(BigDecimal.ZERO, BigDecimal::add);
 	}
 	
+	public String getUuid() {
+		return uuid;
+	}
+	
 	public int quantidadeDeItens() {
 		return itens.size();
 	}
@@ -60,6 +66,31 @@ public class TabelaItensPedido {
 	
 	private Optional<ItemPedido> buscarItemPor(Produto produto) {
 		return itens.stream().filter(i -> i.getProduto().equals(produto)).findAny();
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TabelaItensPedido other = (TabelaItensPedido) obj;
+		if (uuid == null) {
+			if (other.uuid != null)
+				return false;
+		} else if (!uuid.equals(other.uuid))
+			return false;
+		return true;
 	}
 
 }

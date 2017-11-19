@@ -1,5 +1,7 @@
 package com.easyrestaurant.controller;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.easyrestaurant.model.Produto;
 import com.easyrestaurant.repository.Produtos;
-import com.easyrestaurant.session.TabelaItensPedido;
+import com.easyrestaurant.session.TabelasItensSession;
 
 @Controller
 @RequestMapping("/pedidos")
@@ -22,35 +24,41 @@ public class PedidosController {
 	private Produtos produtos;
 	
 	@Autowired
-	private TabelaItensPedido tabelaItens;
+	private TabelasItensSession tabelas;
 	
 	@GetMapping("/form")
 	public ModelAndView form() {
-		return new ModelAndView("pedidos/CadastroPedido");
+		ModelAndView mv = new ModelAndView("pedidos/CadastroPedido");
+		mv.addObject("uuid", UUID.randomUUID().toString());
+		return mv;
 	}
 	
 	@PostMapping("/item")
-	public ModelAndView adicionarItem(Long codigoProduto) {
+	public ModelAndView adicionarItem(Long codigoProduto, String uuid) {
 		Produto produto = produtos.findOne(codigoProduto);
-		tabelaItens.adicionarItem(produto, 1);
-		return mvTabelaItensPedido();
+		tabelas.adicionarItem(uuid, produto, 1);
+		return mvTabelaItensPedido(uuid);
 	}
 	
 	@PutMapping("/item/{codigoProduto}")
-	public ModelAndView alterarQuantidadeDoItem(@PathVariable("codigoProduto") Produto produto, Integer quantidade) {
-		tabelaItens.alterarQuantidade(produto, quantidade);
-		return mvTabelaItensPedido();
+	public ModelAndView alterarQuantidadeDoItem(@PathVariable("codigoProduto") Produto produto, 
+			Integer quantidade, String uuid) {
+		
+		tabelas.alterarQuantidade(uuid, produto, quantidade);
+		return mvTabelaItensPedido(uuid);
 	}
 	
-	@DeleteMapping("/item/{codigoProduto}")
-	public ModelAndView removerItem(@PathVariable("codigoProduto") Produto produto) {
-		tabelaItens.removerItem(produto);
-		return mvTabelaItensPedido();
+	@DeleteMapping("/item/{uuid}/{codigoProduto}")
+	public ModelAndView removerItem(@PathVariable("codigoProduto") Produto produto, 
+			@PathVariable("uuid") String uuid) {
+		
+		tabelas.removerItem(uuid, produto);
+		return mvTabelaItensPedido(uuid);
 	}
 
-	private ModelAndView mvTabelaItensPedido() {
+	private ModelAndView mvTabelaItensPedido(String uuid) {
 		ModelAndView mv = new ModelAndView("pedidos/TabelaItensVenda");
-		mv.addObject("itens", tabelaItens.getItens());
+		mv.addObject("itens", tabelas.getItens(uuid));
 		return mv;
 	}
 	

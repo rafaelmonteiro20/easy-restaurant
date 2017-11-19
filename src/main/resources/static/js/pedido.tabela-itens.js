@@ -3,6 +3,7 @@ Easy.TabelaItens = (function() {
 	function TabelaItens(autocomplete) {
 		this.autocomplete = autocomplete;
 		this.tabelaProdutosContainer = $('.js-tabela-produtos-container');
+		this.uuid = $('#uuid').val();
 	}
 	
 	TabelaItens.prototype.iniciar = function() {
@@ -14,7 +15,8 @@ Easy.TabelaItens = (function() {
 			url: 'item',
 			method: 'POST',
 			data: {
-				codigoProduto: item.codigo
+				codigoProduto: item.codigo,
+				uuid : this.uuid
 			}
 		});
 		
@@ -37,7 +39,8 @@ Easy.TabelaItens = (function() {
 			url: 'item/' + codigoProduto,
 			method: 'PUT',
 			data: {
-				quantidade: quantidade
+				quantidade: quantidade,
+				uuid : this.uuid
 			}
 		});
 		
@@ -52,7 +55,7 @@ Easy.TabelaItens = (function() {
 		var input = $(evento.target);
 		var codigoProduto = input.data('codigo-produto');
 		var resposta = $.ajax({
-			url: 'item/' + codigoProduto,
+			url: 'item/' + this.uuid + '/' + codigoProduto,
 			method: 'DELETE'
 		});
 		

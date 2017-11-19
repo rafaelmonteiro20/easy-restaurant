@@ -1,6 +1,6 @@
 package com.easyrestaurant.venda;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
 
@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import com.easyrestaurant.buider.ProdutoBuilder;
 import com.easyrestaurant.model.Produto;
-import com.easyrestaurant.session.TabelaItensPedido;
 
 public class TabelaItensPedidoTest {
 
