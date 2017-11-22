@@ -43,7 +43,9 @@
 							<div class="aw-box__icon">
 								<i class="fa  fa-usd  fa-3x"></i>
 							</div>
-							<div class="aw-box__value">R$ 0,00</div>
+							<div class="aw-box__value">
+								R$ <span class="js-valor-total-box">0,00</span>
+							</div>
 							<div class="aw-box__title">Total</div>
 						</div>
 					</div>
@@ -132,5 +134,6 @@
 		<script th:src="@{/js/vendors/jquery.easy-autocomplete.min.js}"></script>
 		<script th:src="@{/js/pedido.autocomplete-itens.js}"></script>
 		<script th:src="@{/js/pedido.tabela-itens.js}"></script>
+		<script th:src="@{/js/pedido.js}"></script>
 	</th:block>
 </html>

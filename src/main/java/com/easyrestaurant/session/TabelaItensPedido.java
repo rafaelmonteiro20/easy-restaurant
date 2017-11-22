@@ -38,6 +38,9 @@ class TabelaItensPedido {
 	}
 
 	public void alterarQuantidade(Produto produto, Integer quantidade) {
+		if(quantidade <= 0) 
+			quantidade = 1;
+		
 		ItemPedido item = buscarItemPor(produto).get();
 		item.setQuantidade(quantidade);
 	}

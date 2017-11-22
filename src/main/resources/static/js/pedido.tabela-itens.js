@@ -4,6 +4,8 @@ Easy.TabelaItens = (function() {
 		this.autocomplete = autocomplete;
 		this.tabelaProdutosContainer = $('.js-tabela-produtos-container');
 		this.uuid = $('#uuid').val();
+		this.emitter = $({});
+		this.on = this.emitter.on.bind(this.emitter);
 	}
 	
 	TabelaItens.prototype.iniciar = function() {
@@ -25,12 +27,18 @@ Easy.TabelaItens = (function() {
 
 	function onItemAtualizado(html) {
 		this.tabelaProdutosContainer.html(html);
+		
 		var quantidadeItemInput = $('.js-tabela-produto-quantidade-item');
 		quantidadeItemInput.on('change', onQuantidadeItemAlterado.bind(this));
 		quantidadeItemInput.maskMoney({ precision: 0, thousands: ''});
 		
-		$('.js-tabela-item').on('dblclick', onDoubleClick);
-		$('.js-exclusao-item-btn').on('click', onExclusaoItemClick.bind(this));
+		var tabelaItem = $('.js-tabela-item');
+		tabelaItem.on('dblclick', onDoubleClick);
+		
+		var itemExclusaoBtn = $('.js-exclusao-item-btn');
+		itemExclusaoBtn.on('click', onExclusaoItemClick.bind(this));
+		
+		this.emitter.trigger('tabela-itens-atualizada', tabelaItem.data('valor-total'));
 	}
 	
 	function onQuantidadeItemAlterado(evento) {
@@ -74,13 +82,3 @@ Easy.TabelaItens = (function() {
 	return TabelaItens;
 	
 }());
-
-$(function() {
-	
-	var autocomplete = new Easy.Autocomplete();
-	autocomplete.iniciar();
-	
-	var tabelaItens = new Easy.TabelaItens(autocomplete);
-	tabelaItens.iniciar();
-	
-});

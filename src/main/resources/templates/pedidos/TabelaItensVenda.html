@@ -3,7 +3,7 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:data="http://www.thymeleaf.org/extras/data">
 
-	<div class="tabela-item js-tabela-item" th:each="item : ${itens}">
+	<div class="tabela-item js-tabela-item" th:each="item : ${itens}" data:valor-total="${valorTotal}">
 		<div class="tabela-item__coluna  tabela-item__coluna--foto">
 			<img th:src="@{/fotos/thumbnail.{foto}(foto=${item.produto.fotoOuMock})}" class="img-responsive"/>
 		</div>

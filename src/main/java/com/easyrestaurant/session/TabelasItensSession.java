@@ -1,5 +1,6 @@
 package com.easyrestaurant.session;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,10 +25,6 @@ public class TabelasItensSession {
 	
 	public void alterarQuantidade(String uuid, Produto produto, Integer quantidade) {
 		TabelaItensPedido tabela = buscarTabela(uuid);
-		
-		if(quantidade <= 0)
-			quantidade = 1;
-		
 		tabela.alterarQuantidade(produto, quantidade);
 	}
 
@@ -38,6 +35,10 @@ public class TabelasItensSession {
 
 	public List<ItemPedido> getItens(String uuid) {
 		return buscarTabela(uuid).getItens();
+	}
+	
+	public BigDecimal getValorTotal(String uuid) {
+		return buscarTabela(uuid).getValorTotal();
 	}
 	
 	private TabelaItensPedido buscarTabela(String uuid) {
