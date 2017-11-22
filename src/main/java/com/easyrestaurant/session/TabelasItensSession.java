@@ -23,7 +23,11 @@ public class TabelasItensSession {
 	}
 	
 	public void alterarQuantidade(String uuid, Produto produto, Integer quantidade) {
-		TabelaItensPedido tabela = buscarTabela(uuid);		
+		TabelaItensPedido tabela = buscarTabela(uuid);
+		
+		if(quantidade <= 0)
+			quantidade = 1;
+		
 		tabela.alterarQuantidade(produto, quantidade);
 	}
 

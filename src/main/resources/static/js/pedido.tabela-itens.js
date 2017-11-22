@@ -25,7 +25,10 @@ Easy.TabelaItens = (function() {
 
 	function onItemAtualizado(html) {
 		this.tabelaProdutosContainer.html(html);
-		$('.js-tabela-produto-quantidade-item').on('change', onQuantidadeItemAlterado.bind(this));
+		var quantidadeItemInput = $('.js-tabela-produto-quantidade-item');
+		quantidadeItemInput.on('change', onQuantidadeItemAlterado.bind(this));
+		quantidadeItemInput.maskMoney({ precision: 0, thousands: ''});
+		
 		$('.js-tabela-item').on('dblclick', onDoubleClick);
 		$('.js-exclusao-item-btn').on('click', onExclusaoItemClick.bind(this));
 	}
@@ -33,6 +36,12 @@ Easy.TabelaItens = (function() {
 	function onQuantidadeItemAlterado(evento) {
 		var input = $(evento.target);
 		var quantidade = input.val();
+		
+		if(quantidade <= 0) {
+			input.val(1);
+			quantidade = 1;
+		}
+		
 		var codigoProduto = input.data('codigo-produto');
 		
 		var resposta = $.ajax({
