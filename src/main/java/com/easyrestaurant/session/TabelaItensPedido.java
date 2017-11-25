@@ -21,19 +21,19 @@ class TabelaItensPedido {
 	}
 	
 	public void adicionarItem(Produto produto, Integer quantidade) {
-		Optional<ItemPedido> itemVendaOptional = buscarItemPor(produto);
+		Optional<ItemPedido> itemPedidoOptional = buscarItemPor(produto);
 		
-		ItemPedido itemVenda = null;
+		ItemPedido item = null;
 		
-		if (itemVendaOptional.isPresent()) {
-			itemVenda = itemVendaOptional.get();
-			itemVenda.addQuantidade(quantidade);
+		if (itemPedidoOptional.isPresent()) {
+			item = itemPedidoOptional.get();
+			item.addQuantidade(quantidade);
 		} else {
-			itemVenda = new ItemPedido();
-			itemVenda.setProduto(produto);
-			itemVenda.setQuantidade(quantidade);
-			itemVenda.setValorUnitario(produto.getValorUnitario());
-			itens.add(0, itemVenda);
+			item = new ItemPedido();
+			item.setProduto(produto);
+			item.setQuantidade(quantidade);
+			item.setValorUnitario(produto.getValorUnitario());
+			itens.add(0, item);
 		}
 	}
 

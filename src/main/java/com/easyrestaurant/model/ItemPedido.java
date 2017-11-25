@@ -2,12 +2,36 @@ package com.easyrestaurant.model;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "item_pedido")
 public class ItemPedido {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
+
 	private Integer quantidade;
+
+	@Column(name = "valor_unitario")
 	private BigDecimal valorUnitario;
+
+	@ManyToOne
+	@JoinColumn(name = "codigo_produto")
 	private Produto produto;
+
+	@ManyToOne
+	@JoinColumn(name = "codigo_pedido")
+	private Pedido pedido;
+	
 
 	public Long getCodigo() {
 		return codigo;
@@ -40,15 +64,23 @@ public class ItemPedido {
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
-	
+
 	public BigDecimal getValorTotal() {
 		return valorUnitario.multiply(new BigDecimal(quantidade));
 	}
-	
-	public void addQuantidade(int quantidade) {
-		this.quantidade += quantidade;
+
+	public Pedido getPedido() {
+		return pedido;
 	}
 
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
+	}
+
+	public void addQuantidade(Integer quantidade) {
+		this.quantidade += quantidade;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
