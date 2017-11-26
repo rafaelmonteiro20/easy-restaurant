@@ -34,8 +34,10 @@
 		</div>
 		
 		<div class="container-fluid">
-			<form th:action="@{/pedidos/form}" method="POST">
-				<input type="hidden" id="uuid" th:value="${uuid}" />
+			<form th:action="@{/pedidos/form}" method="POST" th:object="${pedido}">
+				<easy:message />
+				
+				<input type="hidden" id="uuid" th:field="*{uuid}" />
 			
 				<div class="row">
 					<div class="col-sm-4">
@@ -78,7 +80,7 @@
 						<label class="control-label" for="nomeCliente">Cliente</label>
 						<div class="input-group">
 					      <input id="nomeCliente" type="text" readonly="readonly" class="form-control" placeholder="Clique na lupa para pesquisar o cliente"/>
-					      <input id="codigoCliente" type="hidden" />
+					      <input id="codigoCliente" type="hidden" th:field="*{cliente}" />
 					      <span class="input-group-btn">
 					         <button class="btn  btn-default  js-tooltip" type="button" title="Pesquisa avançada"
 				        		data-toggle="modal" data-target="#pesquisaRapidaClientes" >
@@ -114,7 +116,9 @@
 						  </button>
 						  
 						  <ul class="dropdown-menu">
-						    <li><a href="#">Salvar e encerrar</a></li>
+						    <li>
+						    	<a href="#">Salvar e encerrar</a>
+						    </li>
 						  </ul>
 						</div>
 					

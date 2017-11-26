@@ -1,4 +1,7 @@
 package com.easyrestaurant.model;
+
+import static com.easyrestaurant.model.StatusPedido.ABERTO;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "pedido")
@@ -42,11 +46,14 @@ public class Pedido {
 	private Usuario usuario;
 	
 	@Enumerated(EnumType.STRING)
-	private StatusPedido status;
+	private StatusPedido status = ABERTO;
 
 	@OneToMany(mappedBy = "pedido")
 	private List<ItemPedido> itens = new ArrayList<>();
 
+	@Transient
+	private String uuid;
+	
 	
 	public Long getCodigo() {
 		return codigo;
@@ -110,6 +117,18 @@ public class Pedido {
 
 	public void setItens(List<ItemPedido> itens) {
 		this.itens = itens;
+	}
+	
+	public String getUuid() {
+		return uuid;
+	}
+	
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
+	
+	public boolean isNovo() {
+		return codigo == null;
 	}
 
 	@Override

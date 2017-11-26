@@ -57,6 +57,14 @@ public class Usuario implements Serializable {
 				inverseJoinColumns = @JoinColumn(name = "codigo_grupo"))	
 	private List<Grupo> grupos;
 
+	public Usuario(Long codigo) {
+		this.codigo = codigo;
+	}
+	
+	public Usuario() {
+
+	}
+
 	@PreUpdate
 	private void preUpdate() {
 		this.confirmacaoSenha = senha;
