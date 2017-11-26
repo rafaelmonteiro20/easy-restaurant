@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -48,7 +49,7 @@ public class Pedido {
 	@Enumerated(EnumType.STRING)
 	private StatusPedido status = ABERTO;
 
-	@OneToMany(mappedBy = "pedido")
+	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
 	private List<ItemPedido> itens = new ArrayList<>();
 
 	@Transient
@@ -115,8 +116,13 @@ public class Pedido {
 		return itens;
 	}
 
-	public void setItens(List<ItemPedido> itens) {
-		this.itens = itens;
+	public void adicionarItens(List<ItemPedido> itens) {
+		itens.forEach(this::adicionarItem);
+	}
+	
+	public void adicionarItem(ItemPedido item) {
+		this.itens.add(item);
+		item.setPedido(this);
 	}
 	
 	public String getUuid() {

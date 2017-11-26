@@ -43,7 +43,7 @@ public class PedidosController {
 	@PostMapping("/form")
 	public ModelAndView salvar(Pedido pedido, RedirectAttributes attributes) {
 		pedido.setUsuario(new Usuario(1L));
-		pedido.setItens(tabelas.getItens(pedido.getUuid()));
+		pedido.adicionarItens(tabelas.getItens(pedido.getUuid()));
 		
 		pedidoService.salvar(pedido);
 		attributes.addFlashAttribute("mensagem", "Pedido salvo com sucesso.");
