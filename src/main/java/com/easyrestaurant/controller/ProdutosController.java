@@ -43,7 +43,7 @@ public class ProdutosController {
 	
 	@GetMapping("/form")
 	public ModelAndView novo(Produto produto) {
-		ModelAndView mv = new ModelAndView("produtos/CadastroProduto");
+		ModelAndView mv = new ModelAndView("produtos/cadastro-produto");
 		mv.addObject("categorias", categorias.findAll());
 		return mv;
 	}

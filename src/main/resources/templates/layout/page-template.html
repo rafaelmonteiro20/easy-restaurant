@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	
+	<head>
+		<meta charset="UTF-8"/>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    	<meta name="viewport" content="width=device-width" />
+		
+		<title>Easy Restaurant</title>
+		<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.min.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/easy.css}" />
+	</head>
+	
+	<body class="skin-black">
+		<header th:replace="layout/fragments/header :: navbar"></header>
+		
+		<div class="layout-page">
+			<div class="nav-sidebar">
+				<ul class="menu-itens">
+					<li>
+						<a href="#">
+							<span class="menu-item-name">Home</span>
+						</a>
+					</li>
+					
+					<li>
+						<a href="#">
+							<span class="menu-item-name">Produtos</span>
+						</a>
+					</li>
+					
+					<li>
+						<a href="#">
+							<span class="menu-item-name">Categorias</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+			
+			<div class="content-wrapper">
+				<div class="page-header">
+					<div class="container-fluid">
+						<div class="breadcrumbs-container">
+							<h1>
+								<a th:href="@{/produtos}">Produtos</a>
+								<span class="path-divider">/</span>
+								<strong>
+									<a th:href="@{/produtos/form}">Novo produto</a>
+								</strong>
+							</h1>
+						</div>
+					</div>
+				</div>
+			
+				<section layout:fragment="conteudo"></section>
+			</div>
+		
+		</div>
+		
+		<div th:replace="layout/fragments/footer :: footer"></div>
+		
+		<script type="text/javascript" th:src="@{/js/vendors/jquery.js}"></script>
+		<script type="text/javascript" th:src="@{/js/vendors/bootstrap.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/vendors/mask-money.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/vendors/mask.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/easy.js}"></script>
+	</body>
+</html>
