@@ -1,14 +1,15 @@
-<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
 	  xmlns:th="http://www.thymeleaf.org">
 	  
-	<div class="modal fade" id="modalCadastroRapidoCategoria" tabindex="-1" role="dialog" th:fragment="modal">
+	<div class="modal fade" id="modalCadastroCategoria" tabindex="-1" role="dialog" th:fragment="modal">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 				<div class="modal-header">
+					<h4 class="modal-title">Nova Categoria</h4>
 					<button type="button" class="close" data-dismiss="modal">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title">Nova categoria</h4>
 				</div>
 				
 				<div class="modal-body">
@@ -16,13 +17,15 @@
 					
 					<form class="form-vertical" th:action="@{/categorias}">
 						<div class="form-group">
-							<label for="nomeCategoria">Nome</label>
-							<input id="nomeCategoria" type="text" class="form-control" autofocus>
+							<label class="control-label">Nome</label>
+							<input id="nomeCategoria" type="text" class="form-control" />
 						</div>
 					</form>
-					
-					<button type="button" class="btn btn-primary js-modal-salvar-categoria-botao">Salvar</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+				</div>
+				
+				<div class="modal-footer">
+					<button type="button" class="btn btn-link" data-dismiss="modal">Cancelar</button>
+					<button type="button" class="btn btn-success js-modal-salvar-categoria-botao">Salvar</button>
 				</div>
 			</div>
 		</div>

@@ -57,7 +57,6 @@
 			
 				<section layout:fragment="conteudo"></section>
 			</div>
-		
 		</div>
 		
 		<div th:replace="layout/fragments/footer :: footer"></div>
@@ -67,5 +66,7 @@
 		<script type="text/javascript" th:src="@{/js/vendors/mask-money.min.js}"></script>
 		<script type="text/javascript" th:src="@{/js/vendors/mask.min.js}"></script>
 		<script type="text/javascript" th:src="@{/js/easy.js}"></script>
+		
+		<th:block layout:fragment="js-extra"></th:block>
 	</body>
 </html>

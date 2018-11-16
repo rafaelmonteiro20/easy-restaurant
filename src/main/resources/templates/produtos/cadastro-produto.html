@@ -5,7 +5,7 @@
 	  layout:decorator="~{layout/page-template}">
 
 	<head>
-<!-- 		<link th:href="@{/css/vendors/bootstrap-toggle.min.css}" rel="stylesheet"> -->
+		<link th:href="@{/css/vendors/bootstrap-toggle.min.css}" rel="stylesheet">
 <!-- 		<link th:href="@{/css/vendors/upload.min.css}" rel="stylesheet"> -->
 		<title>Cadastro de produto</title>
 	</head>
@@ -43,7 +43,7 @@
 							</select>
 							
 							<div class="field-action__icon">
-								<a href="#" data-toggle="modal" data-target="#modalCadastroRapidoCategoria">
+								<a href="#" data-toggle="modal" data-target="#modalCadastroCategoria">
 									<i class="fa fa-plus-circle icon-large"></i>
 								</a>
 							</div>
@@ -71,7 +71,7 @@
 						<label class="control-label">Status</label>
 						<div>
 							<input type="checkbox" class="js-status" data-size="normal" th:field="*{ativo}"
-								data-on="Ativo" data-off="Inativo" data-onstyle="success" data-offstyle="danger" />
+								data-on="Ativo" data-off="Inativo" data-onstyle="primary" data-offstyle="secondary" />
 						</div>
 					</div>
 				</div>
@@ -104,19 +104,19 @@
 			</form>
 		</div>
 		
-		<div th:replace="categoria/CadastroRapidoCategoria :: modal"></div>
+		<div th:replace="categoria/cadastro-rapido-categoria :: modal"></div>
 <!-- 		<th:block th:replace="hbs/FotoProduto"></th:block> -->
 	</section>
 	
-<!-- 	<th:block layout:fragment="javascript-extra"> -->
-<!-- 		<script th:src="@{/js/vendors/bootstrap-toggle.min.js}"></script> -->
+	<th:block layout:fragment="js-extra">
+		<script th:src="@{/js/vendors/bootstrap-toggle.min.js}"></script>
 <!-- 		<script th:src="@{/js/cadastro-rapido-categoria.js}"></script> -->
 <!-- 		<script th:src="@{/js/vendors/uikit.min.js}"></script> -->
 <!-- 		<script th:src="@{/js/vendors/handlebars.min.js}"></script> -->
 <!-- 		<script th:src="@{/js/upload-foto.js}"></script> -->
 		
-<!-- 		<script> -->
-<!--   			$('.js-status').bootstrapToggle(); -->
-<!-- 		</script> -->
-<!-- 	</th:block> -->
+		<script>
+   			$('.js-status').bootstrapToggle();
+ 		</script>
+	</th:block>
 </html>

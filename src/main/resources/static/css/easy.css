@@ -161,6 +161,26 @@ select.form-control:not([size]):not([multiple]) {
 	font-size: 14px;
 }
 
+.fade.in {
+  opacity: 1;
+}
+
+.modal-backdrop .fade .in {
+  opacity: 0.5 !important;
+}
+
+.modal-backdrop.fade {
+    opacity: 0.5 !important;
+}
+
+.modal-title {
+	font-size: 1.2rem;
+}
+
+.modal-footer {
+	border-top: none;
+}
+
 .icon-large {
 	font-size: 20px;
 }
@@ -171,5 +191,13 @@ select.form-control:not([size]):not([multiple]) {
 
 .field-action__icon {
 	margin: 7px 0px 0px 7px;
+}
+
+.hidden {
+	display: none;	
+}
+
+.toggle-handle {
+	background: #fff;
 }
 
