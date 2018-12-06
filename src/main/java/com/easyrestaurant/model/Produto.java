@@ -11,23 +11,26 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+import javax.persistence.Table;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.util.StringUtils;
 
+import com.easyrestaurant.core.Identifiable;
 import com.easyrestaurant.validation.SKU;
 
 @Entity
-public class Produto {
+@Table(name = "produto")
+public class Produto implements Identifiable<Long> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codigo;
+	private Long id;
 
 	@SKU
 	@NotBlank
@@ -63,12 +66,17 @@ public class Produto {
 	private boolean ativo = true;
 
 	
-	public Long getCodigo() {
-		return codigo;
+	public Produto() {
+		
+	}
+	
+	@Override
+	public Long getId() {
+		return id;
 	}
 
-	public void setCodigo(Long codigo) {
-		this.codigo = codigo;
+	public void setCodigo(Long id) {
+		this.id = id;
 	}
 
 	public String getSku() {
@@ -161,7 +169,7 @@ public class Produto {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -174,10 +182,10 @@ public class Produto {
 		if (getClass() != obj.getClass())
 			return false;
 		Produto other = (Produto) obj;
-		if (codigo == null) {
-			if (other.codigo != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!codigo.equals(other.codigo))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}

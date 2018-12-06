@@ -49,16 +49,22 @@ public class ProdutosController {
 	}
 	
 	@PostMapping(value = "/form")
-	public ModelAndView cadastrar(@Valid Produto produto, BindingResult result, 
+	public ModelAndView salva(@Valid Produto produto, BindingResult result, 
 			Model model, RedirectAttributes attributes) {
 		
-		if(result.hasErrors())
-			return novo(produto);
+		System.out.println("Salvando..");
 		
-		service.save(produto);
+		System.out.println(produto);
 		
-		attributes.addFlashAttribute("mensagem", "Cadastro realizado com sucesso.");
-		return new ModelAndView("redirect:/produtos/form");
+//		if(result.hasErrors())
+//			return novo(produto);
+//		
+//		service.save(produto);
+//		
+//		attributes.addFlashAttribute("mensagem", "Cadastro realizado com sucesso.");
+//		return new ModelAndView("redirect:/produtos/form");
+		
+		return novo(produto);
 	}
 	
 	@GetMapping
