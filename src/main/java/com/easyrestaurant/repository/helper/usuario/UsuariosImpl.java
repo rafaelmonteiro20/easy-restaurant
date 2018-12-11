@@ -25,7 +25,7 @@ import com.easyrestaurant.model.Grupo;
 import com.easyrestaurant.model.Usuario;
 import com.easyrestaurant.model.UsuarioGrupo;
 import com.easyrestaurant.repository.filter.UsuarioFilter;
-import com.easyrestaurant.repository.pagination.PaginacaoUtil;
+import com.easyrestaurant.repository.pagination.PaginationUtil;
 
 public class UsuariosImpl implements UsuariosQueries {
 
@@ -33,14 +33,14 @@ public class UsuariosImpl implements UsuariosQueries {
 	private EntityManager manager;
 	
 	@Autowired
-	private PaginacaoUtil paginacaoUtil;
+	private PaginationUtil paginacaoUtil;
 
 	@SuppressWarnings({"unchecked", "deprecation"})
 	@Transactional(readOnly = true)
 	public Page<Usuario> pesquisar(UsuarioFilter filtro, Pageable pageable) {
 		Criteria criteria = manager.unwrap(Session.class).createCriteria(Usuario.class);
 		
-		paginacaoUtil.configurar(criteria, pageable);
+		paginacaoUtil.configure(criteria, pageable);
 		adicionarFiltro(filtro, criteria);
 		
 		List<Usuario> filtrados = criteria.list();

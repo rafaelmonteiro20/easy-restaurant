@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" 
 	  xmlns:th="http://www.thymeleaf.org">
 	  
-	<div class="modal fade" id="modalCadastroCategoria" tabindex="-1" role="dialog" th:fragment="modal">
+	<div class="modal fade" id="modalFormCategory" tabindex="-1" role="dialog" th:fragment="modal">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -13,19 +13,19 @@
 				</div>
 				
 				<div class="modal-body">
-					<div class="alert  alert-danger  hidden  js-mensagem-cadastro-rapido-categoria" role="alert"></div>
+					<div class="alert  alert-danger  hidden  js-message-modal-form-category" role="alert"></div>
 					
-					<form class="form-vertical" th:action="@{/categorias}">
+					<form class="form-vertical" th:action="@{/categories}">
 						<div class="form-group">
-							<label class="control-label">Nome</label>
-							<input id="nomeCategoria" type="text" class="form-control" />
+							<label class="control-label required">Nome</label>
+							<input id="nameCategory" type="text" class="form-control" />
 						</div>
 					</form>
 				</div>
 				
 				<div class="modal-footer">
 					<button type="button" class="btn btn-link" data-dismiss="modal">Cancelar</button>
-					<button type="button" class="btn btn-success js-modal-salvar-categoria-botao">Salvar</button>
+					<button type="button" class="btn btn-success js-modal-save-category-btn">Salvar</button>
 				</div>
 			</div>
 		</div>

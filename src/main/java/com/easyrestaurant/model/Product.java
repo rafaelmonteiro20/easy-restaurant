@@ -25,8 +25,8 @@ import com.easyrestaurant.core.Identifiable;
 import com.easyrestaurant.validation.SKU;
 
 @Entity
-@Table(name = "produto")
-public class Produto implements Identifiable<Long> {
+@Table(name = "product")
+public class Product implements Identifiable<Long> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,35 +38,31 @@ public class Produto implements Identifiable<Long> {
 
 	@NotBlank
 	@Length(max = 100)
-	private String nome;
+	private String name;
 
-	private String descricao;
+	private String description;
 
 	@NotNull
 	@DecimalMin(value = "0.50")
 	@DecimalMax(value = "999.99")
-	@Column(name = "valor_unitario")
-	private BigDecimal valorUnitario;
+	private BigDecimal price;
 
 	@NotNull
-	@Max(value = 1000)
-	@Column(name = "qtd_estoque")
-	private Integer quantidadeEstoque;
+	@Max(value = 9999)
+	@Column(name = "stock_quantity")
+	private Integer stockQuantity;
 
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "codigo_categoria")
-	private Categoria categoria;
+	@JoinColumn(name = "category_id")
+	private Category category;
 	
-	private String foto;
+	private String image;
 	
-	@Column(name = "content_type")
-	private String contentType;
-	
-	private boolean ativo = true;
+	private boolean active = true;
 
 	
-	public Produto() {
+	public Product() {
 		
 	}
 	
@@ -75,7 +71,7 @@ public class Produto implements Identifiable<Long> {
 		return id;
 	}
 
-	public void setCodigo(Long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -87,72 +83,64 @@ public class Produto implements Identifiable<Long> {
 		this.sku = sku;
 	}
 
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public BigDecimal getValorUnitario() {
-		return valorUnitario;
-	}
-
-	public void setValorUnitario(BigDecimal valorUnitario) {
-		this.valorUnitario = valorUnitario;
-	}
-
-	public Integer getQuantidadeEstoque() {
-		return quantidadeEstoque;
-	}
-
-	public void setQuantidadeEstoque(Integer quantidadeEstoque) {
-		this.quantidadeEstoque = quantidadeEstoque;
-	}
-
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
+	public String getName() {
+		return name;
 	}
 	
-	public String getFoto() {
-		return foto;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public void setFoto(String foto) {
-		this.foto = foto;
+	public String getDescription() {
+		return description;
 	}
 	
-	public String getContentType() {
-		return contentType;
-	}
-	
-	public void setContentType(String contentType) {
-		this.contentType = contentType;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public boolean isAtivo() {
-		return ativo;
+	public BigDecimal getPrice() {
+		return price;
 	}
 	
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+
+	public Integer getStockQuantity() {
+		return stockQuantity;
 	}
 	
-	public String getFotoOuMock() {
-		return StringUtils.isEmpty(foto) ? "produto-mock.png" : foto;
+	public void setStockQuantity(Integer stockQuantity) {
+		this.stockQuantity = stockQuantity;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+	
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+	
+	public String getImage() {
+		return image;
+	}
+	
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+	
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+	
+	public String getImageOrMock() {
+		return StringUtils.isEmpty(image) ? "product-mock.png" : image;
 	}
 	
 	@PrePersist @PreUpdate
@@ -162,7 +150,7 @@ public class Produto implements Identifiable<Long> {
 	
 	@Override
 	public String toString() {
-		return "[" + sku + ", " + nome + "]";
+		return "[" + sku + ", " + name + "]";
 	}
 
 	@Override
@@ -181,7 +169,7 @@ public class Produto implements Identifiable<Long> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Produto other = (Produto) obj;
+		Product other = (Product) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

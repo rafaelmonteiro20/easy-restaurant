@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
 import com.easyrestaurant.model.ItemPedido;
-import com.easyrestaurant.model.Produto;
+import com.easyrestaurant.model.Product;
 
 @Component
 @SessionScope
@@ -17,18 +17,18 @@ public class TabelasItensSession {
 
 	private Set<TabelaItensPedido> tabelas = new HashSet<>();
 
-	public void adicionarItem(String uuid, Produto produto, int quantidade) {
+	public void adicionarItem(String uuid, Product produto, int quantidade) {
 		TabelaItensPedido tabela = buscarTabela(uuid);
 		tabela.adicionarItem(produto, quantidade);
 		tabelas.add(tabela);
 	}
 	
-	public void alterarQuantidade(String uuid, Produto produto, Integer quantidade) {
+	public void alterarQuantidade(String uuid, Product produto, Integer quantidade) {
 		TabelaItensPedido tabela = buscarTabela(uuid);
 		tabela.alterarQuantidade(produto, quantidade);
 	}
 
-	public void removerItem(String uuid, Produto produto) {
+	public void removerItem(String uuid, Product produto) {
 		TabelaItensPedido tabela = buscarTabela(uuid);
 		tabela.removerItem(produto);
 	}

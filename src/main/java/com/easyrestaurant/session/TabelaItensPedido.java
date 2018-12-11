@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.easyrestaurant.model.ItemPedido;
-import com.easyrestaurant.model.Produto;
+import com.easyrestaurant.model.Product;
 
 
 class TabelaItensPedido {
@@ -20,7 +20,7 @@ class TabelaItensPedido {
 		this.uuid = uuid;
 	}
 	
-	public void adicionarItem(Produto produto, Integer quantidade) {
+	public void adicionarItem(Product produto, Integer quantidade) {
 		Optional<ItemPedido> itemPedidoOptional = buscarItemPor(produto);
 		
 		ItemPedido item = null;
@@ -37,7 +37,7 @@ class TabelaItensPedido {
 		}
 	}
 
-	public void alterarQuantidade(Produto produto, Integer quantidade) {
+	public void alterarQuantidade(Product produto, Integer quantidade) {
 		if(quantidade <= 0) 
 			quantidade = 1;
 		
@@ -45,7 +45,7 @@ class TabelaItensPedido {
 		item.setQuantidade(quantidade);
 	}
 	
-	public void removerItem(Produto produto) {
+	public void removerItem(Product produto) {
 		itens.removeIf(item -> item.getProduto().equals(produto));
 	}
 	
@@ -67,7 +67,7 @@ class TabelaItensPedido {
 		return Collections.unmodifiableList(itens);
 	}
 	
-	private Optional<ItemPedido> buscarItemPor(Produto produto) {
+	private Optional<ItemPedido> buscarItemPor(Product produto) {
 		return itens.stream().filter(i -> i.getProduto().equals(produto)).findAny();
 	}
 

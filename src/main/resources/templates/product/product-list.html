@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:easy="http://www.easyrestaurant.com"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/page-template}">
+
+	<head>
+		<title>Pesquisa de produtos</title>
+	</head>
+
+	<section layout:fragment="conteudo">
+		<div class="container-fluid">
+			<form method="get" th:object="${productFilter}">
+				<div class="row">
+					<div class="form-group  col-sm-2">
+						<label for="sku" class="control-label">SKU</label>
+						<input id="sku" type="text" class="form-control" autofocus="autofocus" th:field="*{sku}" />
+					</div>
+					
+					<div class="form-group  col-sm-5" >
+						<label for="name" class="control-label">Nome</label>
+						<input id="name" type="text" class="form-control" th:field="*{name}" />
+					</div>
+				
+					<div class="form-group  col-sm-3">
+						<label class="control-label" for="category">Categoria</label>
+						<select id="category" class="form-control" th:field="*{category}" >
+		                    <option value="">Todas as categorias</option>
+		                    <option th:each="category : ${categories}" th:text="${category.name}" th:value="${category.id}"></option>
+		                </select>
+					</div>
+				
+					<div class="form-group  col-sm-2">
+						<button type="submit" class="btn  btn-primary" style="margin-top: 25px">Pesquisar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</section>
+</html>

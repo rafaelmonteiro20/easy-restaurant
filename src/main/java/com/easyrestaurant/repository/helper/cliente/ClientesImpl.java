@@ -17,7 +17,7 @@ import org.springframework.util.StringUtils;
 
 import com.easyrestaurant.model.Cliente;
 import com.easyrestaurant.repository.filter.ClienteFilter;
-import com.easyrestaurant.repository.pagination.PaginacaoUtil;
+import com.easyrestaurant.repository.pagination.PaginationUtil;
 
 public class ClientesImpl implements ClientesQueries {
 
@@ -25,14 +25,14 @@ public class ClientesImpl implements ClientesQueries {
 	private EntityManager manager;
 	
 	@Autowired
-	private PaginacaoUtil paginacao;
+	private PaginationUtil paginacao;
 
 	@SuppressWarnings({ "deprecation", "unchecked" })
 	@Override @Transactional(readOnly = true)
 	public Page<Cliente> filtrar(ClienteFilter filtro, Pageable pageable) {
 		Criteria criteria = manager.unwrap(Session.class).createCriteria(Cliente.class);
 
-		paginacao.configurar(criteria, pageable);
+		paginacao.configure(criteria, pageable);
 		adicionarFiltro(filtro, criteria);
 
 		return new PageImpl<>(criteria.list(), pageable, count(filtro));

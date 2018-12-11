@@ -2,11 +2,11 @@ package com.easyrestaurant.buider;
 
 import java.math.BigDecimal;
 
-import com.easyrestaurant.model.Produto;
+import com.easyrestaurant.model.Product;
 
 public class ProdutoBuilder {
 
-	private Produto produto = new Produto();
+	private Product produto = new Product();
 	
 	public ProdutoBuilder comCodigo(Long codigo) {
 		produto.setCodigo(codigo);
@@ -18,7 +18,7 @@ public class ProdutoBuilder {
 		return this;
 	}
 	
-	public Produto build() {
+	public Product build() {
 		return produto;
 	}
 	

@@ -14,9 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.easyrestaurant.model.Pedido;
-import com.easyrestaurant.model.Produto;
+import com.easyrestaurant.model.Product;
 import com.easyrestaurant.model.Usuario;
-import com.easyrestaurant.repository.Produtos;
+import com.easyrestaurant.repository.Products;
 import com.easyrestaurant.service.PedidoService;
 import com.easyrestaurant.session.TabelasItensSession;
 
@@ -25,7 +25,7 @@ import com.easyrestaurant.session.TabelasItensSession;
 public class PedidosController {
 
 	@Autowired
-	private Produtos produtos;
+	private Products produtos;
 	
 	@Autowired
 	private PedidoService pedidoService;
@@ -52,13 +52,13 @@ public class PedidosController {
 	
 	@PostMapping("/item")
 	public ModelAndView adicionarItem(Long codigoProduto, String uuid) {
-		Produto produto = produtos.findOne(codigoProduto);
+		Product produto = produtos.findOne(codigoProduto);
 		tabelas.adicionarItem(uuid, produto, 1);
 		return mvTabelaItensPedido(uuid);
 	}
 	
 	@PutMapping("/item/{codigoProduto}")
-	public ModelAndView alterarQuantidadeDoItem(@PathVariable("codigoProduto") Produto produto, 
+	public ModelAndView alterarQuantidadeDoItem(@PathVariable("codigoProduto") Product produto, 
 			Integer quantidade, String uuid) {
 		
 		tabelas.alterarQuantidade(uuid, produto, quantidade);
@@ -66,7 +66,7 @@ public class PedidosController {
 	}
 	
 	@DeleteMapping("/item/{uuid}/{codigoProduto}")
-	public ModelAndView removerItem(@PathVariable("codigoProduto") Produto produto, 
+	public ModelAndView removerItem(@PathVariable("codigoProduto") Product produto, 
 			@PathVariable("uuid") String uuid) {
 		
 		tabelas.removerItem(uuid, produto);

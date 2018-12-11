@@ -26,7 +26,7 @@ public class ItemPedido {
 
 	@ManyToOne
 	@JoinColumn(name = "codigo_produto")
-	private Produto produto;
+	private Product produto;
 
 	@ManyToOne
 	@JoinColumn(name = "codigo_pedido")
@@ -57,11 +57,11 @@ public class ItemPedido {
 		this.valorUnitario = valorUnitario;
 	}
 
-	public Produto getProduto() {
+	public Product getProduto() {
 		return produto;
 	}
 
-	public void setProduto(Produto produto) {
+	public void setProduto(Product produto) {
 		this.produto = produto;
 	}
 

@@ -2,17 +2,17 @@ package com.easyrestaurant.service.event;
 
 import org.springframework.util.StringUtils;
 
-import com.easyrestaurant.model.Produto;
+import com.easyrestaurant.model.Product;
 
 public class ProdutoSalvoEvent {
 
-	private Produto produto;
+	private Product produto;
 
-	public ProdutoSalvoEvent(Produto produto) {
+	public ProdutoSalvoEvent(Product produto) {
 		this.produto = produto;
 	}
 
-	public Produto getProduto() {
+	public Product getProduto() {
 		return produto;
 	}
 	
