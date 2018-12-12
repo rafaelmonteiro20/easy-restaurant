@@ -44,18 +44,12 @@
 				<div class="page-header">
 					<div class="container-fluid">
 						<div class="breadcrumbs-container">
-							<h1>
-								<a th:href="@{/produtos}">Produtos</a>
-								<span class="path-divider">/</span>
-								<strong>
-									<a th:href="@{/produtos/form}">Novo produto</a>
-								</strong>
-							</h1>
+							<h1 layout:fragment="breadcrumbs"></h1>
 						</div>
 					</div>
 				</div>
 			
-				<section layout:fragment="conteudo"></section>
+				<section layout:fragment="content"></section>
 			</div>
 		</div>
 		

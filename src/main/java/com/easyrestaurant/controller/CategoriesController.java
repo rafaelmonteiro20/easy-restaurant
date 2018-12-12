@@ -3,6 +3,7 @@ package com.easyrestaurant.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -44,8 +45,8 @@ public class CategoriesController {
 		try {
 			categoryService.save(category);
 			attributes.addFlashAttribute("message", "Categoria salva com sucesso.");
-			return new ModelAndView("redirect:/category/form");
-
+			return new ModelAndView("redirect:/categories");
+		
 		} catch (ExistingRecordException e) {
 			result.rejectValue("name", e.getMessage(), e.getMessage());
 			return form(category);
@@ -66,7 +67,7 @@ public class CategoriesController {
 	@GetMapping
 	public ModelAndView search() {
 		ModelAndView mv = new ModelAndView("/category/category-list");
-		mv.addObject("categories", categories.findAll());
+		mv.addObject("categories", categories.findAll(Sort.by("name")));
 		return mv;
 	}
 	

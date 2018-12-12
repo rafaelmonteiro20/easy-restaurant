@@ -8,6 +8,14 @@
 	<head>
 		<title>Pesquisa de produtos</title>
 	</head>
+	
+	<h1 layout:fragment="breadcrumbs">
+		<a th:href="@{/produtos}">Produtos</a>
+		<span class="path-divider">/</span>
+		<strong>
+			<a th:href="@{/produtos/form}">Novo produto</a>
+		</strong>
+	</h1>
 
 	<section layout:fragment="conteudo">
 		<div class="container-fluid">

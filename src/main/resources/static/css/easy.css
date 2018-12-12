@@ -111,7 +111,7 @@
 
 .page-header h1 {
     float: left;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 26px;
     max-width: 635px;
     padding-left: 0px;
@@ -132,9 +132,17 @@
     margin: 0 .25em;
 }
 
+.top-area {
+	border-bottom: 1px solid #e5e5e5;
+}
 
-
-
+.top-area .nav-controls {
+    display: inline-block;
+    float: right;
+    text-align: right;
+    padding: 12px 0;
+    margin-bottom: 0;
+}
 
 
 
@@ -146,7 +154,7 @@
 }
 
 .form-control, .input-group-text {
-	padding: .300rem .75rem;
+	padding: 6px 10px;
 	border-radius: 3px;
 }
 

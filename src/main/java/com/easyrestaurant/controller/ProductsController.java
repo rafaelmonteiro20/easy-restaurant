@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -66,7 +67,7 @@ public class ProductsController {
 			@PageableDefault(size = 10) Pageable pageable, HttpServletRequest request) {
 		
 		ModelAndView mv = new ModelAndView("product/product-list");
-		mv.addObject("categories", categories.findAll());
+		mv.addObject("categories", categories.findAll(Sort.by("name")));
 		
 		PageWrapper<Product> pageWrapper = 
 				new PageWrapper<>(products.findAll(productFilter, pageable), request);
