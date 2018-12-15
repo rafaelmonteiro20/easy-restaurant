@@ -28,8 +28,8 @@ import com.easyrestaurant.service.UsuarioService;
 import com.easyrestaurant.service.exception.EmailUsuarioJaCadastradoException;
 import com.easyrestaurant.service.exception.SenhaObrigatoriaUsuarioException;
 
-@Controller
-@RequestMapping("/usuarios")
+//@Controller
+//@RequestMapping("/usuarios")
 public class UsuariosController {
 
 	@Autowired

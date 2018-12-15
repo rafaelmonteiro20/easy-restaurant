@@ -12,7 +12,7 @@ import com.easyrestaurant.repository.Usuarios;
 import com.easyrestaurant.service.exception.EmailUsuarioJaCadastradoException;
 import com.easyrestaurant.service.exception.SenhaObrigatoriaUsuarioException;
 
-@Service
+//@Service
 public class UsuarioService {
 	
 	@Autowired

@@ -11,8 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "item_pedido")
+//@Entity
+//@Table(name = "item_pedido")
 public class ItemPedido {
 
 	@Id

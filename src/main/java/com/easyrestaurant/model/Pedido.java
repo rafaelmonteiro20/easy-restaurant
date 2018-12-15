@@ -21,8 +21,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-@Entity
-@Table(name = "pedido")
+//@Entity
+//@Table(name = "pedido")
 public class Pedido {
 
 	@Id
@@ -38,8 +38,8 @@ public class Pedido {
 	@Column(name = "valor_total")
 	private BigDecimal valorTotal;
 	
-	@ManyToOne
-	@JoinColumn(name = "codigo_cliente")
+//	@ManyToOne
+//	@JoinColumn(name = "codigo_cliente")
 	private Cliente cliente;
 	
 	@ManyToOne

@@ -11,7 +11,7 @@ import com.easyrestaurant.model.ItemPedido;
 import com.easyrestaurant.model.Pedido;
 import com.easyrestaurant.repository.Pedidos;
 
-@Service
+//@Service
 public class PedidoService {
 	
 	@Autowired

@@ -20,8 +20,8 @@ import com.easyrestaurant.repository.Products;
 import com.easyrestaurant.service.PedidoService;
 import com.easyrestaurant.session.TabelasItensSession;
 
-@Controller
-@RequestMapping("/pedidos")
+//@Controller
+//@RequestMapping("/pedidos")
 public class PedidosController {
 
 	@Autowired
