@@ -2,7 +2,6 @@ package com.easyrestaurant.service;
 
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,8 +12,11 @@ import com.easyrestaurant.service.exception.ExistingRecordException;
 @Service
 public class CategoryService {
 
-	@Autowired
 	private Categories categories;
+
+	public CategoryService(Categories categories) {
+		this.categories = categories;
+	}
 	
 	@Transactional
 	public Category save(Category category) {

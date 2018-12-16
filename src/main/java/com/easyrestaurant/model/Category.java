@@ -28,6 +28,10 @@ public class Category implements Identifiable<Long> {
 		this.id = id;
 	}
 	
+	public Category(String name) {
+		this.name = name;
+	}
+	
 	@Override
 	public Long getId() {
 		return id;

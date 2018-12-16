@@ -15,20 +15,21 @@
 	
 	<section layout:fragment="content">
 		<div class="container-fluid">
+			<div th:replace="layout/fragments/message-success :: alert"></div>
+			
 			<div class="top-area">
 				<div class="nav-controls">
 					<a class="btn btn-success" th:href="@{/categories/form}" role="button">Nova Categoria</a>
 				</div>
 			</div>
 	
-	
 			<div class="table-responsive easy-table">
-				<table class="table table-hover">
+				<table class="table">
 					<thead>
 						<tr>
 							<th class="text-center wid100">#</th>
 							<th>Nome</th>
-							<th class="text-center wid150">Ações</th>
+							<th class="wid150"></th>
 						</tr>
 					</thead>
 					
@@ -38,10 +39,10 @@
 							<td th:text="${category.name}"></td>
 							<td class="text-center">
 								<a class="btn  btn-link btn-xs" title="Editar"> 
-									<i class="glyphicon glyphicon-pencil"></i>
+									<i class="fa fa-edit"></i>
 								</a>
 								<a class="btn  btn-link  btn-xs" title="Excluir">
-									<i class="glyphicon glyphicon-remove"></i>
+									<i class="fa fa-trash"></i>
 								</a>
 							</td>
 						</tr>

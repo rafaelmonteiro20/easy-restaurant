@@ -1,5 +1,5 @@
 .skin-black .nav-bar {
-	background: #24292e;
+	background: #34699d;
 }
 
 .nav-bar {
@@ -70,6 +70,7 @@
     color: #707070;
     transition: padding 0.3s;
 }
+
 .nav-sidebar li a:hover {
 	background: #ebebeb;
 	color: #2e2e2e;
@@ -94,7 +95,6 @@
 }
 
 .page-header {
-   	margin-bottom: 25px;
     position: relative;
 }
 
@@ -132,20 +132,22 @@
     margin: 0 .25em;
 }
 
-.top-area {
-	border-bottom: 1px solid #e5e5e5;
+.margin-top-default {
+	margin-top:25px;
 }
 
 .top-area .nav-controls {
     display: inline-block;
     float: right;
     text-align: right;
-    padding: 12px 0;
+    padding: 15px 0;
     margin-bottom: 0;
 }
 
-
-
+.required label:after {
+	content: ' *';
+	color: #dc3545;
+}
 
 .control-label {
 	font-weight: 600;
@@ -167,6 +169,29 @@ select.form-control:not([size]):not([multiple]) {
 	padding: 6px 10px;
 	border-radius: 3px;
 	font-size: 14px;
+}
+
+.btn.btn-danger {
+    background-color: #db3b21;
+    border-color: #c0341d;
+    color: #fff;
+}
+
+.btn.btn-danger:hover {
+	background-color: #c0341d;
+    border-color: #a62d19;
+}
+
+/* ALERT */
+.alert {
+	margin-bottom: 0px;
+	margin-top: 1rem;
+	border-radius: 3px;
+	border-left: 3px solid;
+}
+
+.alert-dismissible .close {
+    padding: 10px 12px;
 }
 
 .fade.in {
@@ -201,6 +226,12 @@ select.form-control:not([size]):not([multiple]) {
 	margin: 7px 0px 0px 7px;
 }
 
+
+
+
+
+
+
 .hidden {
 	display: none;	
 }
@@ -209,15 +240,78 @@ select.form-control:not([size]):not([multiple]) {
 	background: #fff;
 }
 
-
-.margin-top-7 {
-	margin-top: 7px;	
+.margin-top-7 { 
+	margin-top: 7px  
 }
 
-.margin-top-10 {
-	margin-top: 10px;	
+.margin-top-10 { 
+	margin-top: 10px 
 }
 
-.margin-top-20 {
-	margin-top: 20px;
+.margin-top-20 { 
+	margin-top: 20px 
 }
+
+.wid100 { 
+	width: 100px 
+}
+
+.wid150 { 
+	width: 140px 
+}
+
+.center { 
+	text-align: center 
+}
+.right { 
+	text-align: right 
+}
+
+.left { 
+	text-align: left 
+}
+
+/* TABLE */
+.easy-table table tr th {
+	border-bottom-width: 1px;
+	background: #fafafa;
+	font-size: 14px;
+	padding: 10px;
+}
+
+.easy-table table tr td {
+    border-top: none;
+    border-bottom: 1px solid #e7eaec;
+    padding: 4px 10px;
+    vertical-align: middle;
+    font-size: 14px;
+}
+
+/* UPLOAD */
+.upload {
+	padding: 15px;
+	border: 1px dashed #ddd;
+	border-radius: 4px;
+	background: #fafafa;
+	text-align: center;
+}
+
+.upload-form-file {
+	display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 1px;
+}
+
+.upload-form-file > input[type=file] {
+	position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    opacity: 0;
+    cursor: pointer;
+    font-size: 500px;
+}
+
