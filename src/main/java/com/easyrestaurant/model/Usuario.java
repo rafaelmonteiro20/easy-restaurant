@@ -23,9 +23,9 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import com.easyrestaurant.validation.ConfirmacaoSenha;
 
-@ConfirmacaoSenha(atributo = "senha", atributoConfirmacao = "confirmacaoSenha")
-@Entity
-@DynamicUpdate
+//@ConfirmacaoSenha(atributo = "senha", atributoConfirmacao = "confirmacaoSenha")
+//@Entity
+//@DynamicUpdate
 public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -51,11 +51,11 @@ public class Usuario implements Serializable {
 
 	private Boolean ativo = true;
 
-	@NotNull
-	@ManyToMany
-	@JoinTable(name = "usuario_grupo", joinColumns = @JoinColumn(name = "codigo_usuario"),
-				inverseJoinColumns = @JoinColumn(name = "codigo_grupo"))	
-	private List<Grupo> grupos;
+//	@NotNull
+//	@ManyToMany
+//	@JoinTable(name = "usuario_grupo", joinColumns = @JoinColumn(name = "codigo_usuario"),
+//				inverseJoinColumns = @JoinColumn(name = "codigo_grupo"))	
+//	private List<Grupo> grupos;
 
 	public Usuario(Long codigo) {
 		this.codigo = codigo;
@@ -134,20 +134,20 @@ public class Usuario implements Serializable {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public List<Grupo> getGrupos() {
-		return grupos;
-	}
-
-	public void setGrupos(List<Grupo> grupos) {
-		this.grupos = grupos;
-	}
-	
-	public String getNomesGrupos() {
-		if(grupos == null)
-			return "";
-		
-		return grupos.stream().map(Grupo::getNome).collect(Collectors.joining(", "));
-	}
+//	public List<Grupo> getGrupos() {
+//		return grupos;
+//	}
+//
+//	public void setGrupos(List<Grupo> grupos) {
+//		this.grupos = grupos;
+//	}
+//	
+//	public String getNomesGrupos() {
+//		if(grupos == null)
+//			return "";
+//		
+//		return grupos.stream().map(Grupo::getNome).collect(Collectors.joining(", "));
+//	}
 	
 	public boolean isNovo() {
 		return codigo == null;

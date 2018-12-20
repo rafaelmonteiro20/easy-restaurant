@@ -24,7 +24,7 @@ import org.springframework.util.StringUtils;
 import com.easyrestaurant.model.Grupo;
 import com.easyrestaurant.model.Usuario;
 import com.easyrestaurant.model.UsuarioGrupo;
-import com.easyrestaurant.repository.filter.UsuarioFilter;
+import com.easyrestaurant.repository.filter.UserFilter;
 import com.easyrestaurant.repository.pagination.PaginationUtil;
 
 public class UsuariosImpl implements UsuariosQueries {
@@ -37,7 +37,7 @@ public class UsuariosImpl implements UsuariosQueries {
 
 	@SuppressWarnings({"unchecked", "deprecation"})
 	@Transactional(readOnly = true)
-	public Page<Usuario> pesquisar(UsuarioFilter filtro, Pageable pageable) {
+	public Page<Usuario> pesquisar(UserFilter filtro, Pageable pageable) {
 		Criteria criteria = manager.unwrap(Session.class).createCriteria(Usuario.class);
 		
 		paginacaoUtil.configure(criteria, pageable);
@@ -49,7 +49,7 @@ public class UsuariosImpl implements UsuariosQueries {
 		return new PageImpl<>(filtrados, pageable, total(filtro));
 	}
 
-	private void adicionarFiltro(UsuarioFilter filtro, Criteria criteria) {
+	private void adicionarFiltro(UserFilter filtro, Criteria criteria) {
 		if (filtro != null) {
 			if (!StringUtils.isEmpty(filtro.getNome())) {
 				criteria.add(Restrictions.ilike("nome", filtro.getNome(), MatchMode.ANYWHERE));
@@ -73,7 +73,7 @@ public class UsuariosImpl implements UsuariosQueries {
 	}
 	
 	@SuppressWarnings("deprecation")
-	private Long total(UsuarioFilter filtro) {
+	private Long total(UserFilter filtro) {
 		Criteria criteria = manager.unwrap(Session.class).createCriteria(Usuario.class);
 		adicionarFiltro(filtro, criteria);
 		criteria.setProjection(Projections.rowCount());
@@ -81,7 +81,7 @@ public class UsuariosImpl implements UsuariosQueries {
 		return (Long) criteria.uniqueResult();
 	}
 	
-	private long[] getCodigosGrupos(UsuarioFilter filtro) {
+	private long[] getCodigosGrupos(UserFilter filtro) {
 		return filtro.getGrupos().stream().mapToLong(Grupo::getCodigo).toArray();
 	}
 	

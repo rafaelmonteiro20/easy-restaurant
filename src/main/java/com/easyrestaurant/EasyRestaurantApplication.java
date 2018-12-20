@@ -39,6 +39,8 @@ public class EasyRestaurantApplication implements WebMvcConfigurer {
 		NumberStyleFormatter integerFormatter = new NumberStyleFormatter("#,##0");
 		registry.addFormatterForFieldType(Integer.class, integerFormatter);
 	}
+
+	
 	
 	
 //	@Bean

@@ -22,7 +22,7 @@ import com.easyrestaurant.controller.page.PageWrapper;
 import com.easyrestaurant.model.Usuario;
 import com.easyrestaurant.repository.Grupos;
 import com.easyrestaurant.repository.Usuarios;
-import com.easyrestaurant.repository.filter.UsuarioFilter;
+import com.easyrestaurant.repository.filter.UserFilter;
 import com.easyrestaurant.service.StatusUsuario;
 import com.easyrestaurant.service.UsuarioService;
 import com.easyrestaurant.service.exception.EmailUsuarioJaCadastradoException;
@@ -69,7 +69,7 @@ public class UsuariosController {
 	}
 	
 	@GetMapping
-	public ModelAndView pesquisar(UsuarioFilter usuarioFilter, 
+	public ModelAndView pesquisar(UserFilter usuarioFilter, 
 		@PageableDefault(size = 3) Pageable pageable, HttpServletRequest httpServletRequest) {
 		
 		PageWrapper<Usuario> paginaWrapper = new PageWrapper<>(usuarios.pesquisar(usuarioFilter, pageable),

@@ -13,37 +13,36 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.DeferredResult;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.easyrestaurant.dto.FotoDTO;
-import com.easyrestaurant.storage.FotoStorage;
-import com.easyrestaurant.storage.FotoStorageRunnable;
+import com.easyrestaurant.dto.ImageDTO;
+import com.easyrestaurant.storage.ImageStorage;
+import com.easyrestaurant.storage.ImageStorageRunnable;
 
 @RestController
-@RequestMapping("/fotos")
-public class FotosController {
+@RequestMapping("/images")
+public class ImagesController {
 	
 	@Autowired
-	private FotoStorage storage;
+	private ImageStorage storage;
 
 	@PostMapping
-	public DeferredResult<FotoDTO> upload(@RequestParam("files[]") MultipartFile[] files) {
-		DeferredResult<FotoDTO> result = new DeferredResult<>();
+	public DeferredResult<ImageDTO> upload(@RequestParam("files[]") MultipartFile[] files) {
+		DeferredResult<ImageDTO> result = new DeferredResult<>();
 		
 		ExecutorService executor = Executors.newSingleThreadExecutor();
-		executor.submit(new FotoStorageRunnable(files, result, storage));
+		executor.submit(new ImageStorageRunnable(files, result, storage));
 		executor.shutdown();
 		
 		return result;
 	}
 	
-	@GetMapping
-	@RequestMapping("/temp/{nome:.*}")
-	public byte[] recuperarFotoTemporaria(@PathVariable String nome) {
-		return storage.recuperarFotoTemporaria(nome);
+	@GetMapping("/temp/{name:.*}")
+	public byte[] findTemporaryImage(@PathVariable String name) {
+		return storage.getTemporaryImage(name);
 	}
 	
-	@GetMapping("/{nome:.*}")
-	public byte[] recuperar(@PathVariable String nome) {
-		return storage.recuperarFoto(nome);
+	@GetMapping("/{name:.*}")
+	public byte[] findImage(@PathVariable String name) {
+		return storage.getImage(name);
 	}
 	
 }

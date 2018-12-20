@@ -4,8 +4,8 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "usuario_grupo")
+//@Entity
+//@Table(name = "usuario_grupo")
 public class UsuarioGrupo {
 
 	@EmbeddedId

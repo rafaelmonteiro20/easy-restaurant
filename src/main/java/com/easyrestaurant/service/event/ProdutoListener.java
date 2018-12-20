@@ -4,13 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-import com.easyrestaurant.storage.FotoStorage;
+import com.easyrestaurant.storage.ImageStorage;
 
 @Component
 public class ProdutoListener {
 
 	@Autowired
-	private FotoStorage fotoStorage;
+	private ImageStorage fotoStorage;
 	
 	@EventListener(condition = "#evento.hasFoto()")
 	public void produtoSalvo(ProdutoSalvoEvent evento) {
