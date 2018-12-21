@@ -94,28 +94,18 @@
 						<input type="hidden" th:field="*{image}" />
 					
 						<label class="control-label">Foto</label>
-						<div class="js-upload uk-placeholder uk-text-center">
-						    <i class="fa  fa-cloud-upload"></i>
-						    <span class="uk-text-middle">Arraste a foto aqui ou</span>
-						    <div uk-form-custom>
-						        <input type="file" accept=".jpg,.jpeg,.png">
-						        <span class="uk-link">selecione</span>
-						    </div>
+						<div class="js-container-image-product" th:attr="data-url-images=@{/images}">
+							<div id="upload-drop" class="upload js-upload">
+							    <i class="fa  fa-cloud-upload"></i>
+							    <span class="uk-text-middle">Arraste a foto aqui ou</span>
+							    <div uk-form-custom>
+							        <input type="file" accept=".jpg,.jpeg,.png">
+							        <span class="uk-link">selecione</span>
+							    </div>
+							</div>
 						</div>
 					</div>
 				</div>
-				
-						
-<!-- 						<div class="js-container-foto-produto" th:attr="data-url-fotos=@{/fotos}"> -->
-<!-- 							<div id="upload-drop" class="upload"> -->
-<!-- 								 -->
-<!-- 								<span> </span> -->
-<!-- 								<a class="upload-form-file">selecione  -->
-<!-- 									<input id="upload-select" type="file" /> -->
-<!-- 								</a> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
 				
 				<br/>
 					
@@ -127,33 +117,18 @@
 		</div>
 		
 		<div th:replace="category/modal-form-category :: modal"></div>
-<!-- 		<th:block th:replace="hbs/FotoProduto"></th:block> -->
+		<th:block th:replace="hbs/image-product"></th:block>
 	</section>
 	
 	<th:block layout:fragment="js-extra">
 		<script th:src="@{/js/vendors/uikit.min.js}"></script>
 		<script th:src="@{/js/vendors/bootstrap-toggle.min.js}"></script>
 		<script th:src="@{/js/category.modal-form.js}"></script>
-		
-		
-		
-<!-- 		<script th:src="@{/js/vendors/handlebars.min.js}"></script> -->
-<!-- 		<script th:src="@{/js/upload-foto.js}"></script> -->
+		<script th:src="@{/js/vendors/handlebars.min.js}"></script>
+		<script th:src="@{/js/product.upload-image.js}"></script>
 		
 		<script>
    			$('.js-status').bootstrapToggle();
-			
-   			var settings = {
-   				url: '/images',
-   				allow: '*.(jpg|jpeg|png)',
-   				complete: function (response) {
-   					const obj = JSON.parse(response.response);
-   		            $('input[name=image]').val(obj.name);
-   		        }
-   			};
-   			
-   			UIkit.upload('.js-upload', settings);
-   			
 		</script>
 	</th:block>
 </html>
