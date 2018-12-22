@@ -26,7 +26,7 @@ import com.easyrestaurant.model.Product;
 import com.easyrestaurant.repository.Categories;
 import com.easyrestaurant.repository.Products;
 import com.easyrestaurant.repository.filter.ProductFilter;
-import com.easyrestaurant.service.ProdutoService;
+import com.easyrestaurant.service.ProductService;
 
 @Controller
 @RequestMapping("/products")
@@ -36,7 +36,7 @@ public class ProductsController {
 	private Categories categories;
 	
 	@Autowired
-	private ProdutoService produtoService;
+	private ProductService productService;
 	
 	@Autowired
 	private Products products;
@@ -56,10 +56,10 @@ public class ProductsController {
 			return form(product);
 		}
 		
-		produtoService.save(product);
+		productService.save(product);
 		
 		attributes.addFlashAttribute("message", "Cadastro realizado com sucesso.");
-		return new ModelAndView("redirect:/produtos");
+		return new ModelAndView("redirect:/products");
 	}
 	
 	@GetMapping

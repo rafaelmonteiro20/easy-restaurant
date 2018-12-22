@@ -252,23 +252,24 @@ select.form-control:not([size]):not([multiple]) {
 	margin-top: 20px 
 }
 
+.wid50 {
+	width: 50px;
+}
+
+.wid60 {
+	width: 60px;
+}
+
 .wid100 { 
 	width: 100px 
 }
 
 .wid150 { 
-	width: 140px 
+	width: 150px 
 }
 
-.center { 
-	text-align: center 
-}
-.right { 
-	text-align: right 
-}
-
-.left { 
-	text-align: left 
+.wid200 { 
+	width: 200px 
 }
 
 /* TABLE */
@@ -313,5 +314,11 @@ select.form-control:not([size]):not([multiple]) {
     opacity: 0;
     cursor: pointer;
     font-size: 500px;
+}
+
+.img-responsive {
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 

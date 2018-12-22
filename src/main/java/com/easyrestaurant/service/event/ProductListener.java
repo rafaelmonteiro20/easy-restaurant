@@ -7,14 +7,14 @@ import org.springframework.stereotype.Component;
 import com.easyrestaurant.storage.ImageStorage;
 
 @Component
-public class ProdutoListener {
+public class ProductListener {
 
 	@Autowired
-	private ImageStorage fotoStorage;
+	private ImageStorage imageStorage;
 	
-	@EventListener(condition = "#evento.hasFoto()")
-	public void produtoSalvo(ProdutoSalvoEvent evento) {
-		fotoStorage.salvar(evento.getProduto().getFoto());
+	@EventListener(condition = "#event.hasImage()")
+	public void productSaved(ProductSavedEvent event) {
+		imageStorage.save(event.getProduct().getImage());
 	}
 	
 }

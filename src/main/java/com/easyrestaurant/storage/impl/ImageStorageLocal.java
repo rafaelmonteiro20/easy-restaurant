@@ -63,7 +63,7 @@ public class ImageStorageLocal implements ImageStorage {
 			throw new RuntimeException("Error moving photo to final destination", e);
 		}
 		
-//		resize(image);
+		this.resize(image);
 	}
 	
 	@Override
@@ -119,12 +119,12 @@ public class ImageStorageLocal implements ImageStorage {
 		return name;
 	}
 	
-//	private void resize(String foto) {
-//		try {
-//			Thumbnails.of(this.local.resolve(foto).toString()).size(50, 85).toFiles(Rename.PREFIX_DOT_THUMBNAIL);
-//		} catch (IOException e) {
-//			throw new RuntimeException("Erro gerando thumbnail", e);
-//		}
-//	}
+	private void resize(String image) {
+		try {
+			Thumbnails.of(this.path.resolve(image).toString()).size(50, 85).toFiles(Rename.PREFIX_DOT_THUMBNAIL);
+		} catch (IOException e) {
+			throw new RuntimeException("Error generating thumbnail.", e);
+		}
+	}
 	
 }

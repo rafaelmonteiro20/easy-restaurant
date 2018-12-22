@@ -7,21 +7,21 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.easyrestaurant.model.Product;
 import com.easyrestaurant.repository.Products;
-import com.easyrestaurant.service.event.ProdutoSalvoEvent;
+import com.easyrestaurant.service.event.ProductSavedEvent;
 
 @Service
-public class ProdutoService {
+public class ProductService {
 
 	@Autowired
-	private Products produtos;
+	private Products products;
 	
 	@Autowired
 	private ApplicationEventPublisher publisher;
 	
 	@Transactional
-	public void save(Product produto) {
-		produtos.save(produto);
-		publisher.publishEvent(new ProdutoSalvoEvent(produto));
+	public void save(Product product) {
+		products.save(product);
+		publisher.publishEvent(new ProductSavedEvent(product));
 	}
 	
 }

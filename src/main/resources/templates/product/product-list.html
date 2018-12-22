@@ -10,15 +10,13 @@
 	</head>
 	
 	<h1 layout:fragment="breadcrumbs">
-		<a th:href="@{/produtos}">Produtos</a>
-		<span class="path-divider">/</span>
 		<strong>
-			<a th:href="@{/produtos/form}">Novo produto</a>
+			Produtos
 		</strong>
 	</h1>
 
-	<section layout:fragment="conteudo">
-		<div class="container-fluid">
+	<section layout:fragment="content">
+		<div class="container-fluid margin-top-default">
 			<form method="get" th:object="${productFilter}">
 				<div class="row">
 					<div class="form-group  col-sm-2">
@@ -34,16 +32,58 @@
 					<div class="form-group  col-sm-3">
 						<label class="control-label" for="category">Categoria</label>
 						<select id="category" class="form-control" th:field="*{category}" >
-		                    <option value="">Todas as categorias</option>
+		                    <option value="">Todas</option>
 		                    <option th:each="category : ${categories}" th:text="${category.name}" th:value="${category.id}"></option>
 		                </select>
 					</div>
 				
 					<div class="form-group  col-sm-2">
-						<button type="submit" class="btn  btn-primary" style="margin-top: 25px">Pesquisar</button>
+						<button type="submit" class="btn  btn-primary" style="margin-top:28px">Pesquisar</button>
 					</div>
 				</div>
 			</form>
+			
+			<div class="table-responsive easy-table">
+				<table class="table">
+					<thead>
+						<tr>
+							<th class="text-center wid60"></th>
+							<th class="text-center wid100">SKU</th>
+							<th>Nome</th>
+							<th class="text-center">Categoria</th>
+							<th class="text-center">Estoque</th>
+							<th class="text-right">Valor</th>
+							<th class="text-center"></th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<tr th:each="product : ${page.content}">
+							<td class="text-center">
+								<img th:src="@{/images/thumbnail.{image}(image=${product.imageOrMock})}" class="img-responsive"/>
+							</td>
+							
+							<td class="text-center" th:text="${product.sku}"></td>
+							<td th:text="${product.name}"></td>
+							<td class="text-center" th:text="${product.category.name}"></td>
+							<td class="text-center" th:text="${product.stockQuantity}"></td>
+							<td class="text-right" th:text="|R$ ${product.price}|"></td>
+							<td class="text-center">
+								<a class="btn  btn-link  btn-xs" title="Editar"> 
+									<i class="glyphicon glyphicon-pencil"></i>
+								</a>
+								<a class="btn  btn-link  btn-xs" title="Excluir">
+									<i class="glyphicon glyphicon-remove"></i>
+								</a>
+							</td>
+						</tr>
+						
+						<tr th:if="${page.empty}">
+							<td colspan="7">Nenhum produto encontrado.</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</section>
 </html>
