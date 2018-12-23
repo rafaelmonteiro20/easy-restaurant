@@ -158,6 +158,7 @@
 .form-control, .input-group-text {
 	padding: 6px 10px;
 	border-radius: 3px;
+	font-size: 14px;
 }
 
 select.form-control:not([size]):not([multiple]) {
@@ -226,8 +227,10 @@ select.form-control:not([size]):not([multiple]) {
 	margin: 7px 0px 0px 7px;
 }
 
-
-
+/* PAGINATION */
+.page-link {
+	font-size: 14px;
+}
 
 
 

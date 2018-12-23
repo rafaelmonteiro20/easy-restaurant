@@ -51,17 +51,32 @@ public class ProductsImpl implements ProductsQueries {
 		
 		criteria.where(restrictions(builder, criteria, root, filter));
 		
+		int pageSize = pageable.getPageSize();
+		int firstResult = pageable.getPageNumber() * pageSize;
 		
-		TypedQuery<Product> query = manager.createQuery(criteria);
+		TypedQuery<Product> query = manager.createQuery(criteria)
+				.setFirstResult(firstResult)
+				.setMaxResults(pageSize);
+		
+		
+		
 		List<Product> result = query.getResultList();
 		
 //		paginationUtil.configure(criteria, pageable);
 
-		return new PageImpl<>(result, pageable, 10);
+		return new PageImpl<>(result, pageable, count(filter));
 	}
 
-	private Long count(ProductFilter filtro) {
-		return 10L;
+	private Long count(ProductFilter filter) {
+		
+		CriteriaBuilder builder = manager.getCriteriaBuilder();
+		CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
+		Root<Product> root = criteria.from(Product.class);
+		
+		criteria.select(builder.count(root));
+		criteria.where(restrictions(builder, criteria, root, filter));
+		
+		return manager.createQuery(criteria).getSingleResult();
 	}
 
 	private Predicate[] restrictions(CriteriaBuilder builder, CriteriaQuery<?> criteria,
@@ -70,7 +85,7 @@ public class ProductsImpl implements ProductsQueries {
 		List<Predicate> restrictions = new ArrayList<>();
 
 		if(!StringUtils.isEmpty(filter.getSku())) {
-			restrictions.add(builder.equal(root.get("sku"), filter.getSku()));
+			restrictions.add(builder.equal(builder.upper(root.get("sku")), filter.getSku()));
 		}
 		
 		if(!StringUtils.isEmpty(filter.getName())) {
