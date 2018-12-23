@@ -10,7 +10,7 @@ import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.format.support.FormattingConversionService;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.easyrestaurant.controller.converter.CategoriaConverter;
+import com.easyrestaurant.controller.converter.CategoryConverter;
 import com.easyrestaurant.controller.converter.GrupoConverter;
 
 @Configuration
@@ -23,7 +23,7 @@ public class WebConfig implements WebMvcConfigurer {
 		System.out.println(">>>>>>>>>>> REGISTROU...");
 		
 		DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService();
-		conversionService.addConverter(new CategoriaConverter());
+		conversionService.addConverter(new CategoryConverter());
 		conversionService.addConverter(new GrupoConverter());
 		
 		NumberStyleFormatter bigDecimalFormatter = new NumberStyleFormatter("#,##0.00");

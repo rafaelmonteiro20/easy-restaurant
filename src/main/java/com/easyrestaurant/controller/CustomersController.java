@@ -48,9 +48,8 @@ public class CustomersController {
 	}
 	
 	@PostMapping("/form")
-	public ModelAndView save(@Valid Customer customer, BindingResult result, RedirectAttributes attributes) {
-		System.out.println("Chegou... " + customer);
-		System.out.println("Tem error? " + result.hasErrors());
+	public ModelAndView save(@Valid Customer customer, BindingResult result, 
+			RedirectAttributes attributes) {
 		
 		if(result.hasErrors()) {
 			return form(customer);
@@ -59,7 +58,6 @@ public class CustomersController {
 		try {
 			customerService.save(customer);
 			attributes.addFlashAttribute("message", "Cliente cadastrado com sucesso.");
-		
 			return new ModelAndView("redirect:/customers");
 		} catch (ExistingRecordException e) {
 			result.rejectValue("document", e.getMessage(), e.getMessage());

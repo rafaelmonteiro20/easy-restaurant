@@ -144,6 +144,25 @@
     margin-bottom: 0;
 }
 
+.top-area .nav-controls > form {
+	margin-right: 10px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.top-area .nav-controls > form > .btn {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.top-area .nav-controls input {
+    width: 250px;
+    display: inline-block;
+    position: relative;
+    margin-right: 10px;
+}
+
+
 .required label:after {
 	content: ' *';
 	color: #dc3545;
@@ -275,6 +294,14 @@ select.form-control:not([size]):not([multiple]) {
 	width: 200px 
 }
 
+.wid220 { 
+	width: 220px 
+}
+
+.wid250 { 
+	width: 250px 
+}
+
 /* TABLE */
 .easy-table table tr th {
 	border-bottom-width: 1px;
@@ -286,7 +313,7 @@ select.form-control:not([size]):not([multiple]) {
 .easy-table table tr td {
     border-top: none;
     border-bottom: 1px solid #e7eaec;
-    padding: 4px 10px;
+    padding: 10px;
     vertical-align: middle;
     font-size: 14px;
 }

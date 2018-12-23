@@ -19,7 +19,7 @@
 	</h1>
 	
 	<section layout:fragment="content">
-		<div class="container-fluid">
+		<div class="container-fluid margin-top-default">
 			<form method="POST" th:action="@{/customers/form}" th:object=${customer}>
 				<div class="row">
 					<div class="form-group col-sm-12 required">
@@ -31,7 +31,7 @@
 				</div>
 			
 				<div class="row">
-					<div class="form-group col-sm-4 required">
+					<div class="form-group col-sm-4">
 						<label class="control-label">Tipo pessoa</label>
 						<div class="margin-top-7">
 							<th:block th:each="type : ${typesPerson}">

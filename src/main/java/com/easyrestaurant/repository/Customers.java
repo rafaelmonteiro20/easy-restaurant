@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.easyrestaurant.model.Customer;
-import com.easyrestaurant.repository.helper.cliente.CustomersQueries;
+import com.easyrestaurant.repository.query.CustomersQueries;
 
 public interface Customers extends JpaRepository<Customer, Long>, CustomersQueries {
 

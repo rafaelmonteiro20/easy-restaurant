@@ -17,7 +17,7 @@ import org.springframework.web.servlet.i18n.FixedLocaleResolver;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
-import com.easyrestaurant.controller.converter.CategoriaConverter;
+import com.easyrestaurant.controller.converter.CategoryConverter;
 import com.easyrestaurant.controller.converter.GrupoConverter;
 import com.easyrestaurant.thymeleaf.EasyDialect;
 
@@ -38,6 +38,8 @@ public class EasyRestaurantApplication implements WebMvcConfigurer {
 	
 		NumberStyleFormatter integerFormatter = new NumberStyleFormatter("#,##0");
 		registry.addFormatterForFieldType(Integer.class, integerFormatter);
+		
+		registry.addConverter(new CategoryConverter());
 	}
 
 	

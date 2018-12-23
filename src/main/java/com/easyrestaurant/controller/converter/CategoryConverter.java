@@ -5,15 +5,13 @@ import org.springframework.util.StringUtils;
 
 import com.easyrestaurant.model.Category;
 
-public class CategoriaConverter implements Converter<String, Category> {
+public class CategoryConverter implements Converter<String, Category> {
 
 	@Override
 	public Category convert(String id) {
 		if(StringUtils.isEmpty(id)) {
 			return null;
 		}
-			
-		System.out.println("Chamou..");
 		
 		return new Category(Long.valueOf(id));
 	}
