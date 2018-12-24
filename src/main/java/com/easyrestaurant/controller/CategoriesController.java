@@ -3,7 +3,6 @@ package com.easyrestaurant.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.easyrestaurant.model.Category;
-import com.easyrestaurant.repository.Categories;
+import com.easyrestaurant.repository.filter.CategoryFilter;
 import com.easyrestaurant.service.CategoryService;
 import com.easyrestaurant.service.exception.ExistingRecordException;
 
@@ -27,9 +26,6 @@ public class CategoriesController {
 
 	@Autowired
 	private CategoryService categoryService;
-	
-	@Autowired
-	private Categories categories;
 	
 	@GetMapping("/form")
 	public ModelAndView form(Category category) {
@@ -65,9 +61,9 @@ public class CategoriesController {
 	}
 	
 	@GetMapping
-	public ModelAndView search() {
+	public ModelAndView search(CategoryFilter categoryFilter) {
 		ModelAndView mv = new ModelAndView("/category/category-list");
-		mv.addObject("categories", categories.findAll(Sort.by("name")));
+		mv.addObject("categories", categoryService.findAll(categoryFilter));
 		return mv;
 	}
 	

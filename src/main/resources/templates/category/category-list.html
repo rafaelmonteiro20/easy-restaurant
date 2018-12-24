@@ -19,12 +19,10 @@
 			
 			<div class="top-area">
 				<div class="nav-controls">
-					<form method="get">
-						<input type="search" class="form-control"
-							placeholder="Filtrar por nome" />
+					<form method="get" th:object="${categoryFilter}">
+						<input type="search" class="form-control" th:field="*{name}" placeholder="Nome" />
 						<button type="submit" class="btn  btn-primary">Pesquisar</button>
 					</form>
-				
 				
 					<a class="btn btn-success" th:href="@{/categories/form}" role="button">Nova Categoria</a>
 				</div>
