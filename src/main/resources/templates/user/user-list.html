@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:easy="http://www.easyrestaurant.com"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/page-template}">
+
+	<head>
+		<title>Pesquisa de Usuários</title>
+	</head>
+	
+	<h1 layout:fragment="breadcrumbs">
+		<strong>
+			Usuários
+		</strong>
+	</h1>
+	
+	<section layout:fragment="content">
+		<div class="container-fluid margin-top-default">
+			<form method="GET" th:object="${userFilter}" th:action="@{/users}">
+				<div class="row">
+					<div class="form-group  col-sm-6">
+						<label class="control-label" for="nome">Nome</label>
+						<input id="nome" type="text" class="form-control" autofocus="autofocus" th:field="*{name}" />
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="form-group  col-sm-12">
+						<label class="control-label">Grupos</label> 
+						<div>
+							<th:block th:each="group : ${groups}">
+		  						<div class="checkbox  checkbox-inline"> 
+			    					<input type="checkbox" th:value="${group.id}" th:field="*{groups}"/>
+			    					<label th:for="${#ids.prev('groups')}" th:text="${group.name}">Administrador</label>
+		    					</div>
+		    				</th:block>
+						</div>
+	  				</div>
+				</div>
+				
+				<button type="submit" class="btn  btn-primary">Pesquisar</button>
+			</form>
+			
+<!-- 			<div class="aw-datatable-toolbar"> -->
+<!-- 				<button class="btn btn-default  btn-xs  js-status-btn disabled" data:status="ATIVAR"> -->
+<!-- 					<span>Ativar</span> -->
+<!-- 				</button> -->
+				
+<!-- 				<button class="btn btn-default  btn-xs  js-status-btn disabled" data:status="DESATIVAR"> -->
+<!-- 					<span>Desativar</span> -->
+<!-- 				</button> -->
+<!-- 			</div> -->
+			
+			<br />
+			
+			<div class="table-responsive easy-table margin-top-10">
+				<table class="table">
+					<thead>
+						<tr>
+<!-- 							<th class="wid30"> -->
+<!-- 		            			<div class="checkbox checkbox-no-margin text-center"> -->
+<!-- 		            				<input type="checkbox" class="js-selecao-todos"/> -->
+<!-- 		            				<label></label> -->
+<!-- 		            			</div> -->
+<!-- 		            		</th> -->
+							<th>Nome</th>
+							<th>E-mail</th>
+<!-- 							<th>Grupos</th> -->
+							<th class="text-center wid160">Status</th>
+							<th class="text-center wid100"></th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<tr th:each="user : ${page.content}">
+<!-- 							<td> -->
+<!-- 								<div class="checkbox  checkbox-no-margin"> -->
+<!-- 		            				<input type="checkbox" class="js-selecao" data:codigo="${usuario.codigo}"> -->
+<!-- 		            				<label></label> -->
+<!-- 		            			</div> -->
+<!-- 		            		</td> -->
+							<td th:text="${user.name}"></td>
+							<td th:text="${user.mail}"></td>
+<!-- 							<td th:text="${usuario.nomesGrupos}"></td> -->
+							<td class="text-center" th:text="${user.active} ? Ativo : Inativo"></td>
+							<td class="text-center">
+								<a class="btn  btn-link  btn-xs" title="Editar"> 
+									<i class="glyphicon glyphicon-pencil"></i>
+								</a>
+								<a class="btn  btn-link  btn-xs" title="Excluir">
+									<i class="glyphicon glyphicon-remove"></i>
+								</a>
+							</td>
+						</tr>
+						
+						<tr th:if="${page.empty}">
+							<td colspan="6">Nenhum usuário encontrado.</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+	
+<!-- 	<th:block layout:fragment="javascript-extra"> -->
+<!-- 		<script th:src="@{/js/multiselecao.js}"></script>	 -->
+<!-- 	</th:block> -->
+</html>

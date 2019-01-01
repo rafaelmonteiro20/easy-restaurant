@@ -6,8 +6,10 @@ import org.springframework.data.domain.Pageable;
 import com.easyrestaurant.model.User;
 import com.easyrestaurant.repository.filter.UserFilter;
 
-public interface UsuariosQueries {
+public interface UsersQueries {
 
-	public Page<User> pesquisar(UserFilter filtro, Pageable pageable);
+	Page<User> findAll(UserFilter filter, Pageable pageable);
+	
+	Long countAll(UserFilter filter);
 	
 }

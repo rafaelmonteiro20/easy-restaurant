@@ -1,9 +1,12 @@
 package com.easyrestaurant.repository.query.impl;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -12,28 +15,31 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.easyrestaurant.model.User;
 import com.easyrestaurant.repository.filter.UserFilter;
-import com.easyrestaurant.repository.query.UsuariosQueries;
+import com.easyrestaurant.repository.query.UsersQueries;
 
-public class UsuariosImpl implements UsuariosQueries {
+public class UsersImpl implements UsersQueries {
 
 	@PersistenceContext
 	private EntityManager manager;
 	
-//	@Autowired
-//	private PaginationUtil paginacaoUtil;
-
-	@SuppressWarnings({"unchecked", "deprecation"})
+	@Override
 	@Transactional(readOnly = true)
-	public Page<User> pesquisar(UserFilter filtro, Pageable pageable) {
-//		Criteria criteria = manager.unwrap(Session.class).createCriteria(User.class);
-//		
-////		paginacaoUtil.configure(criteria, pageable);
-//		adicionarFiltro(filtro, criteria);
-//		
-//		List<User> filtrados = criteria.list();
-//		filtrados.forEach(u -> Hibernate.initialize(u.getGrupos()));
+	public Page<User> findAll(UserFilter filter, Pageable pageable) {
 		
-		return new PageImpl<>(new ArrayList<>(), pageable, 0);
+		CriteriaBuilder cb = manager.getCriteriaBuilder();
+		CriteriaQuery<User> criteria = cb.createQuery(User.class);
+		Root<User> root = criteria.from(User.class);
+		criteria.select(root);
+		
+		List<User> result = manager.createQuery(criteria)
+			.getResultList();
+		
+		return new PageImpl<>(result, pageable, result.size());
+	}
+
+	@Override
+	public Long countAll(UserFilter filter) {
+		return 10L;
 	}
 
 //	private void adicionarFiltro(UserFilter filtro, Criteria criteria) {
