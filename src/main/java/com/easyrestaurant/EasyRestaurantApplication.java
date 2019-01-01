@@ -1,27 +1,15 @@
 package com.easyrestaurant;
 
 import java.math.BigDecimal;
-import java.util.Locale;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.data.repository.support.DomainClassConverter;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.format.number.NumberStyleFormatter;
-import org.springframework.format.support.DefaultFormattingConversionService;
-import org.springframework.format.support.FormattingConversionService;
-import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.i18n.FixedLocaleResolver;
-import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.spring5.SpringTemplateEngine;
 
 import com.easyrestaurant.controller.converter.CategoryConverter;
-import com.easyrestaurant.controller.converter.GrupoConverter;
-import com.easyrestaurant.thymeleaf.EasyDialect;
-
-import nz.net.ultraq.thymeleaf.LayoutDialect;
+import com.easyrestaurant.controller.converter.GroupConverter;
 
 @SpringBootApplication
 public class EasyRestaurantApplication implements WebMvcConfigurer {
@@ -40,6 +28,7 @@ public class EasyRestaurantApplication implements WebMvcConfigurer {
 		registry.addFormatterForFieldType(Integer.class, integerFormatter);
 		
 		registry.addConverter(new CategoryConverter());
+		registry.addConverter(new GroupConverter());
 	}
 
 	

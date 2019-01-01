@@ -11,7 +11,7 @@ import org.springframework.format.support.FormattingConversionService;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.easyrestaurant.controller.converter.CategoryConverter;
-import com.easyrestaurant.controller.converter.GrupoConverter;
+import com.easyrestaurant.controller.converter.GroupConverter;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
@@ -24,7 +24,7 @@ public class WebConfig implements WebMvcConfigurer {
 		
 		DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService();
 		conversionService.addConverter(new CategoryConverter());
-		conversionService.addConverter(new GrupoConverter());
+		conversionService.addConverter(new GroupConverter());
 		
 		NumberStyleFormatter bigDecimalFormatter = new NumberStyleFormatter("#,##0.00");
 		conversionService.addFormatterForFieldType(BigDecimal.class, bigDecimalFormatter);

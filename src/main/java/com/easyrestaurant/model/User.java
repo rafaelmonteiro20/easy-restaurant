@@ -49,7 +49,7 @@ public class User implements Identifiable<Long> {
 	@ManyToMany
 	@JoinTable(name = "user_group", joinColumns = @JoinColumn(name = "user_id"),
 				inverseJoinColumns = @JoinColumn(name = "group_id"))	
-	private List<Group> groups = new ArrayList<>();
+	private List<Group> groups;
 
 	public User() {
 		

@@ -15,6 +15,7 @@ import com.easyrestaurant.model.User;
 import com.easyrestaurant.repository.Groups;
 import com.easyrestaurant.repository.Users;
 import com.easyrestaurant.service.UsuarioService;
+import com.easyrestaurant.service.exception.ExistingRecordException;
 
 @Controller
 @RequestMapping("/users")
@@ -40,21 +41,18 @@ public class UsersController {
 	@PostMapping("/form")
 	public ModelAndView salvar(@Valid User user, BindingResult result, RedirectAttributes attributes) {
 		if (result.hasErrors()) {
-			return this.form(user);
+			return form(user);
 		}
 		
-		System.out.println("Salvando... " + user);
-		
-//		try {
-//			userService.save(usuario);
-//		
-//			attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso");
-//			return new ModelAndView("redirect:/usuarios/form");
-//		} catch (EmailUsuarioJaCadastradoException e) {
-//			result.rejectValue("email", e.getMessage(), e.getMessage());
-//		} catch (SenhaObrigatoriaUsuarioException e) {
-//			result.rejectValue("senha", e.getMessage(), e.getMessage());
-//		}
+		try {
+			userService.save(user);
+			attributes.addFlashAttribute("message", "Usuário salvo com sucesso");
+			return new ModelAndView("redirect:/users");
+		} catch (ExistingRecordException e) {
+			result.rejectValue("mail", e.getMessage(), e.getMessage());
+		} catch (IllegalArgumentException e) {
+			result.rejectValue("password", e.getMessage(), e.getMessage());
+		}
 		
 		return form(user);
 	}
