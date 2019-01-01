@@ -163,7 +163,7 @@
 }
 
 
-.required label:after {
+.required .control-label:after {
 	content: ' *';
 	color: #dc3545;
 }

@@ -13,18 +13,18 @@ public class UsuarioGrupoId implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "codigo_usuario")
-	private Usuario usuario;
+	private User usuario;
 	
 	@ManyToOne
 	@JoinColumn(name = "codigo_grupo")
 	private Grupo grupo;
 
 	
-	public Usuario getUsuario() {
+	public User getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
+	public void setUsuario(User usuario) {
 		this.usuario = usuario;
 	}
 

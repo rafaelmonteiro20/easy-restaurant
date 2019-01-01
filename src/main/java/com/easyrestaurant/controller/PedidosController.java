@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.easyrestaurant.model.Pedido;
 import com.easyrestaurant.model.Product;
-import com.easyrestaurant.model.Usuario;
+import com.easyrestaurant.model.User;
 import com.easyrestaurant.repository.Products;
 import com.easyrestaurant.service.PedidoService;
 import com.easyrestaurant.session.TabelasItensSession;
@@ -42,7 +42,7 @@ public class PedidosController {
 	
 	@PostMapping("/form")
 	public ModelAndView salvar(Pedido pedido, RedirectAttributes attributes) {
-		pedido.setUsuario(new Usuario(1L));
+		pedido.setUsuario(new User(1L));
 		pedido.adicionarItens(tabelas.getItens(pedido.getUuid()));
 		
 		pedidoService.salvar(pedido);

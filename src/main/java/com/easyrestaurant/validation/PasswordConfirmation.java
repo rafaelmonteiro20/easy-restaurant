@@ -10,22 +10,22 @@ import javax.validation.OverridesAttribute;
 import javax.validation.Payload;
 import javax.validation.constraints.Pattern;
 
-import com.easyrestaurant.validation.validator.ConfirmacaoSenhaValidator;
+import com.easyrestaurant.validation.validator.PasswordConfirmationValidator;
 
 @Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = { ConfirmacaoSenhaValidator.class })
-public @interface ConfirmacaoSenha {
+@Constraint(validatedBy = { PasswordConfirmationValidator.class })
+public @interface PasswordConfirmation {
 
 	@OverridesAttribute(constraint = Pattern.class, name = "message")
-	String message() default "Confirmação senha não confere.";
+	String message() default "Senha não confere.";
 	
 	Class<?>[] groups() default {};
 	
 	Class<? extends Payload>[] payload() default {};
 	
-	String atributo();
+	String password();
 	
-	String atributoConfirmacao();
+	String passwordConfirmation();
 	
 }

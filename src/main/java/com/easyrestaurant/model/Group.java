@@ -15,8 +15,8 @@ import javax.validation.constraints.NotBlank;
 
 import com.easyrestaurant.core.Identifiable;
 
-//@Entity
-//@Table(name = "group")
+@Entity
+@Table(name = "grouping")
 public class Group implements Identifiable<Long> {
 
 	@Id

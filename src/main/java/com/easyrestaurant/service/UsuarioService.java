@@ -7,41 +7,42 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import com.easyrestaurant.model.Usuario;
-import com.easyrestaurant.repository.Usuarios;
-import com.easyrestaurant.service.exception.EmailUsuarioJaCadastradoException;
-import com.easyrestaurant.service.exception.SenhaObrigatoriaUsuarioException;
+import com.easyrestaurant.model.User;
+import com.easyrestaurant.repository.Users;
+import com.easyrestaurant.service.exception.ExistingRecordException;
 
-//@Service
+@Service
 public class UsuarioService {
 	
 	@Autowired
-	private Usuarios usuarios;
+	private Users users;
 	
 //	@Autowired
 //	private PasswordEncoder passwordEncoder;
 		
 	@Transactional
-	public void save(Usuario usuario) {
-		Optional<Usuario> existente = usuarios.findByEmail(usuario.getEmail());
+	public void save(User user) {
+		Optional<User> existing = users.findByMail(user.getMail());
 		
-		if (existente.isPresent())
-			throw new EmailUsuarioJaCadastradoException("E-mail já cadastrado");
+		if (existing.isPresent()) {
+			throw new ExistingRecordException("E-mail já cadastrado");
+		}
 		
-		if (usuario.isNovo() && StringUtils.isEmpty(usuario.getSenha()))
-			throw new SenhaObrigatoriaUsuarioException("Senha é obrigatória para novo usuário");
+		if (user.isNew() && StringUtils.isEmpty(user.getPassword())) {
+			throw new IllegalArgumentException("Senha é obrigatória para novo usuário");
+		}
 		
 //		if (usuario.isNovo()) {
 //			usuario.setSenha(this.passwordEncoder.encode(usuario.getSenha()));
 //			usuario.setConfirmacaoSenha(usuario.getSenha());
 //		}
 		
-		usuarios.save(usuario);
+		users.save(user);
 	}
 	
 	@Transactional
 	public void alterarStatus(Long[] codigos, StatusUsuario status) {
-		status.alterar(codigos, usuarios);
+		status.alterar(codigos, users);
 	}
 	
 }

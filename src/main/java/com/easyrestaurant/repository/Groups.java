@@ -2,8 +2,8 @@ package com.easyrestaurant.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.easyrestaurant.model.Grupo;
+import com.easyrestaurant.model.Group;
 
-public interface Grupos /* extends JpaRepository<Grupo, Long> */{
+public interface Groups extends JpaRepository<Group, Long> {
 
 }

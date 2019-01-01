@@ -9,8 +9,8 @@ import javax.validation.constraints.NotBlank;
 
 import com.easyrestaurant.core.Identifiable;
 
-//@Entity
-//@Table(name = "permission")
+@Entity
+@Table(name = "permission")
 public class Permission implements Identifiable<Long> {
 
 	@Id

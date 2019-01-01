@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:easy="http://www.easyrestaurant.com"
+	  xmlns:data="http://www.thymeleaf.org/extras/data"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/page-template}">
+
+	<head>
+		<title>Cadastro de Usuário</title>
+		<link th:href="@{/css/vendors/bootstrap-toggle.min.css}" rel="stylesheet">
+	</head>
+	
+	<h1 layout:fragment="breadcrumbs">
+		<a th:href="@{/users}">Usuários</a>
+		<span class="path-divider">/</span>
+		<strong>
+			Novo Usuário
+		</strong>
+	</h1>
+
+	<section layout:fragment="content">
+		<div class="container-fluid margin-top-default">
+			<form method="POST" th:object="${user}" th:action="@{/users/form}">
+				<div class="row">
+					<div class="form-group col-sm-12 required">
+						<label for="name" class="control-label">Nome</label>
+						<input id="name" type="text" class="form-control" th:field="*{name}" 
+							th:errorclass="is-invalid" autofocus />
+						<div class="invalid-feedback" th:errors="*{name}"></div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="form-group  col-sm-9  required">
+						<label for="mail" class="control-label">E-mail</label>
+						<input id="mail" type="text" class="form-control" th:field="*{mail}" th:errorclass="is-invalid" />
+						<div class="invalid-feedback" th:errors="*{mail}"></div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="form-group  col-sm-3  required">
+						<label for="password" class="control-label">Senha</label> 
+						<input id="password" type="password" class="form-control" th:field="*{password}"
+							th:errorclass="is-invalid" />
+						<div class="invalid-feedback" th:errors="*{password}"></div>
+					</div>
+					
+					<div class="form-group  col-sm-3  required">
+						<label for="passwordConfirmation" class="control-label">Confirmação de senha</label> 
+						<input id="passwordConfirmation" type="password" class="form-control" 
+							th:field="*{passwordConfirmation}" th:errorclass="is-invalid" />
+						<div class="invalid-feedback" th:errors="*{passwordConfirmation}"></div>
+					</div>
+					
+					<div class="form-group  col-sm-3">
+						<label class="control-label">Status</label>
+						<div>
+							<input type="checkbox" class="js-status" data-size="normal" th:field="*{active}"
+								data-on="Ativo" data-off="Inativo" data-onstyle="success" data-offstyle="danger" />
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="form-group  col-sm-6  required">
+						<label class="control-label">Grupos</label> 
+						<div>
+							<th:block th:each="group : ${groups}">
+		  						<div class="checkbox  checkbox-inline"> 
+			    					<input type="checkbox" th:value="${group.id}" th:field="*{groups}" th:errorclass="is-invalid"/>
+			    					<label th:for="${#ids.prev('groups')}" th:text="${group.name}">Administrador</label>
+		    					</div>
+		    				</th:block>
+						</div>
+						<div class="invalid-feedback" th:errors="*{groups}"></div>
+					</div>
+				</div>
+				
+				<div class="form-group margin-top-20">
+					<button class="btn btn-success" type="submit">Salvar</button>
+					<a th:href="@{/users}" class="btn btn-link" >Voltar a pesquisa</a>
+				</div>
+			</form>
+		</div>
+	</section>
+	
+	<th:block layout:fragment="js-extra">
+		<script th:src="@{/js/vendors/bootstrap-toggle.min.js}"></script>
+		
+		<script>
+			$('.js-status').bootstrapToggle();
+		</script>
+	</th:block>
+</html>

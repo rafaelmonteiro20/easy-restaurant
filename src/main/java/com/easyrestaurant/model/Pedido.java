@@ -44,7 +44,7 @@ public class Pedido {
 	
 	@ManyToOne
 	@JoinColumn(name = "codigo_usuario")
-	private Usuario usuario;
+	private User usuario;
 	
 	@Enumerated(EnumType.STRING)
 	private StatusPedido status = ABERTO;
@@ -96,11 +96,11 @@ public class Pedido {
 		this.cliente = cliente;
 	}
 
-	public Usuario getUsuario() {
+	public User getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
+	public void setUsuario(User usuario) {
 		this.usuario = usuario;
 	}
 
