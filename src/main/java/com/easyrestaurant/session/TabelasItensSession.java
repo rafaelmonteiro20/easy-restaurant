@@ -8,7 +8,7 @@ import java.util.Set;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
-import com.easyrestaurant.model.ItemPedido;
+import com.easyrestaurant.model.ItemOrder;
 import com.easyrestaurant.model.Product;
 
 @Component
@@ -33,7 +33,7 @@ public class TabelasItensSession {
 		tabela.removerItem(produto);
 	}
 
-	public List<ItemPedido> getItens(String uuid) {
+	public List<ItemOrder> getItens(String uuid) {
 		return buscarTabela(uuid).getItens();
 	}
 	

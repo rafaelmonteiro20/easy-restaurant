@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.easyrestaurant.model.Pedido;
+import com.easyrestaurant.model.Order;
 import com.easyrestaurant.model.Product;
 import com.easyrestaurant.model.User;
 import com.easyrestaurant.repository.Products;
-import com.easyrestaurant.service.PedidoService;
+import com.easyrestaurant.service.OrderService;
 import com.easyrestaurant.session.TabelasItensSession;
 
 //@Controller
@@ -28,20 +28,20 @@ public class PedidosController {
 	private Products produtos;
 	
 	@Autowired
-	private PedidoService pedidoService;
+	private OrderService pedidoService;
 	
 	@Autowired
 	private TabelasItensSession tabelas;
 	
 	@GetMapping("/form")
-	public ModelAndView form(Pedido pedido) {
+	public ModelAndView form(Order pedido) {
 		ModelAndView mv = new ModelAndView("pedidos/CadastroPedido");
 		pedido.setUuid(UUID.randomUUID().toString());
 		return mv;
 	}
 	
 	@PostMapping("/form")
-	public ModelAndView salvar(Pedido pedido, RedirectAttributes attributes) {
+	public ModelAndView salvar(Order pedido, RedirectAttributes attributes) {
 		pedido.setUsuario(new User(1L));
 		pedido.adicionarItens(tabelas.getItens(pedido.getUuid()));
 		

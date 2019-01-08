@@ -2,8 +2,8 @@ package com.easyrestaurant.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.easyrestaurant.model.Pedido;
+import com.easyrestaurant.model.Order;
 
-public interface Pedidos /* extends JpaRepository<Pedido, Long> */ {
+public interface Orders extends JpaRepository<Order, Long> {
 
 }
