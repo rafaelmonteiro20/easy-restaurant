@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:easy="http://www.easyrestaurant.com"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/page-template}">
+
+	<head>
+		<title>Pesquisa de Clientes</title>
+	</head>
+	
+	<h1 layout:fragment="breadcrumbs">
+		<strong>Clientes</strong>
+	</h1>
+	
+	<section layout:fragment="content">
+		<div class="container-fluid">
+			<div th:replace="layout/fragments/message-success :: alert"></div>
+			
+			<div class="top-area">
+				<div class="nav-controls">
+					<form method="get" th:object="${customerFilter}">
+						<input id="name" type="search" class="form-control" th:field="*{name}"
+							placeholder="Nome" />
+						
+						<input id="document" type="search" class="form-control" th:field="*{document}"
+							placeholder="CPF/CNPJ" />
+						
+						<button type="submit" class="btn  btn-primary">Pesquisar</button>
+					</form>
+				
+				
+					<a class="btn btn-success" th:href="@{/customers/form}" role="button">Novo Cliente</a>
+				</div>
+			</div>
+			
+			<div class="table-responsive easy-table">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Nome</th>
+							<th class="text-center wid100">Tipo</th>
+							<th class="text-center wid250">CPF/CNPJ</th>
+							<th class="text-center wid150">Telefone</th>
+							<th class="text-center wid100"></th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<tr th:each="customer : ${page.content}">
+							<td th:text="${customer.name}"></td>
+							<td class="text-center" th:text="${customer.type.description}"></td>
+							<td class="text-center" th:text="${customer.document}"></td>
+							<td class="text-center" th:text="${customer.phone}"></td>
+							<td class="text-center">
+								<a class="btn  btn-link  btn-xs" title="Editar"> 
+									<i class="glyphicon glyphicon-pencil"></i>
+								</a>
+								<a class="btn  btn-link  btn-xs" title="Excluir">
+									<i class="glyphicon glyphicon-remove"></i>
+								</a>
+							</td>
+						</tr>
+						
+						<tr th:if="${page.empty}">
+							<td colspan="7">Nenhum cliente encontrado.</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:easy="http://www.easyrestaurant.com"
+	  xmlns:data="http://www.thymeleaf.org/extras/data"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/page-template}">
+
+	<head>
+		<title>Cadastro de cliente</title>
+	</head>
+	
+	<h1 layout:fragment="breadcrumbs">
+		<a th:href="@{/customers}">Clientes</a>
+		<span class="path-divider">/</span>
+		<strong>
+			Novo Cliente
+		</strong>
+	</h1>
+	
+	<section layout:fragment="content">
+		<div class="container-fluid margin-top-default">
+			<form method="POST" th:action="@{/customers/form}" th:object=${customer}>
+				<div class="row">
+					<div class="form-group col-sm-12 required">
+						<label for="name" class="control-label">Nome</label>
+						<input id="name" type="text" class="form-control" th:field="*{name}" 
+							th:errorclass="is-invalid" autofocus />
+						<div class="invalid-feedback" th:errors="*{name}"></div>
+					</div>
+				</div>
+			
+				<div class="row">
+					<div class="form-group col-sm-4">
+						<label class="control-label">Tipo pessoa</label>
+						<div class="margin-top-7">
+							<th:block th:each="type : ${typesPerson}">
+								<div class="form-check form-check-inline">
+									<input th:id="|id_${type}|" type="radio" class="form-check-input js-radio-type-person" 
+									       th:field="*{type}" th:value="${type}" data:document="${type.document}"
+										   data:document-mask="${type.mask}" th:errorclass="is-invalid"> 
+									<label th:for="|id_${type}|" class="form-check-label" th:text="${type.description}">Física</label>
+								</div>
+							</th:block>
+						</div>
+					</div>
+					
+					<div class="form-group col-sm-8 required">
+						<label for="document" class="control-label">CPF/CNPJ</label>
+						<input id="document" type="text" class="form-control" th:field="*{document}" 
+							th:errorclass="is-invalid" disabled />
+						<div class="invalid-feedback" th:errors="*{document}"></div>
+					</div>
+				</div>
+					
+				<div class="row">
+					<div class="form-group  col-sm-4">
+						<label for="phone" class="control-label">Telefone</label>
+						<input id="phone" type="text" class="form-control js-phone" th:field="*{phone}" />
+					</div>
+					
+					<div class="form-group col-sm-8">
+						<label for="mail" class="control-label">E-mail</label>
+						<input id="mail" type="text" class="form-control" th:field="*{mail}" th:errorclass="is-invalid" />
+						<div class="invalid-feedback" th:errors="*{mail}"></div>
+					</div>
+				</div>
+				
+				<div class="form-group margin-top-20">
+					<button class="btn btn-success" type="submit">Salvar</button>
+					<a th:href="@{/customers}" class="btn btn-link" >Voltar a pesquisa</a>
+				</div>
+			</form>
+		</div>
+	</section>
+	
+	<th:block layout:fragment="js-extra">
+		<script th:src="@{/js/customer.mask-document.js}"></script>
+	</th:block>
+</html>

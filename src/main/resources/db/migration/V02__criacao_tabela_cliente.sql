@@ -1,8 +1,0 @@
-CREATE TABLE cliente (
-    codigo BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(80) NOT NULL,
-    documento VARCHAR(30) NOT NULL,
-    tipo VARCHAR(15) NOT NULL,
-    telefone VARCHAR(20),
-    email VARCHAR(80)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;

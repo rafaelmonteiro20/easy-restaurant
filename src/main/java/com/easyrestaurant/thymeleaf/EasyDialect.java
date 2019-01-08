@@ -22,9 +22,9 @@ public class EasyDialect extends AbstractProcessorDialect {
 	public Set<IProcessor> getProcessors(String dialectPrefix) {
 		final Set<IProcessor> processadores = new HashSet<>();
 		processadores.add(new ClassForErrorAttributeTagProcessor(dialectPrefix));
-		processadores.add(new MessageElementTagProcessor(dialectPrefix));
-		processadores.add(new OrderElementTagProcessor(dialectPrefix));
-		processadores.add(new PaginationElementTagProcessor(dialectPrefix));
+//		processadores.add(new MessageElementTagProcessor(dialectPrefix));
+//		processadores.add(new OrderElementTagProcessor(dialectPrefix));
+//		processadores.add(new PaginationElementTagProcessor(dialectPrefix));
 		return processadores;
 	}
 

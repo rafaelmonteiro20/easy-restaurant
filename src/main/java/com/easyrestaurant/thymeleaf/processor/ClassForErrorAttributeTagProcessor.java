@@ -5,7 +5,7 @@ import org.thymeleaf.engine.AttributeName;
 import org.thymeleaf.model.IProcessableElementTag;
 import org.thymeleaf.processor.element.AbstractAttributeTagProcessor;
 import org.thymeleaf.processor.element.IElementTagStructureHandler;
-import org.thymeleaf.spring4.util.FieldUtils;
+import org.thymeleaf.spring5.util.FieldUtils;
 import org.thymeleaf.templatemode.TemplateMode;
 
 public class ClassForErrorAttributeTagProcessor extends AbstractAttributeTagProcessor {
@@ -23,10 +23,11 @@ public class ClassForErrorAttributeTagProcessor extends AbstractAttributeTagProc
 			String attributeValue, IElementTagStructureHandler structureHandler) {
 		
 		boolean hasErrors = FieldUtils.hasErrors(context, attributeValue);
+		System.out.println(">>>>>>>>>> " + attributeValue);
 		
 		if (hasErrors) {
 			String classesExistentes = tag.getAttributeValue("class");
-			structureHandler.setAttribute("class", classesExistentes + " has-error");
+			structureHandler.setAttribute("class", classesExistentes + " is-invalid");
 		}
-	}
+	}	
 }

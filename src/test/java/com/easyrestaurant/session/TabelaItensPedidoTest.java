@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.easyrestaurant.buider.ProdutoBuilder;
-import com.easyrestaurant.model.Produto;
+import com.easyrestaurant.model.Product;
 
 public class TabelaItensPedidoTest {
 
@@ -26,7 +26,7 @@ public class TabelaItensPedidoTest {
 	
 	@Test
 	public void deveCalcularValorTotalComUmItem() {
-		Produto produto = new Produto();
+		Product produto = new Product();
 		BigDecimal valor = new BigDecimal("8.90");
 		produto.setValorUnitario(valor);
 		
@@ -37,10 +37,10 @@ public class TabelaItensPedidoTest {
 	
 	@Test
 	public void deveCalcularValorTotalComVariosItens() {
-		Produto p1 = new ProdutoBuilder()
+		Product p1 = new ProdutoBuilder()
 				.comCodigo(1L).comValorUnitarioDe("8.90").build();
 		
-		Produto p2 = new ProdutoBuilder()
+		Product p2 = new ProdutoBuilder()
 				.comCodigo(2L).comValorUnitarioDe("4.50").build();
 		
 		tabelaItensPedido.adicionarItem(p1, 1);
@@ -51,10 +51,10 @@ public class TabelaItensPedidoTest {
 	
 	@Test
 	public void deveManterQuantidadeDeItensAoAdicionarUmProdutoExistente() {
-		Produto p1 = new ProdutoBuilder()
+		Product p1 = new ProdutoBuilder()
 				.comCodigo(1L).comValorUnitarioDe("4.50").build();
 		
-		Produto p2 = new ProdutoBuilder()
+		Product p2 = new ProdutoBuilder()
 				.comCodigo(1L).comValorUnitarioDe("4.50").build();
 		
 		tabelaItensPedido.adicionarItem(p1, 1);
@@ -66,7 +66,7 @@ public class TabelaItensPedidoTest {
 	
 	@Test
 	public void deveAlterarQuatidadeItens() {
-		Produto p1 = new ProdutoBuilder()
+		Product p1 = new ProdutoBuilder()
 				.comCodigo(1L)
 				.comValorUnitarioDe("4.50").build();
 		
@@ -79,13 +79,13 @@ public class TabelaItensPedidoTest {
 	
 	@Test
 	public void deveRemoverItemDoPedido() {
-		Produto p1 = new ProdutoBuilder()
+		Product p1 = new ProdutoBuilder()
 				.comCodigo(1L).comValorUnitarioDe("5.00").build();
 		
-		Produto p2 = new ProdutoBuilder()
+		Product p2 = new ProdutoBuilder()
 				.comCodigo(2L).comValorUnitarioDe("4.50").build();
 		
-		Produto p3 = new ProdutoBuilder()
+		Product p3 = new ProdutoBuilder()
 				.comCodigo(3L).comValorUnitarioDe("3.90").build();
 		
 		tabelaItensPedido.adicionarItem(p1, 1);
@@ -100,7 +100,7 @@ public class TabelaItensPedidoTest {
 	
 	@Test
 	public void deveMudarQuantidadeDoItemParaUmQuandoForNegativo() {
-		Produto p1 = new ProdutoBuilder()
+		Product p1 = new ProdutoBuilder()
 				.comCodigo(-5L).comValorUnitarioDe("8.90").build();
 		
 		tabelaItensPedido.adicionarItem(p1, 1);

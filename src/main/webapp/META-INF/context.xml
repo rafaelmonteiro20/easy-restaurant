@@ -7,9 +7,8 @@
             driverClass="com.mysql.jdbc.Driver"
             jdbcUrl="jdbc:mysql://localhost/easy_restaurant?useSSL=false"
             user="root"
-            password="1234" 
+            password="123456"
             initialPoolSize="5" 
             minPoolSize="5"
-            maxPoolSize="5" 
-     />
+            maxPoolSize="5" />
 </Context>
