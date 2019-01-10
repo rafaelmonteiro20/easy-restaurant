@@ -1,7 +1,5 @@
 package com.easyrestaurant.model;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -40,10 +38,13 @@ public class User implements Identifiable<Long> {
 
 	private String password;
 
+	private boolean active = true;
+
+	private boolean root;
+	
 	@Transient
 	private String passwordConfirmation;
 
-	private boolean active = true;
 
 	@NotNull
 	@ManyToMany
@@ -102,6 +103,14 @@ public class User implements Identifiable<Long> {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+	
+	public boolean isRoot() {
+		return root;
+	}
+	
+	public void setRoot(boolean root) {
+		this.root = root;
 	}
 
 	public List<Group> getGroups() {

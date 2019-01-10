@@ -11,7 +11,9 @@ import com.easyrestaurant.repository.query.UsersQueries;
 public interface Users extends JpaRepository<User, Long>, UsersQueries {
 
 	Optional<User> findByMail(String mail);
-
+	
+	Optional<User> findByMailAndActiveTrue(String mail);
+	
 	List<User> findByIdIn(Long[] ids);
 	
 }
