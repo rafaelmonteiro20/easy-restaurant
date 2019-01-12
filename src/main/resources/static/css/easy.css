@@ -363,7 +363,7 @@ select.form-control:not([size]):not([multiple]) {
 }
 
 .login-page .container {
-	max-width: 400px;
+	max-width: 340px;
 }
 
 .navless-container {
@@ -375,22 +375,28 @@ select.form-control:not([size]):not([multiple]) {
 }
 
 .login-header {
-   padding: 15px;
-   text-align: center;
-   margin-bottom: 10px;
+  	background-color: transparent;
+    border: 0;
+    color: #333;
+    margin-bottom: 18px;
+    text-align: center;
+    text-shadow: none;
 }
 
 .login-page h1 {
-	margin: 0px;
-	color: #495057;
-	font-size: 22px;
-	font-weight: 600;
+	font-size: 24px;
+    font-weight: 300;
+    letter-spacing: -.5px;
+}
+
+.login-page .alert {
+	margin-bottom: 20px;
 }
 
 .login-box-content {
 	box-shadow: 0 0 0 1px #e5e5e5;
-    border-radius: 2px;
-    padding: 15px;
+    border-radius: 3px;
+    padding: 20px;
     font-size: 13px;
 }
 

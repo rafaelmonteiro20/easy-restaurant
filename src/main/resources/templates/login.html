@@ -17,44 +17,46 @@
 	<body class="skin-black login-page">
 		<div class="page-wrap">
 			<div class="container navless-container">
-				<div class="row">
-					<div class="col-sm-12">
-						<div class="login-header">
-							<h1>EasyRestaurant</h1>
-						</div>
+				<div class="login-header">
+					<h1>EasyRestaurant</h1>
+				</div>
+				
+				<div class="alert  alert-danger  alert-dismissible" role="alert" th:if="${#bools.isTrue(param.error)}">
+					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
+					<div><i class="fa  fa-exclamation-circle"></i> E-mail e/ou senha inválida.</div>
+				</div>
 					
-						<div class="login-box">
-							<div class="login-box-content">
-								<form method="POST" th:action="@{/login}">
-									<div class="form-group">
-										<label for="name" class="control-label">E-mail</label>
-										<input id="name" type="text" class="form-control"
-											name="username"  autofocus />
-										<div class="invalid-feedback"></div>
-									</div>
-									
-									<div class="form-group">
-										<label for="name" class="control-label">Senha</label>
-										<input id="name" type="password" class="form-control"
-											name="password" />
-										<div class="invalid-feedback"></div>
-									</div>
-								
-									<div class="forgot-password">
-										<div class="float-right">
-											<a href="#">Esqueceu a senha?</a>
-										</div>
-									</div>
-									
-									<div class="submit-container">
-										<button class="btn btn-success" type="submit">Login</button>
-									</div>
-								</form>
+				<div class="login-box">
+					<div class="login-box-content">
+						<form method="POST" th:action="@{/login}">
+							<div class="form-group">
+								<label for="name" class="control-label">E-mail</label>
+								<input id="name" type="text" class="form-control" name="username"  autofocus />
+								<div class="invalid-feedback"></div>
 							</div>
-						</div>
+									
+							<div class="form-group">
+								<label for="name" class="control-label">Senha</label>
+								<input id="name" type="password" class="form-control" name="password" />
+								<div class="invalid-feedback"></div>
+							</div>
+								
+							<div class="forgot-password">
+								<div class="float-right">
+									<a href="#">Esqueceu a senha?</a>
+								</div>
+							</div>
+									
+							<div class="submit-container">
+								<button class="btn btn-success" type="submit">Login</button>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
+		
+		<script type="text/javascript" th:src="@{/js/vendors/jquery.js}"></script>
+		<script type="text/javascript" th:src="@{/js/vendors/bootstrap.min.js}"></script>
 	</body>
 </html>
