@@ -19,7 +19,11 @@ public class Permission implements Identifiable<Long> {
 	
 	@NotBlank
 	private String name;
+	
+	@NotBlank
+	private String role;
 
+	
 	public Permission() {
 
 	}
@@ -39,6 +43,14 @@ public class Permission implements Identifiable<Long> {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getRole() {
+		return role;
+	}
+	
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	@Override

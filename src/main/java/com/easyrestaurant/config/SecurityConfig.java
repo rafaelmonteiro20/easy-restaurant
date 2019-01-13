@@ -36,6 +36,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
+				.antMatchers("/products/form").hasRole("CREATE_PRODUCT")
+				.antMatchers("/products").hasRole("READ_PRODUCTS")
+				.antMatchers("/users/form").hasRole("CREATE_USER")
+				.antMatchers("/users").hasRole("READ_USERS")
+				.antMatchers("/customers/form").hasRole("CREATE_CUSTOMER")
+				.antMatchers("/customers").hasRole("READ_CUSTOMERS")
+				.antMatchers("/categories/form").hasRole("CREATE_CATEGORY")
+				.antMatchers("/categories").hasRole("READ_CATEGORIES")
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()
